@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Users from './pages/User/Users';
+import Phome from './pages/Package/P_home';
+import Pcreate from './pages/Package/P_create';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,6 +14,8 @@ root.render(
       <Routes>
         <Route path='/' element={<App/>} />
         <Route path='/users' element={<Users/>} />
+        <Route path='/phome' element={<Phome/>} />
+        <Route path='/create' element={<Pcreate/>} />
         
       </Routes>
   </BrowserRouter>
