@@ -1,0 +1,59 @@
+.create-package-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.create-package-form {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px;
+}
+
+.create-package-form h2 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 2px; /* Increased gap between field name and field */
+}
+
+input[type='text'],
+select {
+  width: calc(100% - 22px); /* Adjusted width to accommodate label and input padding */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button[type='submit'] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #78a55a;
+  color: #fff;
+  cursor: pointer;
+}
+
+.meal-options {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.meal-option {
+  width: calc(25% - 10px); /* Adjusted width to create space between checkboxes */
+  margin-right: 10px;
+}
+
+.meal-option label {
+  margin-left: 5px;
+}
