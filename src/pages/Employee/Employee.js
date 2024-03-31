@@ -1,33 +1,33 @@
 import { Box } from "@mui/material";
-import UserForm from "./UserForm";
-import UsersTable from "./UsersTable";
+import E_register from "./E_register";
+import E_table from "./E_table";
 import Axios from "axios";
 import {useEffect, useState} from "react";
 
 
 
-const Users = () =>{  
+const Employee = () =>{  
 
-  const [users, setUsers] = useState([]);
+  const [employee, setEmployee] = useState([]);
   const [submitted, setsubmitted] = useState(false);
-  const [selectedUser, setSelectedUser] = useState({});
+  const [selectedEmployee, setSelectedEmployee] = useState({});
   const[isEdit , setIsEdit] = useState(false);
 
   useEffect(() => {
-    getUsers();
+    getEmployee();
   }, []);
 
-  const getUsers = () => {
-    Axios.get('http://localhost:3001/api/users')
+  const getEmployee = () => {
+    Axios.get('http://localhost:3001/api/employee')
       .then(response => {
-        setUsers(response.data?.response || []);
+          setEmployee(response.data?.response || []);
       })
       .catch(error => {
         console.error("Axios Error : ", error);
       })
   }
 
-  const addUser = (data) => {
+  const addEmployee = (data) => {
     setsubmitted(true);
     
     const payload = {
@@ -35,9 +35,9 @@ const Users = () =>{
       name : data.name,
     }
 
-    Axios.post('http://localhost:3001/api/createuser', payload)
+    Axios.post('http://localhost:3001/api/createemployee', payload)
     .then(response => {
-      getUsers();
+      getEmployee();
       setsubmitted(false);
       isEdit(false);
     })
@@ -46,7 +46,7 @@ const Users = () =>{
     });
   }
 
-  const updateUser = (data) => {
+  const updateEmployee = (data) => {
     setsubmitted(true);
 
     const payload = {
@@ -54,9 +54,9 @@ const Users = () =>{
       name : data.name,
     }
 
-    Axios.post('http://localhost:3001/api/updateuser', payload)
+    Axios.post('http://localhost:3001/api/updateemployee', payload)
     .then(response => {
-      getUsers();
+      getEmployee();
       setsubmitted(false);
       isEdit(false);
 
@@ -67,10 +67,10 @@ const Users = () =>{
 
   }
 
-  const deleteUser = (data) => {
-    Axios.post('http://localhost:3001/api/deleteUser', data)
+  const deleteEmployee = (data) => {
+    Axios.post('http://localhost:3001/api/deleteemployee', data)
     .then(() => {
-      getUsers();
+      getEmployee();
 
     })
     .catch(error => {
@@ -88,22 +88,22 @@ const Users = () =>{
 
           }}
         >
-          <UserForm 
-            addUser={addUser}
-            updateUser={updateUser}
+          <E_register 
+            addEmployee={addEmployee}
+            updateEmployee={updateEmployee}
             submitted={submitted}
-            data = {selectedUser}
+            data = {selectedEmployee}
             isEdit={isEdit}
           />
           
 
-          <UsersTable
+          <E_table
             rows={users}
-            selectedUser = {data => {
-              setSelectedUser(data);
+            selectedEmployee = {data => {
+               selectedEmployee(data);
               setIsEdit(true);
             }}
-            deleteUser={data => window.confirm('Are you sure?') && deleteUser(data)}
+            deleteEmployee={data => window.confirm('Are you sure?') && deleteEmployee(data)}
            /> 
 
         </Box>
@@ -111,4 +111,4 @@ const Users = () =>{
     );
 }
 
-export default Users;
+export default Employee;

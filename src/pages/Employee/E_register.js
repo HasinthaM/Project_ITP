@@ -1,7 +1,7 @@
 import { Button, Grid, Input, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
-const UserForm = ({addUser, updateUser, submitted, data, isEdit}) => {  // addUser props 
+const E_register = ({addEmployee, updateEmployee, submitted, data, isEdit}) => {  // addemployee props 
 
   const [id,setId] = useState(0);
   const [name,setName] = useState('');
@@ -90,7 +90,7 @@ const UserForm = ({addUser, updateUser, submitted, data, isEdit}) => {  // addUs
                 backgroundColor: '00c6e6',
               }
             }}
-            onClick={() => isEdit? addUser({id, name}) : addUser({id, name})}
+            onClick={() => isEdit? addEmployee({id, name}) : addEmployee({id, name})}
         >
 
           {
@@ -101,4 +101,4 @@ const UserForm = ({addUser, updateUser, submitted, data, isEdit}) => {  // addUs
 
 }
 
-export default UserForm;
+export default E_register;

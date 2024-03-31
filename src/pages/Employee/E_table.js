@@ -1,6 +1,6 @@
 import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
-const UsersTable = ({ rows , selectedUser, deleteUser}) => {  //can write this also - const UsersTable = ({rows}) , in 16 row props should remove
+const E_table = ({ rows , selectedEmployee, deleteEmployee}) => {  //can write this also - const E_table = ({rows}) , in 16 row props should remove
     return(
 
       <TableContainer component={Paper}>
@@ -21,7 +21,7 @@ const UsersTable = ({ rows , selectedUser, deleteUser}) => {  //can write this a
                       <TableCell >
                         <Button
                           sx={{margin: '0px 10px'}}
-                          onClick={() => selectedUser ({id : row.id , name : row.name})}
+                          onClick={() => selectedEmployee ({id : row.id , name : row.name})}
                         >
                           update
 
@@ -29,7 +29,7 @@ const UsersTable = ({ rows , selectedUser, deleteUser}) => {  //can write this a
 
                         <Button
                           sx={{margin: '0px 10px'}}
-                          onClick={() => deleteUser ({ id : row.id})}
+                          onClick={() => deleteEmployee ({ id : row.id})}
                         >
                           delete
 
@@ -53,4 +53,4 @@ const UsersTable = ({ rows , selectedUser, deleteUser}) => {  //can write this a
 
 }
 
-export default UsersTable;
+export default E_table;

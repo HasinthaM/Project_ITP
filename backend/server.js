@@ -5,6 +5,7 @@ const port = 3001;
 const host = 'localhost';  // can use http://localhost also
 const mongoose = require('mongoose');
 const router = require('./routers/router');
+//const router = require('./routers/Employee/E_router');
 
 app.use(cors());
 app.use(express.json());
