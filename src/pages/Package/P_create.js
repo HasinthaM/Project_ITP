@@ -1,209 +1,281 @@
 import React, { useState } from 'react';
-import '../../styles/Package/P_create.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import '../../styles/P_create.css';
 
-const CreatePackage = () => {
+const P_create = () => {
+  const navigate = useNavigate();
+
+  const [pID, setPID] = useState('');
   const [province, setProvince] = useState('');
   const [packageName, setPackageName] = useState('');
-  const [packageID, setPackageID] = useState('');
   const [places, setPlaces] = useState('');
-  const [meals, setMeals] = useState([]);
+  const [meals, setMeals] = useState('');
   const [activities, setActivities] = useState('');
-  const [accommodations, setAccomodations] = useState('');
+  const [accommodation, setAccommodation] = useState('');
   const [price, setPrice] = useState('');
+
   const [errors, setErrors] = useState({
+    pID: '',
     province: '',
     packageName: '',
-    packageID: '',
     places: '',
     meals: '',
     activities: '',
-    accommodations: '',
-    price: ''
+    accommodation: '',
+    price: '',
   });
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const newErrors = {};
+  const provinces = [
+    'Western Province',
+    'Central Province',
+    'Southern Province',
+    'Northern Province',
+    'Eastern Province',
+    'North Western Province',
+    'North Central Province',
+    'Uva Province',
+    'Sabaragamuwa Province',
+  ];
 
-    // Check each field for empty value
-    if (!province) newErrors.province = 'Required';
-    if (!packageName) newErrors.packageName = 'Required';
-    if (!packageID) newErrors.packageID = 'Required';
-    if (!places) newErrors.places = 'Required';
-    if (meals.length === 0) newErrors.meals = 'Required';
-    if (!activities) newErrors.activities = 'Required';
-    if (!accommodations) newErrors.accommodations = 'Required';
-    if (!price) newErrors.price = 'Required';
-
-    // Set errors object with newErrors
-    setErrors(newErrors);
-
-    // If there are no errors, proceed with package creation
-    if (Object.keys(newErrors).length === 0) {
-      // Handle the submission of the travel plan
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case 'pID':
+        setPID(value);
+        break;
+      case 'province':
+        setProvince(value);
+        break;
+      case 'packageName':
+        setPackageName(value);
+        break;
+      case 'places':
+        setPlaces(value);
+        break;
+      case 'meals':
+        setMeals(value);
+        break;
+      case 'activities':
+        setActivities(value);
+        break;
+      case 'accommodation':
+        setAccommodation(value);
+        break;
+      case 'price':
+        setPrice(value);
+        break;
+      default:
+        break;
     }
   };
 
-  const handleMealChange = (e) => {
-    const { value, checked } = e.target;
-    if (checked) {
-      setMeals([...meals, value]);
-    } else {
-      setMeals(meals.filter((meal) => meal !== value));
+  const validateForm = () => {
+    let valid = true;
+    const newErrors = {};
+
+    // Check for empty fields
+    if (pID.trim() === '') {
+      newErrors.pID = 'Required';
+      valid = false;
+    }
+    if (province.trim() === '') {
+      newErrors.province = 'Required';
+      valid = false;
+    }
+    if (packageName.trim() === '') {
+      newErrors.packageName = 'Required';
+      valid = false;
+    }
+    if (places.trim() === '') {
+      newErrors.places = 'Required';
+      valid = false;
+    }
+    if (meals.trim() === '') {
+      newErrors.meals = 'Required';
+      valid = false;
+    }
+    if (activities.trim() === '') {
+      newErrors.activities = 'Required';
+      valid = false;
+    }
+    if (accommodation.trim() === '') {
+      newErrors.accommodation = 'Required';
+      valid = false;
+    }
+    if (price.trim() === '') {
+      newErrors.price = 'Required';
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    try {
+      const data = {
+        pID,
+        province,
+        packageName,
+        places,
+        meals,
+        activities,
+        accommodation,
+        price,
+      };
+
+      const response = await axios.post('http://localhost:3001/api/package/save', data);
+
+      if (response.data.success) {
+        setPID('');
+        setProvince('');
+        setPackageName('');
+        setPlaces('');
+        setMeals('');
+        setActivities('');
+        setAccommodation('');
+        setPrice('');
+        navigate('/pdashboard');
+        alert("Failed!");
+      } else {
+        alert("Package created successfully!");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred while creating the package. Please try again later.");
     }
   };
 
   return (
-    <div className="create-package-container">
-      <form className="create-package-form" onSubmit={handleSubmit}>
-        <h2>Create Package</h2>
-        <div className="form-group">
-          <label htmlFor="packageID">Package ID:</label>
+    <div className="container">
+      <h2>Package Creation</h2>
+      <form className="form-container" onSubmit={onSubmit}>
+        <div>
+          <label htmlFor="pID">Package ID:</label>
           <input
             type="text"
             id="pID"
-            value={packageID}
-            onChange={(e) => setPackageID(e.target.value)}
+            value={pID}
+            onChange={handleInputChange}
             placeholder="Package ID"
+            name="pID"
           />
-          {errors.packageID && <span className="error-message">{errors.packageID}</span>}
+          {errors.pID && <p className="error-message">{errors.pID}</p>}
         </div>
 
-        <div className="form-group">
+        <div>
           <label htmlFor="province">Province:</label>
           <select
             id="province"
             value={province}
-            onChange={(e) => setProvince(e.target.value)}
+            onChange={handleInputChange}
+            name="province"
           >
             <option value="">Select Province</option>
-            <option value="Central">Central</option>
-            <option value="Eastern">Eastern</option>
-            <option value="North Central">North Central</option>
-            <option value="Northern">Northern</option>
-            <option value="North Western">North Western</option>
-            <option value="Sabaragamuwa">Sabaragamuwa</option>
-            <option value="Southern">Southern</option>
-            <option value="Uva">Uva</option>
-            <option value="Western">Western</option>
+            {provinces.map((provinceName, index) => (
+              <option key={index} value={provinceName}>
+                {provinceName}
+              </option>
+            ))}
           </select>
-          {errors.province && <span className="error-message">{errors.province}</span>}
+          {errors.province && <p className="error-message">{errors.province}</p>}
         </div>
 
-        <div className="form-group">
+        <div>
           <label htmlFor="packageName">Package Name:</label>
           <input
             type="text"
             id="packageName"
             value={packageName}
-            onChange={(e) => setPackageName(e.target.value)}
+            onChange={handleInputChange}
             placeholder="Package Name"
+            name="packageName"
           />
-          {errors.packageName && <span className="error-message">{errors.packageName}</span>}
+          {errors.packageName && <p className="error-message">{errors.packageName}</p>}
         </div>
 
-        <div className="form-group">
+        <div>
           <label htmlFor="places">Places:</label>
           <input
             type="text"
             id="places"
             value={places}
-            onChange={(e) => setPlaces(e.target.value)}
+            onChange={handleInputChange}
             placeholder="Places"
+            name="places"
           />
-          {errors.places && <span className="error-message">{errors.places}</span>}
+          {errors.places && <p className="error-message">{errors.places}</p>}
         </div>
 
-        <div className="form-group">
-          <label>Meals:</label>
-          <div className="meal-options">
-            <div className="meal-option">
-              <input
-                type="checkbox"
-                id="meals"
-                value="Breakfast"
-                checked={meals.includes('Breakfast')}
-                onChange={handleMealChange}
-              />
-              <label htmlFor="breakfastCheckbox">Breakfast</label>
-            </div>
-            <div className="meal-option">
-              <input
-                type="checkbox"
-                id="meals"
-                value="Lunch"
-                checked={meals.includes('Lunch')}
-                onChange={handleMealChange}
-              />
-              <label htmlFor="lunchCheckbox">Lunch</label>
-            </div>
-            <div className="meal-option">
-              <input
-                type="checkbox"
-                id="meals"
-                value="Tea"
-                checked={meals.includes('Tea')}
-                onChange={handleMealChange}
-              />
-              <label htmlFor="teaCheckbox">Tea</label>
-            </div>
-            <div className="meal-option">
-              <input
-                type="checkbox"
-                id="meals"
-                value="Dinner"
-                checked={meals.includes('Dinner')}
-                onChange={handleMealChange}
-              />
-              <label htmlFor="dinnerCheckbox">Dinner</label>
-            </div>
-          </div>
-          {errors.meals && <span className="error-message">{errors.meals}</span>}
+        <div>
+          <label htmlFor="meals">Meals:</label>
+          <input
+            type="text"
+            id="meals"
+            value={meals}
+            onChange={handleInputChange}
+            placeholder="Meals"
+            name="meals"
+          />
+          {errors.meals && <p className="error-message">{errors.meals}</p>}
         </div>
 
-        <div className="form-group">
+        <div>
           <label htmlFor="activities">Activities:</label>
           <input
             type="text"
             id="activities"
             value={activities}
-            onChange={(e) => setActivities(e.target.value)}
+            onChange={handleInputChange}
             placeholder="Activities"
+            name="activities"
           />
-          {errors.activities && <span className="error-message">{errors.activities}</span>}
+          {errors.activities && <p className="error-message">{errors.activities}</p>}
         </div>
 
-        <div className="form-group">
+        <div>
           <label htmlFor="accommodation">Accommodation:</label>
-          <select
+          <input
+            type="text"
             id="accommodation"
-            value={accommodations}
-            onChange={(e) => setAccomodations(e.target.value)}
-          >
-            <option value="">Select Accommodation</option>
-            <option value="3 Star Hotels">3 Star Hotels</option>
-            <option value="5 Star Hotels">5 Star Hotels</option>
-            <option value="Annexes">Annexes</option>
-          </select>
-          {errors.accommodations && <span className="error-message">{errors.accommodations}</span>}
+            value={accommodation}
+            onChange={handleInputChange}
+            placeholder="Accommodation"
+            name="accommodation"
+          />
+          {errors.accommodation && <p className="error-message">{errors.accommodation}</p>}
         </div>
 
-        <div className="form-group">
+        <div>
           <label htmlFor="price">Price:</label>
           <input
             type="text"
             id="price"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={handleInputChange}
             placeholder="Price"
+            name="price"
           />
-          {errors.price && <span className="error-message">{errors.price}</span>}
+          {errors.price && <p className="error-message">{errors.price}</p>}
         </div>
 
-        <button type="submit">Create Package</button>
+        <button className="package-button" type="submit">
+          <i className="far fa-check-square"></i>
+          &nbsp; Create
+        </button>
       </form>
+      <button className='detail-button' onClick={() => navigate('/pdashboard')}>
+        All Packages
+      </button>
     </div>
   );
 };
 
-export default CreatePackage;
+export default P_create;

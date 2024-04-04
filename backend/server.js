@@ -1,18 +1,34 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 
-const PORT = 3002;
-const DB_URL = 'mongodb+srv://oshadhanipun2k1:Oshadha2001@packagecrud.8uyc1qg.mongodb.net/packageM?retryWrites=true&w=majority&appName=packageCRUD'; // Removed extra 'const DB_URL =' inside the string
+// Import routes
+const packageRoutes = require('./routers/Package/P_routes');
 
-mongoose.connect(DB_URL)
-.then(() =>{
-    console.log('DB Connected')
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+
+// Connect to MongoDB
+const DB_URL = 'mongodb+srv://oshadhanipun2k1:Oshadha2001@packagecrud.8uyc1qg.mongodb.net/packageM?retryWrites=true&w=majority&appName=packageCRUD';
+mongoose.connect(DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 })
-.catch((err) => console.log('DB connection error', err));
+.then(() => {
+    console.log('MongoDB Connected');
+})
+.catch((err) => {
+    console.log('MongoDB connection error', err);
+});
 
+// Use routes
+app.use('/api', packageRoutes);
 
-app.listen(PORT, () =>{
+const PORT = process.env.PORT || 3001; // Use environment variable or port 3001 as default
+app.listen(PORT, () => {
     console.log(`App is running on ${PORT}`);
 });

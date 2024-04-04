@@ -5,8 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Users from './pages/User/Users';
-import Phome from './pages/Package/P_home';
 import Pcreate from './pages/Package/P_create';
+import Pdashboard from './pages/Package/P_dashboard'
+import Pedit from './pages/Package/P_edit'
+import Pdetails from './pages/Package/P_details'
+import Pdelete from './pages/Package/P_delete'
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,8 +20,14 @@ root.render(
       <Routes>
         <Route path='/' element={<App/>} />
         <Route path='/users' element={<Users/>} />
-        <Route path='/phome' element={<Phome/>} />
         <Route path='/create' element={<Pcreate/>} />
+        <Route path='/pdashboard' element={<Pdashboard/>} />
+        <Route path='/edit/:id' element={<Pedit/>} />
+        <Route path='/package/:id' element={<Pdetails/>} />
+        <Route path='/delete/:id' element={<Pdelete/>} />
+        
+        
+
         
       </Routes>
   </BrowserRouter>
