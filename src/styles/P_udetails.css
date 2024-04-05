@@ -1,0 +1,35 @@
+body {
+    background-color: lavender; 
+  }
+  
+  .package-details {
+    margin: 20px; 
+  }
+  
+  .package-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 100px;
+  }
+  
+  .package-table th,
+  .package-table td {
+    border: 2px solid black;
+    padding: 12px;
+  }
+  
+  .package-table th {
+    background-color: lavender;
+    font-weight: bold;
+  }
+  
+  .package-table td {
+    text-align: left;
+  }
+  
+  .package-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  
+  

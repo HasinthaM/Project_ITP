@@ -9,7 +9,11 @@ import Pcreate from './pages/Package/P_create';
 import Pdashboard from './pages/Package/P_dashboard'
 import Pedit from './pages/Package/P_edit'
 import Pdetails from './pages/Package/P_details'
-import Pdelete from './pages/Package/P_delete'
+import Phome from './pages/Package/PackageUser/P_userhome'
+import PUdash from './pages/Package/PackageUser/P_userdashboard'
+import PUcus from './pages/Package/PackageUser/P_customize'
+import PUedit from './pages/Package/PackageUser/P_uedit'
+import PUview from './pages/Package/PackageUser/P_udetails'
 
 
 
@@ -24,7 +28,13 @@ root.render(
         <Route path='/pdashboard' element={<Pdashboard/>} />
         <Route path='/edit/:id' element={<Pedit/>} />
         <Route path='/package/:id' element={<Pdetails/>} />
-        <Route path='/delete/:id' element={<Pdelete/>} />
+        <Route path='/phome' element={<Phome/>} />
+        <Route path='/udashboard' element={<PUdash/>} />
+        <Route path='/ucus' element={<PUcus/>} />
+        <Route path='/editu/:id' element={<PUedit/>} />
+        <Route path='/viewu/:id' element={<PUview/>} />
+
+
         
         
 
