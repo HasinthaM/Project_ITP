@@ -1,35 +1,52 @@
 body {
-    background-color: lavender; 
-  }
-  
-  .package-details {
-    margin: 20px; 
-  }
-  
-  .package-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 100px;
-  }
-  
-  .package-table th,
-  .package-table td {
-    border: 2px solid black;
-    padding: 12px;
-  }
-  
-  .package-table th {
-    background-color: lavender;
-    font-weight: bold;
-  }
-  
-  .package-table td {
-    text-align: left;
-  }
-  
-  .package-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  
-  
+  background-color: lavender;
+}
+
+.cpackage-details {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.cname h3 {
+  text-align: center;
+  size: 30px;
+}
+
+.cpackage-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.cpackage-table th,
+.cpackage-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.cpackage-table th {
+  font-weight: bold;
+  text-align: left;
+}
+
+.cbutton-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.cd-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cd-button:hover {
+  background-color: #0056b3;
+}

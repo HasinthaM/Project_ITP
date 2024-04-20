@@ -46,23 +46,30 @@ const P_dashboard = () => {
     };
 
     // Filter packages based on search query
-    const filteredPackages = packages.filter(packageItem => {
-        return (
-            packageItem.pID.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            packageItem.province.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            packageItem.packageName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            packageItem.places.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            packageItem.meals.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            packageItem.activities.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            packageItem.accommodation.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            packageItem.price.toString().toLowerCase().includes(searchQuery.toLowerCase())
-        );
-    });
+const filteredPackages = packages.filter(packageItem => {
+    const query = searchQuery.toLowerCase();
+    return (
+        packageItem.pID.toLowerCase().includes(query) ||
+        packageItem.province.toLowerCase().includes(query) ||
+        packageItem.packageName.toLowerCase().includes(query) ||
+        packageItem.vehicle.toLowerCase().includes(query) ||
+        packageItem.noOfPerson.toString().toLowerCase().includes(query) ||
+        packageItem.places.toLowerCase().includes(query) ||
+        (Array.isArray(packageItem.meals) ? packageItem.meals.join(', ').toLowerCase().includes(query) : packageItem.meals.toLowerCase().includes(query)) ||
+        packageItem.activities.toLowerCase().includes(query) ||
+        packageItem.accommodation.toLowerCase().includes(query) ||
+        packageItem.price.toString().toLowerCase().includes(query)
+    );
+});
+
+
 
     return (
-        <div>
-           <h2>Tour Packages</h2>
-             <div className="search-bar">
+        <div className='dash'>
+            <div className='create-p'>
+            <h2>Tour Packages</h2>
+            </div>
+             <div className="search-bar1">
              <input
             type="text"
             placeholder="Search..."
@@ -77,6 +84,8 @@ const P_dashboard = () => {
                             <th>PID</th>
                             <th>Province</th>
                             <th>PName</th>
+                            <th>Vehicle</th>
+                            <th>NPersons</th>
                             <th>Places</th>
                             <th>Meals</th>
                             <th>Activities</th>
@@ -91,6 +100,8 @@ const P_dashboard = () => {
                                 <td>{packageItem.pID}</td>
                                 <td>{packageItem.province}</td>
                                 <td>{packageItem.packageName}</td>
+                                <td>{packageItem.vehicle}</td>
+                                <td>{packageItem.noOfPerson}</td>
                                 <td>{packageItem.places}</td>
                                 <td>{packageItem.meals}</td>
                                 <td>{packageItem.activities}</td>
@@ -112,7 +123,8 @@ const P_dashboard = () => {
                     </tbody>
                 </table>
             </div>
-            <button className='create-button' onClick={() => navigate('/create')}>Create Package</button>
+            <button className='create-button2' onClick={() => navigate('/create')}>Create Package</button>
+            <button className='report1' onClick={() => navigate('/preport')}>Generate Report</button>
         </div>
     );
 };

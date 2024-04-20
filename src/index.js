@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Users from './pages/User/Users';
 import Pcreate from './pages/Package/P_create';
 import Pdashboard from './pages/Package/P_dashboard'
 import Pedit from './pages/Package/P_edit'
@@ -14,6 +13,12 @@ import PUdash from './pages/Package/PackageUser/P_userdashboard'
 import PUcus from './pages/Package/PackageUser/P_customize'
 import PUedit from './pages/Package/PackageUser/P_uedit'
 import PUview from './pages/Package/PackageUser/P_udetails'
+import PUMore1 from './pages/Package/PackageUser/P_more1'
+import PUMore2 from './pages/Package/PackageUser/P_more2'
+import PUMore3 from './pages/Package/PackageUser/P_more3'
+import PUMore4 from './pages/Package/PackageUser/P_more4'
+import POM from './pages/Package/P_operationM'
+import PR from './pages/Package/PackageUser/P_report'
 
 
 
@@ -23,7 +28,6 @@ root.render(
   <BrowserRouter>
       <Routes>
         <Route path='/' element={<App/>} />
-        <Route path='/users' element={<Users/>} />
         <Route path='/create' element={<Pcreate/>} />
         <Route path='/pdashboard' element={<Pdashboard/>} />
         <Route path='/edit/:id' element={<Pedit/>} />
@@ -32,7 +36,16 @@ root.render(
         <Route path='/udashboard' element={<PUdash/>} />
         <Route path='/ucus' element={<PUcus/>} />
         <Route path='/editu/:id' element={<PUedit/>} />
-        <Route path='/viewu/:id' element={<PUview/>} />
+        <Route path='/udetails/:id' element={<PUview/>} />
+        <Route path='/more1' element={<PUMore1/>} />
+        <Route path='/more2' element={<PUMore2/>} />
+        <Route path='/more3' element={<PUMore3/>} />
+        <Route path='/more4' element={<PUMore4/>} />
+        <Route path='/o-manager' element={<POM/>} />
+        <Route path='/preport' element={<PR/>} />
+
+
+
 
 
         

@@ -5,16 +5,23 @@ import axios from 'axios';
 export default function P_edit() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [values, setValues] = useState({
-    pID: '',
-    province: '',
-    packageName: '',
-    places: '',
-    meals: '',
-    activities: '',
-    accommodation: '',
-    price: '',
-  });
+  const [values, setValues] = useState(null);
+
+  const provinces = [
+    'Western Province',
+    'Central Province',
+    'Southern Province',
+    'Northern Province',
+    'Eastern Province',
+    'North Western Province',
+    'North Central Province',
+    'Uva Province',
+    'Sabaragamuwa Province',
+  ];
+
+  const vehicles = ['Car', 'Van', 'Bike', 'Bicycle', 'Luxury Bus'];
+  const accommodations = ['3 Star Hotel', '5 Star Hotel', 'Annexe'];
+  const mealOptions = ['Breakfast', 'Lunch', 'Tea', 'Dinner'];
 
   useEffect(() => {
     axios.get(`http://localhost:3001/api/package/${id}`)
@@ -24,6 +31,8 @@ export default function P_edit() {
           pID: packageData.pID,
           province: packageData.province,
           packageName: packageData.packageName,
+          vehicle: packageData.vehicle,
+          noOfPerson: packageData.noOfPerson, // Corrected from noOfperson to noOfPerson
           places: packageData.places,
           meals: packageData.meals,
           activities: packageData.activities,
@@ -42,105 +51,175 @@ export default function P_edit() {
     });
   };
 
+  const handleMealSelection = (event) => {
+    const { value } = event.target;
+    const index = values.meals.indexOf(value);
+    if (index === -1) {
+      setValues(prevState => ({
+        ...prevState,
+        meals: [...prevState.meals, value]
+      }));
+    } else {
+      const updatedMeals = [...values.meals];
+      updatedMeals.splice(index, 1);
+      setValues(prevState => ({
+        ...prevState,
+        meals: updatedMeals
+      }));
+    }
+  };
+
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
       await axios.put(`http://localhost:3001/api/package/update/${id}`, values);
+      alert('Package updated successfully!');
       navigate('/pdashboard');
     } catch (error) {
       console.error('Update failed:', error);
-      // Handle error here, e.g., show an error message
+      alert('Failed to update package. Please try again later.');
     }
   };
 
   return (
     <div className="container">
-      {Object.keys(values).length > 0 ? (
+      <h2>Update Package Details</h2>
+      {values ? (
         <form className="form-container" onSubmit={onSubmit}>
-          <div>
-            <label htmlFor="pID">Package ID:</label>
-            <input
-              type="text"
-              id="pID"
-              name="pID"
-              value={values.pID}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="province">Province:</label>
-            <input
-              type="text"
-              id="province"
-              name="province"
-              value={values.province}
-              disabled // Disabling the field
-            />
-          </div>
-          <div>
-            <label htmlFor="packageName">Package Name:</label>
-            <input
-              type="text"
-              id="packageName"
-              name="packageName"
-              value={values.packageName}
-              onChange={handleInputChange}
-            />
-          </div>
+          <div className="flex-container">
+            <div>
+              <label htmlFor="pID">Package ID</label>
+              <input
+                type="text"
+                id="pID"
+                value={values.pID}
+                onChange={handleInputChange}
+                name="pID"
+                readOnly
+              />
+            </div>
 
-          <div>
-            <label htmlFor="places">Places:</label>
-            <input
-              type="text"
-              id="places"
-              name="places"
-              value={values.places}
-              onChange={handleInputChange}
-            />
-          </div>
+            <div>
+              <label htmlFor="province">Province</label>
+              <select
+                id="province"
+                value={values.province}
+                onChange={handleInputChange}
+                name="province"
+              >
+                <option value="">Select Province</option>
+                {provinces.map((provinceName, index) => (
+                  <option key={index} value={provinceName}>
+                    {provinceName}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div>
-            <label htmlFor="meals">Meals:</label>
-            <input
-              type="text"
-              id="meals"
-              name="meals"
-              value={values.meals}
-              onChange={handleInputChange}
-            />
-          </div>
+            <div>
+              <label htmlFor="packageName">Package Name</label>
+              <input
+                type="text"
+                id="packageName"
+                value={values.packageName}
+                onChange={handleInputChange}
+                name="packageName"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="activities">Activities:</label>
-            <input
-              type="text"
-              id="activities"
-              name="activities"
-              value={values.activities}
-              onChange={handleInputChange}
-            />
-          </div>
+            <div>
+              <label htmlFor="vehicle">Vehicle</label>
+              <select
+                id="vehicle"
+                value={values.vehicle}
+                onChange={handleInputChange}
+                name="vehicle"
+              >
+                <option value="">Select Vehicle</option>
+                {vehicles.map((vehicleOption, index) => (
+                  <option key={index} value={vehicleOption}>
+                    {vehicleOption}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div>
-            <label htmlFor="accommodation">Accommodation:</label>
-            <input
-              type="text"
-              id="accommodation"
-              name="accommodation"
-              value={values.accommodation}
-              onChange={handleInputChange}
-            />
-          </div>
+            <div className="person-input-container">
+              <label htmlFor="noOfPerson">Number of Persons</label>
+              <input
+                type="number"
+                id="noOfPerson"
+                value={values.noOfPerson}
+                onChange={handleInputChange}
+                name="noOfPerson"
+                min="1"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="price">Price:</label>
-            <input
-              type="text"
-              id="price"
-              name="price"
-              value={values.price}
-              onChange={handleInputChange}
-            />
+            <div>
+              <label htmlFor="places">Places</label>
+              <input
+                type="text"
+                id="places"
+                value={values.places}
+                onChange={handleInputChange}
+                name="places"
+              />
+            </div>
+
+            <div>
+              <label>Meals:</label>
+              {mealOptions.map((mealOption, index) => (
+                <div key={index} className="meal-option">
+                  <input
+                    type="checkbox"
+                    value={mealOption}
+                    onChange={handleMealSelection}
+                    checked={values.meals.includes(mealOption)}
+                  />
+                  <label>{mealOption}</label>
+                </div>
+              ))}
+            </div>
+
+            <div>
+              <label htmlFor="activities">Activities</label>
+              <input
+                type="text"
+                id="activities"
+                value={values.activities}
+                onChange={handleInputChange}
+                name="activities"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="accommodation">Accommodation</label>
+              <select
+                id="accommodation"
+                value={values.accommodation}
+                onChange={handleInputChange}
+                name="accommodation"
+              >
+                <option value="">Select Accommodation</option>
+                {accommodations.map((accommodationOption, index) => (
+                  <option key={index} value={accommodationOption}>
+                    {accommodationOption}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label htmlFor="price">Price</label>
+              <input
+                type="text"
+                id="price"
+                value={values.price}
+                onChange={handleInputChange}
+                name="price"
+              />
+            </div>
           </div>
           <button className="package-button" type="submit">
             <i className="far fa-check-square"></i>

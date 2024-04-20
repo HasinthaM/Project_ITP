@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Create model
 const packageSchema = new mongoose.Schema({
     pID: {
         type: String,
@@ -14,12 +13,20 @@ const packageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    vehicle: {
+        type: String,
+        required: true
+    },
+    noOfPerson: {
+        type: Number,
+        required: true
+    },
     places: {
         type: String,
         required: true
     },
     meals: {
-        type: String,
+        type: [String], 
         required: true
     },
     activities: {
@@ -33,8 +40,12 @@ const packageSchema = new mongoose.Schema({
     price: {
         type: String,
         required: true
+    },
+    status: {
+        type: String,
+        enum: ["Pending", "Approved", "Rejected"],
+        default: "Pending"
     }
 });
 
-// Export the model
 module.exports = mongoose.model('Package', packageSchema);

@@ -1,7 +1,6 @@
 const express = require('express');
 const { body, param, validationResult } = require('express-validator');
 const Package = require('../../model/Package/P_model');
-const User = require('../../model/Package/P_UserModel');
 
 const router = express.Router();
 
@@ -112,126 +111,28 @@ router.delete('/package/delete/:id', validateIDParam, handleValidationErrors, as
     }
 });
 
-//User Package CRUD
-
-//save package user customize
-router.post('/user/save', async (req, res) => {
+// Accept package
+router.put('/package/:id/accept', async (req, res) => {
     try {
-        const newUser = new User(req.body);
-        await newUser.save();
-        return res.status(200).json({
-            Success: "User saved successfully"
-        });
+        const packageId = req.params.id;
+        const updatedPackage = await Package.findByIdAndUpdate(packageId, { status: "Approved" }, { new: true });
+        res.json({ success: true, package: updatedPackage });
     } catch (error) {
-        return res.status(400).json({
-            error: error.message
-        });
+        console.error("Error accepting package:", error);
+        res.status(500).json({ success: false, error: "Failed to accept package" });
     }
 });
 
-//get package user customize
-router.get('/user', async (req, res) => {
+// Reject package
+router.put('/package/:id/reject', async (req, res) => {
     try {
-        const users = await User.find().exec();
-        return res.status(200).json({
-            success: true,
-            existingUser: users
-        });
+        const packageId = req.params.id;
+        const updatedPackage = await Package.findByIdAndUpdate(packageId, { status: "Rejected" }, { new: true });
+        res.json({ success: true, package: updatedPackage });
     } catch (error) {
-        return res.status(400).json({
-            error: error.message
-        });
+        console.error("Error rejecting package:", error);
+        res.status(500).json({ success: false, error: "Failed to reject package" });
     }
 });
-
-//get specific package user customize
-router.get('/user/:id', async(req, res)=> {
-    try {
-        const userID = req.params.id;
-        const user = await User.findById(userID).exec();
-        
-        if (!user) {
-            return res.status(404).json({ success: false, message: 'Customize Package not found' });
-        }
-        
-        return res.status(200).json({
-            success: true,
-            user: user
-        });
-    } catch (error) {
-        return res.status(400).json({
-            error: error.message
-        });
-    }
-});
-
-//update  package user customize
-router.put('/user/update/:id', async (req, res) => {
-    try {
-        await User.findByIdAndUpdate(req.params.id, { $set: req.body });
-        return res.status(200).json({
-            success: "Customize package Updated Successfully"
-        });
-    } catch (error) {
-        return res.status(400).json({
-            error: error.message
-        });
-    }
-});
-
-//delete  package user customize
-router.delete('/user/delete/:id', async (req, res) => {
-    try {
-        const deleteUser = await User.findByIdAndDelete(req.params.id);
-        return res.json({
-            message: "Customize Package Delete Successful",
-            deleteUser
-        });
-    } catch (error) {
-        return res.status(400).json({
-            message: "Customize Package Delete Unsuccessful",
-            error: error.message
-        });
-    }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 module.exports = router;

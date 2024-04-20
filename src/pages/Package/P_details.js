@@ -25,41 +25,34 @@ const PackageDetails = () => {
     fetchPackage();
   }, [id]);
 
-  const { province, packageName, places, meals, activities, accommodation, price } = packageData;
+  const { pID, province, packageName, vehicle, noOfPerson, places, meals, activities, accommodation, price } = packageData;
 
   return (
-    <div className="package-details">
-      <h2>Package Details</h2>
+    <div className="package-details1">
+      <div className='pedit'>
+        <h3>Package Details</h3>
+      </div>
       {Object.keys(packageData).length > 0 ? (
-        <table className="package-table">
-          <thead>
-            <tr>
-              <th>Province</th>
-              <th>Package Name</th>
-              <th>Places</th>
-              <th>Meals</th>
-              <th>Activities</th>
-              <th>Accommodation</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{province}</td>
-              <td>{packageName}</td>
-              <td>{places}</td>
-              <td>{meals}</td>
-              <td>{activities}</td>
-              <td>{accommodation}</td>
-              <td>{price}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="flex-container2">
+          <div className="flex-item2">
+            <p><strong>PID:</strong> {pID}</p>
+            <p><strong>Province:</strong> {province}</p>
+            <p><strong>PName:</strong> {packageName}</p>
+            <p><strong>Vehicle:</strong> {vehicle}</p>
+            <p><strong>NPersons:</strong> {noOfPerson}</p>
+            <p><strong>Places:</strong> {places}</p>
+            <p><strong>Meals:</strong> {meals}</p>
+            <p><strong>Activities:</strong> {activities}</p>
+            <p><strong>Accommodation:</strong> {accommodation}</p>
+            <p><strong>Price:</strong> {price}</p>
+          </div>
+        </div>
       ) : (
         <p>Loading package details...</p>
       )}
-      <button className='detail-button' onClick={() => navigate('/pdashboard')}>
-        All Packages </button> 
+      <button className='detail-button2' onClick={() => navigate('/pdashboard')}>
+        All Packages
+      </button>
     </div>
   );
 };

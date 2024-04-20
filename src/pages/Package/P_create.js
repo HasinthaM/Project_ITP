@@ -9,8 +9,10 @@ const P_create = () => {
   const [pID, setPID] = useState('');
   const [province, setProvince] = useState('');
   const [packageName, setPackageName] = useState('');
+  const [vehicle, setVehicle] = useState('');
+  const [noOfPerson, setNoOfPerson] = useState('');
   const [places, setPlaces] = useState('');
-  const [meals, setMeals] = useState('');
+  const [meals, setMeals] = useState([]);
   const [activities, setActivities] = useState('');
   const [accommodation, setAccommodation] = useState('');
   const [price, setPrice] = useState('');
@@ -19,6 +21,8 @@ const P_create = () => {
     pID: '',
     province: '',
     packageName: '',
+    vehicle:'',
+    noOfPerson:'',
     places: '',
     meals: '',
     activities: '',
@@ -38,32 +42,53 @@ const P_create = () => {
     'Sabaragamuwa Province',
   ];
 
+  const vehicles = ['Car', 'Van', 'Bike', 'Bicycle', 'Luxury Bus'];
+  const accommodations = ['3 Star Hotel', '5 Star Hotel', 'Annexe'];
+  const mealOptions = ['Breakfast', 'Lunch', 'Tea', 'Dinner'];
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    let newValue = value;
+
+    if (name === 'activities' || name === 'places') {
+      newValue = value.replace(/[0-9]/g, '');
+    } else if (name === 'noOfPerson') {
+      newValue = value.replace(/\D/g, '');
+      if (parseInt(newValue) > 25) {
+        newValue = '25';
+      }
+    }
+
     switch (name) {
       case 'pID':
-        setPID(value);
+        setPID(newValue);
         break;
       case 'province':
-        setProvince(value);
+        setProvince(newValue);
         break;
       case 'packageName':
-        setPackageName(value);
+        setPackageName(newValue);
+        break;
+      case 'vehicle':
+        setVehicle(newValue);
+        break;
+      case 'noOfPerson':
+        setNoOfPerson(newValue);
         break;
       case 'places':
-        setPlaces(value);
+        setPlaces(newValue);
         break;
       case 'meals':
-        setMeals(value);
+        setMeals([...meals, newValue]);
         break;
       case 'activities':
-        setActivities(value);
+        setActivities(newValue);
         break;
       case 'accommodation':
-        setAccommodation(value);
+        setAccommodation(newValue);
         break;
       case 'price':
-        setPrice(value);
+        setPrice(newValue);
         break;
       default:
         break;
@@ -74,7 +99,6 @@ const P_create = () => {
     let valid = true;
     const newErrors = {};
 
-    // Check for empty fields
     if (pID.trim() === '') {
       newErrors.pID = 'Required';
       valid = false;
@@ -91,7 +115,7 @@ const P_create = () => {
       newErrors.places = 'Required';
       valid = false;
     }
-    if (meals.trim() === '') {
+    if (meals.length === 0) {
       newErrors.meals = 'Required';
       valid = false;
     }
@@ -105,6 +129,11 @@ const P_create = () => {
     }
     if (price.trim() === '') {
       newErrors.price = 'Required';
+      valid = false;
+    }
+
+    if (parseInt(noOfPerson) > 25) {
+      newErrors.noOfPerson = 'Maximum 25 persons allowed';
       valid = false;
     }
 
@@ -124,6 +153,8 @@ const P_create = () => {
         pID,
         province,
         packageName,
+        vehicle,
+        noOfPerson,
         places,
         meals,
         activities,
@@ -137,13 +168,16 @@ const P_create = () => {
         setPID('');
         setProvince('');
         setPackageName('');
+        setVehicle('');
+        setNoOfPerson('');
         setPlaces('');
-        setMeals('');
+        setMeals([]);
         setActivities('');
         setAccommodation('');
         setPrice('');
         navigate('/pdashboard');
-        alert("Failed!");
+        alert("Package created successfully!");
+        navigate('/pdashboard');
       } else {
         alert("Package created successfully!");
       }
@@ -157,118 +191,158 @@ const P_create = () => {
     <div className="container">
       <h2>Package Creation</h2>
       <form className="form-container" onSubmit={onSubmit}>
-        <div>
-          <label htmlFor="pID">Package ID:</label>
-          <input
-            type="text"
-            id="pID"
-            value={pID}
-            onChange={handleInputChange}
-            placeholder="Package ID"
-            name="pID"
-          />
-          {errors.pID && <p className="error-message">{errors.pID}</p>}
-        </div>
+        <div className="flex-container">
+          <div>
+            <label htmlFor="pID"></label>
+            <input
+              type="text"
+              id="pID"
+              value={pID}
+              onChange={handleInputChange}
+              placeholder="Package ID"
+              name="pID"
+            />
+            {errors.pID && <p className="error-message">{errors.pID}</p>}
+          </div>
 
-        <div>
-          <label htmlFor="province">Province:</label>
-          <select
-            id="province"
-            value={province}
-            onChange={handleInputChange}
-            name="province"
-          >
-            <option value="">Select Province</option>
-            {provinces.map((provinceName, index) => (
-              <option key={index} value={provinceName}>
-                {provinceName}
-              </option>
+          <div>
+            <label htmlFor="province"></label>
+            <select
+              id="province"
+              value={province}
+              onChange={handleInputChange}
+              name="province"
+            >
+              <option value="">Select Province</option>
+              {provinces.map((provinceName, index) => (
+                <option key={index} value={provinceName}>
+                  {provinceName}
+                </option>
+              ))}
+            </select>
+            {errors.province && <p className="error-message">{errors.province}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="packageName"></label>
+            <input
+              type="text"
+              id="packageName"
+              value={packageName}
+              onChange={handleInputChange}
+              placeholder="Package Name"
+              name="packageName"
+            />
+            {errors.packageName && <p className="error-message">{errors.packageName}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="vehicle"></label>
+            <select
+              id="vehicle"
+              value={vehicle}
+              onChange={handleInputChange}
+              name="vehicle"
+            >
+              <option value="">Select Vehicle</option>
+              {vehicles.map((vehicleOption, index) => (
+                <option key={index} value={vehicleOption}>
+                  {vehicleOption}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="person-input-container">
+            <label htmlFor="noOfPerson"></label>
+            <input
+              type="number"
+              id="noOfPerson"
+              value={noOfPerson}
+              onChange={handleInputChange}
+              placeholder="Number of Persons"
+              name="noOfPerson"
+              min="1"
+            />
+            {errors.noOfPerson && <p className="error-message">{errors.noOfPerson}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="places"></label>
+            <input
+              type="text"
+              id="places"
+              value={places}
+              onChange={handleInputChange}
+              placeholder="Places"
+              name="places"
+            />
+            {errors.places && <p className="error-message">{errors.places}</p>}
+          </div>
+
+          <div>
+            <label>Meals:</label>
+            {mealOptions.map((mealOption, index) => (
+              <div key={index} className="meal-option">
+                <input
+                  type="checkbox"
+                  value={mealOption}
+                  onChange={handleInputChange}
+                  checked={meals.includes(mealOption)}
+                  name="meals"
+                />
+                <label>{mealOption}</label>
+              </div>
             ))}
-          </select>
-          {errors.province && <p className="error-message">{errors.province}</p>}
-        </div>
+            {errors.meals && <p className="error-message">{errors.meals}</p>}
+          </div>
 
-        <div>
-          <label htmlFor="packageName">Package Name:</label>
-          <input
-            type="text"
-            id="packageName"
-            value={packageName}
-            onChange={handleInputChange}
-            placeholder="Package Name"
-            name="packageName"
-          />
-          {errors.packageName && <p className="error-message">{errors.packageName}</p>}
-        </div>
+          <div>
+            <label htmlFor="activities"></label>
+            <input
+              type="text"
+              id="activities"
+              value={activities}
+              onChange={handleInputChange}
+              placeholder="Activities"
+              name="activities"
+            />
+            {errors.activities && <p className="error-message">{errors.activities}</p>}
+          </div>
 
-        <div>
-          <label htmlFor="places">Places:</label>
-          <input
-            type="text"
-            id="places"
-            value={places}
-            onChange={handleInputChange}
-            placeholder="Places"
-            name="places"
-          />
-          {errors.places && <p className="error-message">{errors.places}</p>}
-        </div>
+          <div>
+            <label htmlFor="accommodation"></label>
+            <select
+              id="accommodation"
+              value={accommodation}
+              onChange={handleInputChange}
+              name="accommodation"
+            >
+              <option value="">Select Accommodation</option>
+              {accommodations.map((accommodationOption, index) => (
+                <option key={index} value={accommodationOption}>
+                  {accommodationOption}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div>
-          <label htmlFor="meals">Meals:</label>
-          <input
-            type="text"
-            id="meals"
-            value={meals}
-            onChange={handleInputChange}
-            placeholder="Meals"
-            name="meals"
-          />
-          {errors.meals && <p className="error-message">{errors.meals}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="activities">Activities:</label>
-          <input
-            type="text"
-            id="activities"
-            value={activities}
-            onChange={handleInputChange}
-            placeholder="Activities"
-            name="activities"
-          />
-          {errors.activities && <p className="error-message">{errors.activities}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="accommodation">Accommodation:</label>
-          <input
-            type="text"
-            id="accommodation"
-            value={accommodation}
-            onChange={handleInputChange}
-            placeholder="Accommodation"
-            name="accommodation"
-          />
-          {errors.accommodation && <p className="error-message">{errors.accommodation}</p>}
-        </div>
-
-        <div>
-          <label htmlFor="price">Price:</label>
-          <input
-            type="text"
-            id="price"
-            value={price}
-            onChange={handleInputChange}
-            placeholder="Price"
-            name="price"
-          />
-          {errors.price && <p className="error-message">{errors.price}</p>}
+          <div>
+            <label htmlFor="price"></label>
+            <input
+              type="text"
+              id="price"
+              value={price}
+              onChange={handleInputChange}
+              placeholder="Price"
+              name="price"
+            />
+            {errors.price && <p className="error-message">{errors.price}</p>}
+          </div>
         </div>
 
         <button className="package-button" type="submit">
-          <i className="far fa-check-square"></i>
-          &nbsp; Create
+          Create Package
         </button>
       </form>
       <button className='detail-button' onClick={() => navigate('/pdashboard')}>

@@ -1,12 +1,15 @@
 .table-container {
   position: relative;
-  margin: 80px auto 20px auto;
+  margin: 70px auto 30px auto;
   width: 80%;
   background-color: lavender;
+  top: 80px;
 }
 
-h2 {
+.create-p h2 {
   text-align: center;
+  font-size: 40px;
+  top: 50px;
 }
 
 table {
@@ -33,13 +36,18 @@ button {
   border-radius: 10px;
 }
 
-button.create-button {
+.create-button2 {
+  position: absolute;
+  bottom: 610px; 
+  left: 80%; 
+  transform: translateX(-50%); 
   background-color: #78A55A;
   color: white;
-  position: absolute;
-  top: 20px;
-  left: 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
 }
+
 
 button.edit, button.delete, button.view {
   margin-right: 5px;
@@ -66,10 +74,48 @@ button.view {
   align-items: center;
 }
 
-.search-bar {
+.search-bar1 {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  border-radius: 20px;
+  top: 60px; 
+  right: 25px; 
 }
 
+.search-bar1 input[type="text"] {
+  padding: 8px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+}
+
+.search-bar1 input[type="text"]:focus {
+  border-color: #78A55A; 
+}
+
+.search-bar1 input[type="text"]::placeholder {
+  color: #999; 
+}
+
+.search-bar1 button {
+  padding: 8px 20px;
+  background-color: #78A55A;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.search-bar1 button:hover {
+  background-color: #5C7B4C; 
+}
+.report1 {
+  position: absolute;
+  bottom: 580px; 
+  left: 80%; 
+  transform: translateX(-50%); 
+  background-color: #78A55A;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+}

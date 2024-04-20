@@ -1,14 +1,17 @@
 const mongoose = require('mongoose');
 
 // Create model
-const packageSchema = new mongoose.Schema({
-   
+const userSchema = new mongoose.Schema({
     province: {
         type: String,
         required: true
     },
-    packageName: {
-        type: String,
+    duration: {
+        type: String, 
+        required: true
+    },
+    noOfperson: {
+        type: Number,
         required: true
     },
     vehicle: {
@@ -20,7 +23,7 @@ const packageSchema = new mongoose.Schema({
         required: true
     },
     meals: {
-        type: String,
+        type: [String],
         required: true
     },
     activities: {
@@ -38,4 +41,4 @@ const packageSchema = new mongoose.Schema({
 });
 
 // Export the model
-module.exports = mongoose.model('User', packageSchema);
+module.exports = mongoose.model('User', userSchema);

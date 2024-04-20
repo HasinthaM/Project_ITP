@@ -2,9 +2,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   background-color: lavender;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.flex-container {
+  width: 400px;
+  padding: 20px;
+  background-color: lavenderblush;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 60px;
 }
 
 .form-container {
@@ -16,20 +26,17 @@
   margin-bottom: 15px;
 }
 
-.form-container label {
-  font-weight: bold;
-}
-
 .form-container input[type="text"],
-.form-container select { /* Apply styles to select element */
-  width: 100%;
+.form-container input[type="number"],
+.form-container select {
+  min-width: 400px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-.package-button{
+.package-button {
   background-color: #4caf50;
   color: white;
   padding: 10px 20px;
@@ -37,6 +44,7 @@
   border-radius: 10px;
   cursor: pointer;
 }
+
 .detail-button {
   position: absolute;
   top: 35px;
@@ -65,7 +73,18 @@ h2 {
   top: 3%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 22px;
-  font-style: italic;
+  font-size: 30px;
   color: darkblue;
+}
+
+.person-input-container {
+  margin-bottom: 15px;
+}
+
+.person-input-container input[type="number"] { 
+  min-width: 400px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }

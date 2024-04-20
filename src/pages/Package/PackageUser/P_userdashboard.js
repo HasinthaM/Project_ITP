@@ -1,4 +1,3 @@
-// P_userdashboard.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +5,7 @@ import '../../../styles/P_userdashboard.css';
 
 const P_userdashboard = () => {
     const [users, setUsers] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -43,18 +43,46 @@ const P_userdashboard = () => {
     };
 
     const handleView = (packageUItem) => {
-        navigate(`/viewu/${packageUItem._id}`); 
+        navigate(`/udetails/${packageUItem._id}`); 
     };
+    const handleSearchChange = (e) => {
+        const value = e.target.value.toLowerCase();
+        setSearchQuery(value);
+    };
+    
+    const filteredUsers = users.filter((user) =>
+    Object.values(user).some((value) => {
+        if (typeof value === "number") {
+            return String(value).toLowerCase().includes(searchQuery.toLowerCase());
+        } else if (typeof value === "string") {
+            return value.toLowerCase().includes(searchQuery.toLowerCase());
+        }
+        return false;
+    })
+);
+
+    
 
     return (
         <div>
-            <h3>Customize Packages</h3>
-            <div className="table-container">
+            <div className='search-bar2'>
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={handleSearchChange}
+                />
+            </div>
+            <div className='cus-topic'>
+                <h2>Customize Packages</h2>
+            </div>
+            <div className="table-container2">
                 <table>
                     <thead>
                         <tr>
                             <th>Province</th>
-                            <th>PName</th>
+                            <th>Duration</th>
+                            <th>NPerson</th>
                             <th>Vehicle</th>
                             <th>Places</th>
                             <th>Meals</th>
@@ -65,10 +93,11 @@ const P_userdashboard = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map(packageUItem => (
+                        {filteredUsers.map((packageUItem) => (
                             <tr key={packageUItem._id}>
                                 <td>{packageUItem.province}</td>
-                                <td>{packageUItem.packageName}</td>
+                                <td>{packageUItem.duration}</td>
+                                <td>{packageUItem.noOfperson}</td>
                                 <td>{packageUItem.vehicle}</td>
                                 <td>{packageUItem.places}</td>
                                 <td>{packageUItem.meals}</td>
@@ -91,7 +120,7 @@ const P_userdashboard = () => {
                     </tbody>
                 </table>
             </div>
-            <button className='create-button' onClick={() => navigate('/ucus')}>Customize Package</button>
+            <button className='create-button3' onClick={() => navigate('/ucus')}>Customize Package</button>
         </div>
     );
 }

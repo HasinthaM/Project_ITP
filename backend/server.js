@@ -7,6 +7,7 @@ const app = express();
 
 // Import routes
 const packageRoutes = require('./routers/Package/P_routes');
+const userRoutes = require('./routers/Package/P_userRoutes')
 
 // Middleware
 app.use(cors());
@@ -27,8 +28,9 @@ mongoose.connect(DB_URL, {
 
 // Use routes
 app.use('/api', packageRoutes);
+app.use('/api', userRoutes);
 
-const PORT = process.env.PORT || 3001; // Use environment variable or port 3001 as default
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`App is running on ${PORT}`);
 });

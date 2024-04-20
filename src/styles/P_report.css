@@ -1,0 +1,85 @@
+.table-container4 {
+    position: relative;
+    margin: 70px auto 30px auto;
+    width: 60%;
+    background-color: lavender;
+    right: 10px;
+    top: 80px;
+  }
+  
+  .create-p2 h2 {
+    text-align: center;
+    font-size: 40px;
+    top: 50px;
+    position: absolute;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #000;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border: 2px solid black;
+  }
+  
+  th {
+    background-color: lavender;
+    font-weight: bold;
+  }
+  
+  button {
+    padding: 5px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  .create-button2 {
+    position: absolute;
+    bottom: 610px;
+    background-color: #78A55A;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  
+  .search-bar1 {
+    position: absolute;
+    top: 60px;
+  }
+  
+  .search-bar1 input[type="text"] {
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+  }
+  
+  .search-bar1 input[type="text"]:focus {
+    border-color: #78A55A;
+  }
+  
+  .search-bar1 input[type="text"]::placeholder {
+    color: #999;
+  }
+  
+  .search-bar1 button {
+    padding: 8px 20px;
+    background-color: #78A55A;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  
+  .search-bar1 button:hover {
+    background-color: #5C7B4C;
+  }
+  
