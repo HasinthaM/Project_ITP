@@ -37,6 +37,7 @@ const Home = () => {
   };
   console.log(salary)
   return (
+    <div className='bg-orange-200 min-h-screen'>
     <div className='p-4'>
       <input
         type="text"
@@ -55,7 +56,7 @@ const Home = () => {
 
       <div className='flex justify-center items-center gap-x-4'>
       </div>
-      <div className='flex justify-between items-center'>
+      <div className='flex-grow text-center'>
         <h1 className='text-3xl my-8 text-center'>Salary List</h1>
         <Link to='/salary/create'>
           <MdOutlineAddBox className='text-sky-800 text-4xl' />
@@ -138,6 +139,7 @@ const Home = () => {
           </tbody>
         </table>
       )}
+    </div>
     </div>
   );
 };

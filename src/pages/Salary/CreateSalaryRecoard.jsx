@@ -71,11 +71,12 @@ const CreateSalaryRecoard = () => {
 
 
   return (
+    <div className='bg-purple-200 min-h-screen'>
     <div className='p-4'>
       <BackButton />
       <h1 className='text-3xl my-4 text-center'>Create Salary</h1>
       {loading ? <Spinner /> : ''}
-      <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
+      <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto bg-rose-100'>
       <div className='my-4'>
           <label className='text-xl mr-4 text-gray-500'>Salary ID</label>
           <input
@@ -118,6 +119,7 @@ const CreateSalaryRecoard = () => {
           Save
         </button>
       </div>
+    </div>
     </div>
   );
 }
