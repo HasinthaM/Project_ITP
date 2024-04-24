@@ -4,7 +4,7 @@ const cors = require('cors');
 const port = 3001;
 const host = 'localhost';  // can use http://localhost also
 const mongoose = require('mongoose');
-const router = require('./routers/router');
+
 
 const salaryRouter = require('./routers/salaryRoute');
 
@@ -31,5 +31,5 @@ const server = app.listen(port, host, () =>{
      console.log(`Node server is listening to ${server.address().port}`)
 }); 
 
-app.use('/api', router);
+
 app.use('/api/salary', salaryRouter);

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Users from './pages/User/Users';
 import Home from './pages/Salary/Home'
 import CreateSalaryRecoard from './pages/Salary/CreateSalaryRecoard';
 import ShowSalaryRecoards from './pages/Salary/ShowSalaryRecoards';
@@ -20,7 +19,7 @@ root.render(
   <SnackbarProvider>
       <Routes>
    
-        <Route path='/users' element={<Users/>} />
+       
         <Route path='/' element={<App />} />
         <Route path='/salarys' element={<Home />} />
       <Route path='/salary/create' element={<CreateSalaryRecoard />} />
