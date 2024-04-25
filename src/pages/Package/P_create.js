@@ -50,12 +50,22 @@ const P_create = () => {
     const { name, value } = event.target;
     let newValue = value;
 
+    const alphanumericRegex = /^[a-zA-Z0-9\s]*$/;
+
     if (name === 'activities' || name === 'places') {
-      newValue = value.replace(/[0-9]/g, '');
+      if (/\d/.test(value)) {
+        alert("Please enter only English letters.");
+        return;
+      }
     } else if (name === 'noOfPerson') {
       newValue = value.replace(/\D/g, '');
       if (parseInt(newValue) > 25) {
         newValue = '25';
+      }
+    } else if (name === 'pID' || name === 'packageName') {
+      if (!alphanumericRegex.test(value)) {
+        alert("Please enter numeric and letters.");
+        return;
       }
     }
 
@@ -99,16 +109,26 @@ const P_create = () => {
     let valid = true;
     const newErrors = {};
 
+    const alphanumericRegex = /^[a-zA-Z0-9\s]*$/;
+
     if (pID.trim() === '') {
       newErrors.pID = 'Required';
       valid = false;
-    }
-    if (province.trim() === '') {
-      newErrors.province = 'Required';
+    } else if (!alphanumericRegex.test(pID)) {
+      newErrors.pID = 'Please enter only English letters.';
       valid = false;
     }
+
     if (packageName.trim() === '') {
       newErrors.packageName = 'Required';
+      valid = false;
+    } else if (!alphanumericRegex.test(packageName)) {
+      newErrors.packageName = 'Please enter numeric and letters.';
+      valid = false;
+    }
+
+    if (province.trim() === '') {
+      newErrors.province = 'Required';
       valid = false;
     }
     if (places.trim() === '') {
@@ -325,6 +345,7 @@ const P_create = () => {
                 </option>
               ))}
             </select>
+            {errors.accommodation && <p className="error-message">{errors.accommodation}</p>}
           </div>
 
           <div>
