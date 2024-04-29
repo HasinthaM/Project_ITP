@@ -5,7 +5,7 @@ packagebody {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-image: url('../images/cg2.jpg');
+  background-image: url('../Package/P_customize.css');
   background-size: cover;
   background-position: center;
   font-family: 'Times New Roman', Times, serif;
@@ -46,7 +46,7 @@ packagebody {
 }
 
 .detail-button {
-  background-color: #008CBA; 
+  background-color: #000000; 
   color: white;
   padding: 10px 20px;
   border: none;
@@ -56,7 +56,7 @@ packagebody {
 }
 
 .c-button {
-  background-color: #4caf50;
+  background-color: #000000;
   color: white;
   padding: 10px 20px;
   border: none;

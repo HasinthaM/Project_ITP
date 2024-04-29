@@ -1,29 +1,27 @@
-.table-container4 {
+.table-container {
     position: relative;
     margin: 70px auto 30px auto;
-    width: 60%;
+    width: 80%;
     background-color: lavender;
-    right: 10px;
     top: 80px;
   }
   
-  .create-p2 h2 {
+  .create-p h2 {
     text-align: center;
     font-size: 40px;
     top: 50px;
-    position: absolute;
   }
   
   table {
     width: 100%;
     border-collapse: collapse;
-    border: 2px solid #000;
+    border: 2px solid #000; 
   }
   
   th, td {
     padding: 8px;
     text-align: left;
-    border: 2px solid black;
+    border: 2px solid black; 
   }
   
   th {
@@ -40,8 +38,10 @@
   
   .create-button2 {
     position: absolute;
-    bottom: 610px;
-    background-color: #78A55A;
+    bottom: 610px; 
+    left: 80%; 
+    transform: translateX(-50%); 
+    background-color: #000000;
     color: white;
     cursor: pointer;
     border: none;
@@ -49,9 +49,35 @@
   }
   
   
+  button.edit, button.reject, button.accept{
+    margin-right: 5px;
+  }
+  
+  button.edit {
+    background-color: #eed202;
+    color: black;
+    margin-right: 5px;
+  }
+  
+  button.reject {
+    background-color: red;
+    color: whitesmoke;
+  }
+  
+  button.accept {
+    background-color: #78A55A;
+    color: black;
+  }
+  
+  .action-buttons {
+    display: flex;
+    align-items: center;
+  }
+  
   .search-bar1 {
     position: absolute;
-    top: 60px;
+    top: 60px; 
+    right: 25px; 
   }
   
   .search-bar1 input[type="text"] {
@@ -62,11 +88,11 @@
   }
   
   .search-bar1 input[type="text"]:focus {
-    border-color: #78A55A;
+    border-color: #78A55A; 
   }
   
   .search-bar1 input[type="text"]::placeholder {
-    color: #999;
+    color: #999; 
   }
   
   .search-bar1 button {
@@ -80,6 +106,18 @@
   }
   
   .search-bar1 button:hover {
-    background-color: #5C7B4C;
+    background-color: #5C7B4C; 
+  }
+
+  .report {
+    position: absolute;
+    bottom: 580px; 
+    left: 80%; 
+    transform: translateX(-50%); 
+    background-color: #78A55A;
+    color: white;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
   }
   

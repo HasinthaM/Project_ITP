@@ -37,7 +37,7 @@
 }
 
 .package-button {
-  background-color: #4caf50;
+  background-color: #000000;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -49,7 +49,7 @@
   position: absolute;
   top: 35px;
   left: 20px;
-  background-color: #008CBA;
+  background-color: #000000;
   color: white;
   padding: 10px 20px;
   border: none;

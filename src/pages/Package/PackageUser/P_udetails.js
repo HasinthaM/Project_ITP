@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import '../../../styles/P_udetails.css'
+import '../../../styles/Package/P_udetails.css'
 
 const P_udetails = () => {
   const [packageData, setPackageData] = useState(null); // Initialize to null

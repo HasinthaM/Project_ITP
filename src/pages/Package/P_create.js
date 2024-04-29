@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/P_create.css';
+import '../../styles/Package/P_create.css';
 
 const P_create = () => {
   const navigate = useNavigate();

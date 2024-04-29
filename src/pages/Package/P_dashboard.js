@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/P_dashboard.css';
+import '../../styles/Package/P_dashboard.css';
 
 const P_dashboard = () => {
     const [packages, setPackages] = useState([]);

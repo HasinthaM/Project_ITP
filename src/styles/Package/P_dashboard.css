@@ -41,7 +41,7 @@ button {
   bottom: 610px; 
   left: 80%; 
   transform: translateX(-50%); 
-  background-color: #78A55A;
+  background-color: #000000;
   color: white;
   cursor: pointer;
   border: none;
@@ -113,7 +113,7 @@ button.view {
   bottom: 580px; 
   left: 80%; 
   transform: translateX(-50%); 
-  background-color: #78A55A;
+  background-color: #000000;
   color: white;
   cursor: pointer;
   border: none;

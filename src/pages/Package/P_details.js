@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
-import '../../styles/P_details.css'
+import '../../styles/Package/P_details.css'
 
 const PackageDetails = () => {
   const [packageData, setPackageData] = useState({});

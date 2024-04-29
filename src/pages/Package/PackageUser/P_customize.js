@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../../../styles/P_customize.css';
+import '../../../styles/Package/P_customize.css';
 
 const P_customize = () => {
     const navigate = useNavigate();

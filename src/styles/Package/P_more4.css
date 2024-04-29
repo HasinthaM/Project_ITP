@@ -1,13 +1,12 @@
-/* P_more1.css */
-
-.flexm1-container {
+.flexm4-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px;
+    margin: 40px;
+    border-radius: 10px;
   }
   
-  .card1 {
+  .card4 {
     background-color: #D9D9D9;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -15,25 +14,25 @@
     width: 300px;
   }
   
-  .card-image1 {
+  .card-image4 {
     width: 100%;
     border-radius: 10px;
     margin-top: 55px;
   }
   
-  .card-title1 {
+  .card-title4 {
     font-size: 20px;
-    margin-top: 35px;
+    margin-top: 54px;
   }
   
-  .card-description1 {
+  .card-description4 {
     font-size: 16px;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 520;
   }
   
-  .select-button1 {
-    background-color: #78A55A;
+  .select-button4 {
+    background-color: #000000;
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -46,7 +45,7 @@
     display: block;
   }
   
-  .select-button1:hover {
+  .select-button4:hover {
     background-color: #0056b3;
   }
   

@@ -1,0 +1,71 @@
+packagebody {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-image: url('../Package/P_customize.css');
+  background-size: cover;
+  background-position: center;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.flexcus-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.customize-container {
+  width: 400px;
+  padding: 20px;
+  background-color: lavender;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.form-group select,
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.meal-option {
+  display: flex;
+  align-items: center;
+}
+
+.detail-button {
+  background-color: #000000; 
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.c-button {
+  background-color: #000000;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.pc h3 {
+  font-size: 25px;
+}
+

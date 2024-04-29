@@ -67,7 +67,7 @@ button.view {
   bottom: 610px; 
   left: 80%; 
   transform: translateX(-50%); 
-  background-color: #78A55A;
+  background-color: #000000;
   color: white;
   cursor: pointer;
   border: none;
@@ -97,7 +97,7 @@ button.view {
 
 .search-bar2 button {
   padding: 8px 20px;
-  background-color: #78A55A;
+  background-color: #000000;
   color: white;
   border: none;
   border-radius: 10px;

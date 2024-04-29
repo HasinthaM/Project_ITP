@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../../styles/P_more4.css'
-import More4 from '../../../images/dd.jpg';
+import '../../../styles/Package/P_more4.css'
+import More4 from '../../../images/Package/dd.jpg';
 
 const P_more4 = () => {
   return (

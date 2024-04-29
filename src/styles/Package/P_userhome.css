@@ -1,5 +1,5 @@
 body {
-    background-image: url('../images/bg.jpg');
+    background-image: url('../../images/Package/bg.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -41,7 +41,8 @@ body {
 }
 
 .more-button {
-    background-color: #78A55A;
+    background-color: #000000;
+    color: white;
     margin-top: 10px;
     font-size: 18px;
     padding: 8px 50px; 
