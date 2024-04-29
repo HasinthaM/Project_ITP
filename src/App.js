@@ -9,6 +9,7 @@ function App() {
       <header className="App-header">
         <h1>Welcome</h1>
         <button className='users-button' onClick={() => navigate('/users')}>Users</button>
+        <button className='ticket-button' onClick={() => navigate('/ticket')}>Ticket</button>
       </header>
     </div>
   );

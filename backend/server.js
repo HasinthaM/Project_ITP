@@ -6,10 +6,12 @@ const host = 'localhost';  // can use http://localhost also
 const mongoose = require('mongoose');
 const router = require('./routers/router');
 
+const ticketRouter = require('./routers/ticketRoute');
+
 app.use(cors());
 app.use(express.json());
 
-const uri = 'mongodb+srv://projectitp:itp@cluster0.90q48aw.mongodb.net/?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://Sherin:123@cluster1.un9er2n.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1';
 
 const connect = async () => {
      try { 
@@ -30,3 +32,4 @@ const server = app.listen(port, host, () =>{
 }); 
 
 app.use('/api', router);
+app.use('/api/ticket', ticketRouter);
