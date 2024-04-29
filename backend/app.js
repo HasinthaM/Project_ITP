@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express(); //app -express instance
 const cors = require('cors');
-const controller = require('./controller/User/controller');
-const E_controller = require('./controller/Employee/E_controller')
+// const controller = require('./controller/User/controller');
+// const E_controller = require('./controller/Employee/E_controller')
 
 app.use(cors()); //middle ware to unblock cors
 
