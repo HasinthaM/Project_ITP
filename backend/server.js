@@ -4,12 +4,12 @@ const cors = require('cors');
 const port = 3001;
 const host = 'localhost';  // can use http://localhost also
 const mongoose = require('mongoose');
-const router = require('./routers/router');
+const router = require('./routers/Feedback/Frouters');
 
 app.use(cors());
 app.use(express.json());
 
-const uri = 'mongodb+srv://projectitp:itp@cluster0.90q48aw.mongodb.net/?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://pkdlhiruni:hiruni@cluster0.u4qyifx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
 const connect = async () => {
      try { 
