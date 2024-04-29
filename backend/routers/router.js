@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controller/User/controller');
+const controller = require('../controller/Destination Manager/controller');
 
-router.get('/users', controller.getUsers);
-router.post('/createuser', controller.addUser);
-router.post('/updateuser', controller.updateUser);
-router.post('/deleteuser', controller.deleteUser);
+router.get('/destination', controller.getDestination);
+router.post('/createdestination', controller.addDestination);
+router.post('/updatedestination', controller.updateDestination);
+router.post('/deleteDestination', controller.deleteDestination);
 
 module.exports = router;

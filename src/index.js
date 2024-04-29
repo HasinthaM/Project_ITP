@@ -4,14 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Users from './pages/User/Users';
+import Destination from './pages/Destination/Destination';
+import Login from './pages/Home/Login';
+import Attraction from './pages/Destination/Attraction';
+import Attraction02 from './pages/Destination/Attraction02';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
       <Routes>
         <Route path='/' element={<App/>} />
-        <Route path='/users' element={<Users/>} />
+        <Route path='/login1' element={<Login/>} />
+        <Route path='/destination' element={<Destination/>} />
+        <Route path='/attractions' element= { <Attraction/> }></Route>
+      <Route path='/attraction' element= { <Attraction02/> }></Route>
 
       </Routes>
   </BrowserRouter>

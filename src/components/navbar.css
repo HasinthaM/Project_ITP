@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    
+}
+
+.nav-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 65px;
+}
+
+.logo{
+    margin-left: 20px;
+}
+
+.middle-section{
+    
+}
+
+.btn{
+    font-size: 15px;
+    padding: 0 18px;
+    height: 65px;
+    background-color: transparent;
+    border-style: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.right-section{
+    margin-right: 2px;  
+}
+
+.right-section .btn{
+    color: aliceblue;
+}
+
+.right-section .btn:hover{
+    background-color: rgba(0, 0, 0, 0.6);
+}
