@@ -1,19 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Users from './pages/User/Users';
+import Home from './pages/Salary/Home'
+import CreateSalaryRecoard from './pages/Salary/CreateSalaryRecoard';
+import ShowSalaryRecoards from './pages/Salary/ShowSalaryRecoards';
+import EditSalaryRecoard from './pages/Salary/EditSalaryRecoard';
+import DeleteSalaryRecoard from './pages/Salary/DeleteSalaryRecoard';
+import ShowSalary from './pages/Salary/ShowSalary';
+import { SnackbarProvider } from 'notistack';
+import App from './App';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
+  <SnackbarProvider>
       <Routes>
-        <Route path='/' element={<App/>} />
-        <Route path='/users' element={<Users/>} />
+   
+       
+        <Route path='/' element={<App />} />
+        <Route path='/salarys' element={<Home />} />
+      <Route path='/salary/create' element={<CreateSalaryRecoard />} />
+      <Route path='/salary/details/:_id' element={<ShowSalaryRecoards />} />
+      <Route path='/salary/edit/:_id' element={<EditSalaryRecoard />} />
+      <Route path='/salary/delete/:_id' element={<DeleteSalaryRecoard />} />
+      <Route path='/salary/details1/:_id' element={<ShowSalary />} />
 
       </Routes>
+      </SnackbarProvider>
   </BrowserRouter>
 );
 

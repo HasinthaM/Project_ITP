@@ -4,12 +4,14 @@ const cors = require('cors');
 const port = 3001;
 const host = 'localhost';  // can use http://localhost also
 const mongoose = require('mongoose');
-const router = require('./routers/router');
+
+
+const salaryRouter = require('./routers/salaryRoute');
 
 app.use(cors());
 app.use(express.json());
 
-const uri = 'mongodb+srv://projectitp:itp@cluster0.90q48aw.mongodb.net/?retryWrites=true&w=majority';
+const uri = 'mongodb://localhost:27017/salaryDB';
 
 const connect = async () => {
      try { 
@@ -29,4 +31,5 @@ const server = app.listen(port, host, () =>{
      console.log(`Node server is listening to ${server.address().port}`)
 }); 
 
-app.use('/api', router);
+
+app.use('/api/salary', salaryRouter);
