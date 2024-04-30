@@ -3,6 +3,11 @@ import { useFormik } from 'formik'
 import "./ModelPopup.css";
 import { axiosPut } from "../../../axiosServices";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const notify = () => toast("Employee Update Successfully!");
+
 const EditDetailsModal = ({ empById, setEditModal }) => {
     const { firstname, lastname, email, phone, job, dateofjoining, image } = empById
     //const date = new Date(dateofjoining)
@@ -118,7 +123,19 @@ const EditDetailsModal = ({ empById, setEditModal }) => {
                         </div>
                     </div>
                     <div className="modalFooter">
-                        <button className="add-btn" type="submit">{loading ? 'Editing' : 'Edit and Save'}</button>
+                        <button onClick={notify} className="add-btn" type="submit">{loading ? 'Editing' : 'Edit and Save'}</button>
+                        <ToastContainer 
+                            position="top-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="colored"
+                            />
                     </div>
                 </div>
             </form>

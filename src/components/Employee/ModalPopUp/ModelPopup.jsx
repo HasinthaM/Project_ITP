@@ -3,6 +3,11 @@ import "./ModelPopup.css";
 import { useFormik } from 'formik'
 import { axiosPost } from "../../../axiosServices";
 // import ImageUpload from "./ImageUpload";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import * as Yup from 'yup';
+
+const notify = () => toast("Employee Added Successfully!");
 
 const ModelPopup = ({ setShowModal }) => {
   const [loading, setLoading] = useState(false)
@@ -35,7 +40,18 @@ const ModelPopup = ({ setShowModal }) => {
     onSubmit: values => {
       createEmployee(values)
 
+
     },
+    validationSchema: Yup.object({
+      firstname: Yup.string().required('First Name is required'),
+      lastname: Yup.string().required('Last Name is required'),
+      email: Yup.string().email('Invalid email address').required('Email is required'),
+      phone: Yup.string().required('Phone is required'),
+      phone: Yup.string().matches(/^[0-9]+$/, 'Phone must contain only numbers').required('Phone is required'),
+      job: Yup.string().required('Job Position is required'),
+      dateofjoining: Yup.date().required('Date of Joining is required'),
+      image: Yup.string().required('Image is required')
+    })
   })
   return (
     <div className="modalContainer">
@@ -112,7 +128,20 @@ const ModelPopup = ({ setShowModal }) => {
               />
             </div>
             <div className="modalFooter">
-              <button className="add-btn" type="submit">{loading ? 'Saving...' : 'Save Details'}</button>
+              <button onClick={notify} className="add-btn" type="submit">{loading ? 'Saving...' : 'Save Details'}</button>
+              <ToastContainer 
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+                
+                />
             </div>
 
           </div>
