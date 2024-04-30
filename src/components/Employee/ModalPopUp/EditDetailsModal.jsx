@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const notify = () => toast("Employee Update Successfully!");
 
+// Function to handle editing employee details
 const EditDetailsModal = ({ empById, setEditModal }) => {
     const { firstname, lastname, email, phone, job, dateofjoining, image } = empById
     //const date = new Date(dateofjoining)
@@ -25,6 +26,7 @@ const EditDetailsModal = ({ empById, setEditModal }) => {
             console.log(err)
         }
     }
+    // Formik form setup
     const formik = useFormik({
         initialValues: {
             firstname,

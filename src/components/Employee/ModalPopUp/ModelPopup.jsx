@@ -3,17 +3,24 @@ import "./ModelPopup.css";
 import { useFormik } from 'formik'
 import { axiosPost } from "../../../axiosServices";
 // import ImageUpload from "./ImageUpload";
+
+// Importing ToastContainer and toast for notifications
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from 'yup';
 
+// Function to trigger notification
 const notify = () => toast("Employee Added Successfully!");
 
+// State to manage loading state
 const ModelPopup = ({ setShowModal }) => {
   const [loading, setLoading] = useState(false)
+  
   //const [imageURL, setImageURL] = useState('')
   //console.log(empById)
 
+
+  // Function to create employee
   const createEmployee = async (values) => {
     setLoading(true)
     try{
@@ -21,12 +28,14 @@ const ModelPopup = ({ setShowModal }) => {
       console.log(res)
       setLoading(false)
       setShowModal(false)
+      notify(); // Trigger notification upon successful employee creation
     }
     catch(err){
       console.log(err)
     }
   }
 
+  // Formik form setup
   const formik = useFormik({
     initialValues: {
       firstname: '',
@@ -37,6 +46,8 @@ const ModelPopup = ({ setShowModal }) => {
       dateofjoining: '',
       image: ''
     },
+
+    // Form submission handler
     onSubmit: values => {
       createEmployee(values)
 
