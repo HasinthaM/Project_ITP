@@ -19,6 +19,8 @@ const UserForm = ({addUser, updateUser, submitted, data, isEdit}) => {  // addUs
       setName(data.name);
     }
   }, [data]);
+
+
   return(
       <Grid
         container
@@ -27,6 +29,8 @@ const UserForm = ({addUser, updateUser, submitted, data, isEdit}) => {  // addUs
           backgroundColor: '#ffffff',
           marginBottom: '3px',
           display: 'block',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <Grid item xs={12}>
@@ -42,7 +46,8 @@ const UserForm = ({addUser, updateUser, submitted, data, isEdit}) => {  // addUs
                 marginRight: '20px',
                 fontSize: '16px',
                 width: '100px',
-                display:'block'
+                display:'block',
+                
               }}
               >ID</Typography>
               <Input
@@ -99,6 +104,10 @@ const UserForm = ({addUser, updateUser, submitted, data, isEdit}) => {  // addUs
       </Grid>
   );
 
+}
+
+const Users = () =>{
+  
 }
 
 export default UserForm;

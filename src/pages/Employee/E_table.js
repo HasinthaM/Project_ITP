@@ -1,4 +1,4 @@
-import { Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
 const E_table = ({ rows , selectedEmployee, deleteEmployee}) => {  //can write this also - const E_table = ({rows}) , in 16 row props should remove
     return(
@@ -9,6 +9,7 @@ const E_table = ({ rows , selectedEmployee, deleteEmployee}) => {  //can write t
               <TableRow>
                   <TableCell>ID</TableCell>
                   <TableCell>Name</TableCell>
+                  <TableCell>Role</TableCell>
                   <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
@@ -18,10 +19,11 @@ const E_table = ({ rows , selectedEmployee, deleteEmployee}) => {  //can write t
                     <TableRow key={row.id} sx={{'&:last-child td, &:last-child th' : {border: 0}}}>
                       <TableCell component='th' scope="row">{row.id}</TableCell>
                       <TableCell component='th' scope="row">{row.name}</TableCell>
+                      <TableCell component='th' scope="row">{row.role}</TableCell>
                       <TableCell >
                         <Button
                           sx={{margin: '0px 10px'}}
-                          onClick={() => selectedEmployee ({id : row.id , name : row.name})}
+                          onClick={() => selectedEmployee ({id : row.id , name : row.name, role : row.role})}
                         >
                           update
 
@@ -45,7 +47,11 @@ const E_table = ({ rows , selectedEmployee, deleteEmployee}) => {  //can write t
                 }
             </TableBody>
         </Table>
+       
+
     </TableContainer>
+
+    
 
 
     )

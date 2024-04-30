@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Users from './pages/User/Users';
 import Employee from './pages/Employee/Employee';
+import Dashboard from './components/Employee/Dashboard';
+import EmpLeave from './pages/Employee/EmpLeave';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,6 +16,8 @@ root.render(
         <Route path='/' element={<App/>} />
         <Route path='/users' element={<Users/>} />
         <Route path='/employee' element={<Employee/>} />
+        <Route path='/dashboard' element={<Dashboard/>} />
+        <Route path='/empleave' element={<EmpLeave/>} />
 
       </Routes>
   </BrowserRouter>
