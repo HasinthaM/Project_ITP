@@ -1,0 +1,19 @@
+.flex-container6 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-box6 {
+    width: calc(25% - 20px);
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: lavender;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.flex-box6 div {
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+

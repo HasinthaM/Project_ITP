@@ -19,6 +19,7 @@ import PUMore3 from './pages/Package/PackageUser/P_more3'
 import PUMore4 from './pages/Package/PackageUser/P_more4'
 import POM from './pages/Package/P_operationM'
 import PR from './pages/Package/PackageUser/P_report'
+import PI from './pages/Package/PackageUser/P_uinterface'
 
 
 
@@ -43,6 +44,8 @@ root.render(
         <Route path='/more4' element={<PUMore4/>} />
         <Route path='/o-manager' element={<POM/>} />
         <Route path='/preport' element={<PR/>} />
+        <Route path='/pintfc' element={<PI/>} />
+
 
 
 

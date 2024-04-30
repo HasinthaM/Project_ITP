@@ -119,3 +119,15 @@ button.view {
   border: none;
   border-radius: 10px;
 }
+
+.p-home2 {
+  position: absolute;
+  bottom: 640px; 
+  left: 80%; 
+  transform: translateX(-50%); 
+  background-color: #000000;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+}

@@ -125,6 +125,7 @@ const filteredPackages = packages.filter(packageItem => {
             </div>
             <button className='create-button2' onClick={() => navigate('/create')}>Create Package</button>
             <button className='report1' onClick={() => navigate('/preport')}>Generate Report</button>
+            <button className='p-home2' onClick={() => navigate('/pintfc')}>Packages</button>
         </div>
     );
 };
