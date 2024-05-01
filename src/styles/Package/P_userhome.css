@@ -1,8 +1,4 @@
-body {
-    background-image: url('../../images/Package/bg.jpg');
-    background-size: cover;
-    background-position: center;
-}
+
 
 .topic {
     display: flex;
