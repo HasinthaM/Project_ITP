@@ -57,6 +57,54 @@ const P_create = () => {
 
   const mealOptions = ["Breakfast", "Lunch", "Tea", "Dinner"];
 
+  const handleVehicleChange = (value) => {
+    const selectedVehicle = vehicles.find((vehicle) => vehicle.type === value);
+    if (selectedVehicle) {
+      form.setFieldsValue({ noOfPerson: selectedVehicle.seats });
+    }
+  };
+
+  const handleKeyPress = (event, fieldName) => {
+    const charCode = event.which ? event.which : event.keyCode;
+    const value = event.key;
+    if (
+      (charCode >= 65 && charCode <= 90) || // A-Z
+      (charCode >= 97 && charCode <= 122) || // a-z
+      (charCode >= 48 && charCode <= 57) || // 0-9
+      charCode === 8 || // Backspace
+      charCode === 32 || // Space
+      charCode === 9 || // Tab
+      (charCode >= 37 && charCode <= 40) || // Arrow keys
+      charCode === 46 || // Delete
+      (value === value.toUpperCase() && value !== value.toLowerCase())
+    ) {
+      return true;
+    } else {
+      event.preventDefault();
+      alert(`Please enter only alphanumeric characters for ${fieldName}`);
+      return false;
+    }
+  };
+
+  const handleAlphaKeyPress = (event, fieldName) => {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (
+      (charCode >= 65 && charCode <= 90) || // A-Z
+      (charCode >= 97 && charCode <= 122) || // a-z
+      charCode === 8 || // Backspace
+      charCode === 32 || // Space
+      charCode === 9 || // Tab
+      (charCode >= 37 && charCode <= 40) || // Arrow keys
+      charCode === 46
+    ) {
+      return true;
+    } else {
+      event.preventDefault();
+      alert(`Please enter only letters for ${fieldName}`);
+      return false;
+    }
+  };
+
   return (
     <div className="package-form1">
       <h2>Create Package</h2>
@@ -78,15 +126,16 @@ const P_create = () => {
         }}
       >
         <Row gutter={[26, 26]}>
-          {" "}
-          {/* Adjusted gap between columns */}
           <Col span={8}>
             <Form.Item
               label="Package ID"
               name="pID"
               rules={[{ required: true, message: "Please enter Package ID" }]}
             >
-              <Input placeholder="Package ID" />
+              <Input
+                placeholder="Package ID"
+                onKeyPress={(e) => handleKeyPress(e, "Package ID")}
+              />
             </Form.Item>
             <Form.Item
               label="Select Province"
@@ -104,9 +153,14 @@ const P_create = () => {
             <Form.Item
               label="Package Name"
               name="packageName"
-              rules={[{ required: true, message: "Please enter Package Name" }]}
+              rules={[
+                { required: true, message: "Please enter Package Name" },
+              ]}
             >
-              <Input placeholder="Package Name" />
+              <Input
+                placeholder="Package Name"
+                onKeyPress={(e) => handleKeyPress(e, "Package Name")}
+              />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -115,7 +169,10 @@ const P_create = () => {
               name="vehicle"
               rules={[{ required: true, message: "Please select Vehicle" }]}
             >
-              <Select placeholder="Select Vehicle">
+              <Select
+                placeholder="Select Vehicle"
+                onChange={handleVehicleChange}
+              >
                 {vehicles.map((vehicle) => (
                   <Option key={vehicle.type} value={vehicle.type}>
                     {vehicle.type}
@@ -135,9 +192,17 @@ const P_create = () => {
             <Form.Item
               label="Places"
               name="places"
-              rules={[{ required: true, message: "Please enter Places" }]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter Places",
+                },
+              ]}
             >
-              <Input placeholder="Places" />
+              <Input
+                placeholder="Places"
+                onKeyPress={(e) => handleAlphaKeyPress(e, "Places")}
+              />
             </Form.Item>
             <Form.Item
               label="Meals"
@@ -157,9 +222,17 @@ const P_create = () => {
             <Form.Item
               label="Activities"
               name="activities"
-              rules={[{ required: true, message: "Please enter Activities" }]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter Activities",
+                },
+              ]}
             >
-              <Input placeholder="Activities" />
+              <Input
+                placeholder="Activities"
+                onKeyPress={(e) => handleAlphaKeyPress(e, "Activities")}
+              />
             </Form.Item>
             <Form.Item
               label="Select Accommodation"
@@ -179,11 +252,14 @@ const P_create = () => {
               name="price"
               rules={[{ required: true, message: "Please enter Price" }]}
             >
-              <Input placeholder="Price" />
+              <Input
+                placeholder="Price"
+                onKeyPress={(e) => handleKeyPress(e, "Price")}
+              />
             </Form.Item>
           </Col>
         </Row>
-        <div style={{ textAlign:"center",marginTop: "20px"}}>
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
           <Button type="primary" htmlType="submit" loading={loading}>
             Create Package
           </Button>
