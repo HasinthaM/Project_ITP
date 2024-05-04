@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Form, Input, Select, Checkbox, Button, Row, Col } from 'antd';
 import '../../styles/Package/P_edit.css';
+import PSidebar from "../../components/Package/PSidebar";
 
-export default function P_edit() {
-  const navigate = useNavigate();
+const { Option } = Select;
+
+const P_edit = () => {
   const { id } = useParams();
+  const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
   const [values, setValues] = useState(null);
 
   const provinces = [
@@ -20,7 +25,14 @@ export default function P_edit() {
     'Sabaragamuwa Province',
   ];
 
-  const vehicles = ['Car', 'Van', 'Bike', 'Bicycle', 'Luxury Bus'];
+  const vehicles = [
+    { type: 'Car', seats: 4 },
+    { type: 'Van', seats: 10 },
+    { type: 'Bike', seats: 2 },
+    { type: 'Bicycle', seats: 1 },
+    { type: 'Luxury Bus', seats: 25 },
+  ];
+
   const accommodations = ['3 Star Hotel', '5 Star Hotel', 'Annexe'];
   const mealOptions = ['Breakfast', 'Lunch', 'Tea', 'Dinner'];
 
@@ -33,7 +45,7 @@ export default function P_edit() {
           province: packageData.province,
           packageName: packageData.packageName,
           vehicle: packageData.vehicle,
-          noOfPerson: packageData.noOfPerson, // Corrected from noOfperson to noOfPerson
+          noOfPerson: packageData.noOfPerson,
           places: packageData.places,
           meals: packageData.meals,
           activities: packageData.activities,
@@ -44,195 +56,195 @@ export default function P_edit() {
       .catch(err => console.log(err));
   }, [id]);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
-  };
-
-  const handleMealSelection = (event) => {
-    const { value } = event.target;
-    const index = values.meals.indexOf(value);
-    if (index === -1) {
-      setValues(prevState => ({
-        ...prevState,
-        meals: [...prevState.meals, value]
-      }));
-    } else {
-      const updatedMeals = [...values.meals];
-      updatedMeals.splice(index, 1);
-      setValues(prevState => ({
-        ...prevState,
-        meals: updatedMeals
-      }));
+  const handleVehicleChange = (value) => {
+    const selectedVehicle = vehicles.find((vehicle) => vehicle.type === value);
+    if (selectedVehicle) {
+      form.setFieldsValue({ noOfPerson: selectedVehicle.seats });
     }
   };
 
-  const onSubmit = async (event) => {
-    event.preventDefault();
+
+  const onFinish = async (values) => {
     try {
+      setLoading(true);
       await axios.put(`http://localhost:3001/api/package/update/${id}`, values);
       alert('Package updated successfully!');
-      navigate('/pdashboard');
     } catch (error) {
       console.error('Update failed:', error);
       alert('Failed to update package. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleKeyPress = (event, fieldName) => {
+    const charCode = event.which ? event.which : event.keyCode;
+    const value = event.key;
+    if (
+      (charCode >= 65 && charCode <= 90) || // A-Z
+      (charCode >= 97 && charCode <= 122) || // a-z
+      (charCode >= 48 && charCode <= 57) || // 0-9
+      charCode === 8 || // Backspace
+      charCode === 32 || // Space
+      charCode === 9 || // Tab
+      (charCode >= 37 && charCode <= 40) || // Arrow keys
+      charCode === 46 || // Delete
+      (value === value.toUpperCase() && value !== value.toLowerCase())
+    ) {
+      return true;
+    } else {
+      event.preventDefault();
+      alert(`Please enter only alphanumeric characters for ${fieldName}`);
+      return false;
+    }
+  };
+
+  const handleAlphaKeyPress = (event, fieldName) => {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (
+      (charCode >= 65 && charCode <= 90) || // A-Z
+      (charCode >= 97 && charCode <= 122) || // a-z
+      charCode === 8 || // Backspace
+      charCode === 32 || // Space
+      charCode === 9 || // Tab
+      (charCode >= 37 && charCode <= 40) || // Arrow keys
+      charCode === 46
+    ) {
+      return true;
+    } else {
+      event.preventDefault();
+      alert(`Please enter only letters for ${fieldName}`);
+      return false;
     }
   };
 
   return (
-    <div className="container">
-      <h2>Update Package Details</h2>
-      {values ? (
-        <form className="form-container" onSubmit={onSubmit}>
-          <div className="flex-container">
-            <div>
-              <label htmlFor="pID">Package ID</label>
-              <input
-                type="text"
-                id="pID"
-                value={values.pID}
-                onChange={handleInputChange}
-                name="pID"
-                readOnly
+    <div>
+      <PSidebar />
+      <h2 className='u-tittle'>Update Package</h2>
+      <div className="update-form">
+        {values ? (
+          <Form
+            form={form}
+            onFinish={onFinish}
+            layout="vertical"
+            initialValues={values}
+          >
+            <Row gutter={[26, 26]}>
+              <Col span={8}>
+                <Form.Item
+                  label="Package ID"
+                  name="pID"
+                  rules={[{ required: true, message: 'Please enter Package ID' }]}
+                >
+                  <Input readOnly />
+                </Form.Item>
+                <Form.Item
+                  label="Select Province"
+                  name="province"
+                  rules={[{ required: true, message: 'Please select Province' }]}
+                >
+                  <Select placeholder="Select Province">
+                    {provinces.map((provinceName, index) => (
+                      <Option key={index} value={provinceName}>
+                        {provinceName}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  label="Package Name"
+                  name="packageName"
+                  rules={[{ required: true, message: 'Please enter Package Name' }]}
+                >
+                  <Input
+                onKeyPress={(e) => handleKeyPress(e, "Package Name")} />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item
+                  label="Select Vehicle"
+                  name="vehicle"
+                  rules={[{ required: true, message: 'Please select Vehicle' }]}
+                >
+                  <Select placeholder="Select Vehicle" onChange={handleVehicleChange}>
+                    {vehicles.map((vehicle) => (
+                      <Option key={vehicle.type} value={vehicle.type}>
+                        {vehicle.type}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  label="Number of Persons"
+                  name="noOfPerson"
+                  rules={[{ required: true, message: 'Please enter Number of Persons' }]}
+                >
+                  <Input type="number" min={1} />
+                </Form.Item>
+                <Form.Item
+                  label="Places"
+                  name="places"
+                  rules={[{ required: true, message: 'Please enter Places' }]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  label="Meals"
+                  name="meals"
+                  rules={[{ required: true, message: 'Please select Meals', type: 'array' }]}
+                >
+                  <Checkbox.Group options={mealOptions} />
+                </Form.Item>
+              </Col>
+              
+              <Col span={8}>
+                <Form.Item
+                  label="Activities"
+                  name="activities"
+                  rules={[{ required: true, message: 'Please enter Activities' }]}
+                >
+                  <Input 
+                onKeyPress={(e) => handleAlphaKeyPress(e, "Activities")}
               />
-            </div>
-
-            <div>
-              <label htmlFor="province">Province</label>
-              <select
-                id="province"
-                value={values.province}
-                onChange={handleInputChange}
-                name="province"
-              >
-                <option value="">Select Province</option>
-                {provinces.map((provinceName, index) => (
-                  <option key={index} value={provinceName}>
-                    {provinceName}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="packageName">Package Name</label>
-              <input
-                type="text"
-                id="packageName"
-                value={values.packageName}
-                onChange={handleInputChange}
-                name="packageName"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="vehicle">Vehicle</label>
-              <select
-                id="vehicle"
-                value={values.vehicle}
-                onChange={handleInputChange}
-                name="vehicle"
-              >
-                <option value="">Select Vehicle</option>
-                {vehicles.map((vehicleOption, index) => (
-                  <option key={index} value={vehicleOption}>
-                    {vehicleOption}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="person-input-container">
-              <label htmlFor="noOfPerson">Number of Persons</label>
-              <input
-                type="number"
-                id="noOfPerson"
-                value={values.noOfPerson}
-                onChange={handleInputChange}
-                name="noOfPerson"
-                min="1"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="places">Places</label>
-              <input
-                type="text"
-                id="places"
-                value={values.places}
-                onChange={handleInputChange}
-                name="places"
-              />
-            </div>
-
-            <div>
-              <label>Meals:</label>
-              {mealOptions.map((mealOption, index) => (
-                <div key={index} className="meal-option">
-                  <input
-                    type="checkbox"
-                    value={mealOption}
-                    onChange={handleMealSelection}
-                    checked={values.meals.includes(mealOption)}
-                  />
-                  <label>{mealOption}</label>
-                </div>
-              ))}
-            </div>
-
-            <div>
-              <label htmlFor="activities">Activities</label>
-              <input
-                type="text"
-                id="activities"
-                value={values.activities}
-                onChange={handleInputChange}
-                name="activities"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="accommodation">Accommodation</label>
-              <select
-                id="accommodation"
-                value={values.accommodation}
-                onChange={handleInputChange}
-                name="accommodation"
-              >
-                <option value="">Select Accommodation</option>
-                {accommodations.map((accommodationOption, index) => (
-                  <option key={index} value={accommodationOption}>
-                    {accommodationOption}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="price">Price</label>
-              <input
-                type="text"
-                id="price"
-                value={values.price}
-                onChange={handleInputChange}
-                name="price"
-              />
-            </div>
-          </div>
-          <button className="package-button" type="submit">
-            <i className="far fa-check-square"></i>
-            &nbsp; Update
-          </button>
-        </form>
-      ) : (
-        <p>Loading package data...</p>
-      )}
-      <button className='detail-button' onClick={() => navigate('/pdashboard')}>
-        All Packages
-      </button>
+                </Form.Item>
+                <Form.Item
+                  label="Select Accommodation"
+                  name="accommodation"
+                  rules={[{ required: true, message: 'Please select Accommodation' }]}
+                >
+                  <Select placeholder="Select Accommodation">
+                    {accommodations.map((accommodationOption, index) => (
+                      <Option key={index} value={accommodationOption}>
+                        {accommodationOption}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  label="Price"
+                  name="price"
+                  rules={[{ required: true, message: 'Please enter Price' }]}
+                >
+                  <Input onKeyPress={(e) => handleKeyPress(e, "Price")}
+               />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Form.Item>
+              <div  style={{ textAlign: "center", marginTop: "20px" }}>
+              <Button type="primary" htmlType="submit" loading={loading}>
+                Update Package
+              </Button>
+              </div>
+            </Form.Item>
+          </Form>
+        ) : (
+          <p>Loading package data...</p>
+        )}
+      </div>
     </div>
   );
-}
+};
+
+export default P_edit;

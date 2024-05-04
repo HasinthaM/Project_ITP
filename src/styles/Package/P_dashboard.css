@@ -1,27 +1,32 @@
-.table-container {
-  position: relative;
-  margin: 70px auto 30px auto;
-  width: 80%;
+.table-container1 {
+  position: absolute;
+  top: 200px; /* Adjust as needed */
+  left: 230px; /* Width of your sidebar */
+  width: calc(100% - 250px); /* Adjust according to your sidebar width */
+  margin-right: 100px; /* Add a margin to separate from the sidebar */
   background-color: lavender;
-  top: 80px;
 }
 
-.create-p h2 {
-  text-align: center;
-  font-size: 40px;
-  top: 50px;
+.p-title {
+  position: absolute;
+  top: 20px; /* Adjust the top position as needed */
+  left: 58%;
+  transform: translateX(-50%);
+  color: blue;
+  font-size: 45px; /* Adjust the font size as needed */
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  border: 2px solid #000; 
+  border: 1px solid #000; 
 }
 
 th, td {
-  padding: 8px;
+  padding: 6px;
   text-align: left;
-  border: 2px solid black; 
+  border: 1px solid black; 
+  font-size: 14px;
 }
 
 th {
@@ -35,19 +40,6 @@ button {
   border: none;
   border-radius: 10px;
 }
-
-.create-button2 {
-  position: absolute;
-  bottom: 610px; 
-  left: 80%; 
-  transform: translateX(-50%); 
-  background-color: #000000;
-  color: white;
-  cursor: pointer;
-  border: none;
-  border-radius: 10px;
-}
-
 
 button.edit, button.delete, button.view {
   margin-right: 5px;
@@ -74,28 +66,28 @@ button.view {
   align-items: center;
 }
 
-.search-bar1 {
+.search-barp {
   position: absolute;
-  top: 60px; 
-  right: 25px; 
+  top: 140px; /* Adjust the top position to match the h4 tag */
+  left: 230px; 
 }
 
-.search-bar1 input[type="text"] {
+.search-barp input[type="text"] {
   padding: 8px;
   border: 2px solid #ccc;
   border-radius: 20px;
   outline: none;
 }
 
-.search-bar1 input[type="text"]:focus {
+.search-barp input[type="text"]:focus {
   border-color: #78A55A; 
 }
 
-.search-bar1 input[type="text"]::placeholder {
+.search-barp input[type="text"]::placeholder {
   color: #999; 
 }
 
-.search-bar1 button {
+.search-barp button {
   padding: 8px 20px;
   background-color: #78A55A;
   color: white;
@@ -105,29 +97,6 @@ button.view {
   margin-left: 5px;
 }
 
-.search-bar1 button:hover {
+.search-barp button:hover {
   background-color: #5C7B4C; 
-}
-.report1 {
-  position: absolute;
-  bottom: 580px; 
-  left: 80%; 
-  transform: translateX(-50%); 
-  background-color: #000000;
-  color: white;
-  cursor: pointer;
-  border: none;
-  border-radius: 10px;
-}
-
-.p-home2 {
-  position: absolute;
-  bottom: 640px; 
-  left: 80%; 
-  transform: translateX(-50%); 
-  background-color: #000000;
-  color: white;
-  cursor: pointer;
-  border: none;
-  border-radius: 10px;
 }

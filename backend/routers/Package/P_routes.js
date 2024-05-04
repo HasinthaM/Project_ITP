@@ -111,28 +111,6 @@ router.delete('/package/delete/:id', validateIDParam, handleValidationErrors, as
     }
 });
 
-// Accept package
-router.put('/package/:id/accept', async (req, res) => {
-    try {
-        const packageId = req.params.id;
-        const updatedPackage = await Package.findByIdAndUpdate(packageId, { status: "Approved" }, { new: true });
-        res.json({ success: true, package: updatedPackage });
-    } catch (error) {
-        console.error("Error accepting package:", error);
-        res.status(500).json({ success: false, error: "Failed to accept package" });
-    }
-});
 
-// Reject package
-router.put('/package/:id/reject', async (req, res) => {
-    try {
-        const packageId = req.params.id;
-        const updatedPackage = await Package.findByIdAndUpdate(packageId, { status: "Rejected" }, { new: true });
-        res.json({ success: true, package: updatedPackage });
-    } catch (error) {
-        console.error("Error rejecting package:", error);
-        res.status(500).json({ success: false, error: "Failed to reject package" });
-    }
-});
 
 module.exports = router;

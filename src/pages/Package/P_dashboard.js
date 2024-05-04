@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/Package/P_dashboard.css';
+import Psidebar from '../../components/Package/PSidebar';
 
 const P_dashboard = () => {
     const [packages, setPackages] = useState([]);
@@ -45,39 +46,35 @@ const P_dashboard = () => {
         navigate(`/package/${packageItem._id}`); 
     };
 
-    // Filter packages based on search query
-const filteredPackages = packages.filter(packageItem => {
-    const query = searchQuery.toLowerCase();
-    return (
-        packageItem.pID.toLowerCase().includes(query) ||
-        packageItem.province.toLowerCase().includes(query) ||
-        packageItem.packageName.toLowerCase().includes(query) ||
-        packageItem.vehicle.toLowerCase().includes(query) ||
-        packageItem.noOfPerson.toString().toLowerCase().includes(query) ||
-        packageItem.places.toLowerCase().includes(query) ||
-        (Array.isArray(packageItem.meals) ? packageItem.meals.join(', ').toLowerCase().includes(query) : packageItem.meals.toLowerCase().includes(query)) ||
-        packageItem.activities.toLowerCase().includes(query) ||
-        packageItem.accommodation.toLowerCase().includes(query) ||
-        packageItem.price.toString().toLowerCase().includes(query)
-    );
-});
-
-
+    const filteredPackages = packages.filter(packageItem => {
+        const query = searchQuery.toLowerCase();
+        return (
+            packageItem.pID.toLowerCase().includes(query) ||
+            packageItem.province.toLowerCase().includes(query) ||
+            packageItem.packageName.toLowerCase().includes(query) ||
+            packageItem.vehicle.toLowerCase().includes(query) ||
+            packageItem.noOfPerson.toString().toLowerCase().includes(query) ||
+            packageItem.places.toLowerCase().includes(query) ||
+            (Array.isArray(packageItem.meals) ? packageItem.meals.join(', ').toLowerCase().includes(query) : packageItem.meals.toLowerCase().includes(query)) ||
+            packageItem.activities.toLowerCase().includes(query) ||
+            packageItem.accommodation.toLowerCase().includes(query) ||
+            packageItem.price.toString().toLowerCase().includes(query)
+        );
+    });
 
     return (
         <div className='dash'>
-            <div className='create-p'>
-            <h2>Tour Packages</h2>
-            </div>
-             <div className="search-bar1">
-             <input
-            type="text"
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-             />
-            </div>
-            <div className="table-container">
+            <Psidebar />
+            <h4 className='p-title'>Tour Packages</h4>
+            <div className="search-barp">
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                </div>
+            <div className='table-container1'>
                 <table>
                     <thead>
                         <tr>
@@ -123,9 +120,6 @@ const filteredPackages = packages.filter(packageItem => {
                     </tbody>
                 </table>
             </div>
-            <button className='create-button2' onClick={() => navigate('/create')}>Create Package</button>
-            <button className='report1' onClick={() => navigate('/preport')}>Generate Report</button>
-            <button className='p-home2' onClick={() => navigate('/pintfc')}>Packages</button>
         </div>
     );
 };

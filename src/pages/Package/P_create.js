@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Form, Input, Select, Checkbox, Button, Row, Col } from "antd";
 import axios from "axios";
-
 import "../../styles/Package/P_create.css";
+import PSidebar from "../../components/Package/PSidebar";
 
 const { Option } = Select;
 
 const P_create = () => {
-  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
 
@@ -106,8 +104,10 @@ const P_create = () => {
   };
 
   return (
+    <div>
+       <PSidebar />
     <div className="package-form1">
-      <h2>Create Package</h2>
+      <h2 className="c-tittle">Create Package</h2>
       <Form
         form={form}
         onFinish={handleSubmit}
@@ -267,20 +267,9 @@ const P_create = () => {
         <div
           style={{ textAlign: "left", marginTop: "5px", marginLeft: "308px" }}
         >
-          <Button
-            type="primary"
-            onClick={() => navigate("/pdashboard")}
-            style={{
-              backgroundColor: "black",
-              color: "white",
-              border: "1px solid black",
-            }}
-            className="dash-button"
-          >
-            All Packages
-          </Button>
         </div>
       </Form>
+    </div>
     </div>
   );
 };
