@@ -1,29 +1,29 @@
 .table-container4 {
-    position: relative;
-    margin: 70px auto 30px auto;
-    width: 60%;
-    background-color: lavender;
-    right: 10px;
-    top: 80px;
+  position: absolute;
+  top: 200px; /* Adjust as needed */
+  left: 220px; /* Width of your sidebar */
+  width: calc(100% - 350px); /* Adjust according to your sidebar width */
+  margin-right: 100px; /* Add a margin to separate from the sidebar */
+  background-color: lavender;
   }
   
-  .create-p2 h2 {
-    text-align: center;
-    font-size: 40px;
-    top: 50px;
+  .r-title {
     position: absolute;
+    top: 60px; /* Adjust the top position as needed */
+    left: 52%;
+    transform: translateX(-50%);
+    color: black;
+    font-size: 45px; /* Adjust the font size as needed */
   }
   
   table {
     width: 100%;
     border-collapse: collapse;
-    border: 2px solid #000;
   }
   
   th, td {
-    padding: 8px;
+    padding: 6px;
     text-align: left;
-    border: 2px solid black;
   }
   
   th {
@@ -31,16 +31,9 @@
     font-weight: bold;
   }
   
-  button {
-    padding: 5px 20px;
-    cursor: pointer;
-    border: none;
-    border-radius: 10px;
-  }
-  
   .create-button2 {
     position: absolute;
-    bottom: 610px;
+    bottom: 558px;
     background-color: #000000;
     color: white;
     cursor: pointer;
@@ -49,37 +42,4 @@
   }
   
   
-  .search-bar1 {
-    position: absolute;
-    top: 60px;
-  }
-  
-  .search-bar1 input[type="text"] {
-    padding: 8px;
-    border: 2px solid #ccc;
-    border-radius: 20px;
-    outline: none;
-  }
-  
-  .search-bar1 input[type="text"]:focus {
-    border-color: #78A55A;
-  }
-  
-  .search-bar1 input[type="text"]::placeholder {
-    color: #999;
-  }
-  
-  .search-bar1 button {
-    padding: 8px 20px;
-    background-color: #78A55A;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-left: 5px;
-  }
-  
-  .search-bar1 button:hover {
-    background-color: #5C7B4C;
-  }
-  
+ 

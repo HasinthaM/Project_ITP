@@ -18,7 +18,7 @@ import PUMore2 from './pages/Package/PackageUser/P_more2'
 import PUMore3 from './pages/Package/PackageUser/P_more3'
 import PUMore4 from './pages/Package/PackageUser/P_more4'
 import POM from './pages/Package/P_operationM'
-import PR from './pages/Package/PackageUser/P_report'
+import PR from './pages/Package/P_report'
 import PI from './pages/Package/PackageUser/P_uinterface'
 
 
