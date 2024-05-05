@@ -40,31 +40,6 @@ app.post('/deleteuser', (req, res) => {
      });
 });
 
-app.get('/employee', (req, res) => {
-     E_controller.getEmployee(req, res, next => {
-          res.send();
-     });
-});
-
-//Rest API
-app.post('/createemployee', (req, res) => {
-     E_controller.addEmployee(req.body, (callack) => {
-          res.send();
-     });
-});
-
-app.post('/updateemployee', (req, res) => {
-     E_controller.updateEmployee(req.body, (callack) => {
-          res.send(callack);
-     });
-});
-
-app.post('/deleteemployee', (req, res) => {
-     E_controller.deleteEmployee(req.body, (callack) => {
-          res.send(callack);
-     });
-});
-
 module.exports = app;
 
 

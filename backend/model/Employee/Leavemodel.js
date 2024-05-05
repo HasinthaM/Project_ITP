@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -29,6 +29,4 @@ const EmployeeLeaveSchema = new Schema({
     }
 });
 
-const EmployeeLeave = mongoose.model('EmployeeLeave', EmployeeLeaveSchema)
-
-export default EmployeeLeave
+module.exports = mongoose.model("EmployeeLeave", EmployeeLeaveSchema);

@@ -2,36 +2,51 @@ import React, { useState } from "react";
 import "./ModelPopup.css";
 import { useFormik } from 'formik'
 import { axiosPost } from "../../../axiosServices";
+import { toast } from "react-hot-toast";
 // import ImageUpload from "./ImageUpload";
 
-// Importing ToastContainer and toast for notifications
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import * as Yup from 'yup';
-
-// Function to trigger notification
-const notify = () => toast("Employee Added Successfully!");
 
 // State to manage loading state
 const ModelPopup = ({ setShowModal }) => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [gender, setGender] = useState(''); 
+
+  const handleGenderChange = (e) => {
+    setGender(e.target.value); // Update gender state when the radio button changes
+  };
   
   //const [imageURL, setImageURL] = useState('')
   //console.log(empById)
+
+    // Declare a state variable for the selected image preview
+    const [selectedImagePreview, setSelectedImagePreview] = useState(null);
+  
+    // Function to handle file input change
+    const handleImageChange = (e) => {
+      const selectedFile = e.target.files[0];
+      setSelectedImagePreview(URL.createObjectURL(selectedFile));
+    };
 
 
   // Function to create employee
   const createEmployee = async (values) => {
     setLoading(true)
     try{
-      const res = await axiosPost('/employee', values)
+      const res = await axiosPost('/employee', values);
       console.log(res)
       setLoading(false)
       setShowModal(false)
-      notify(); // Trigger notification upon successful employee creation
+      toast.success("Employee added Successfully!", {
+        duration: 4000,
+        position:'top-right'
+      });
     }
     catch(err){
       console.log(err)
+      toast.error("Error creating employee.please try again!", {
+        duration: 4000,
+        position:'top-right'
+      });
     }
   }
 
@@ -44,121 +59,235 @@ const ModelPopup = ({ setShowModal }) => {
       phone: '',
       job: '',
       dateofjoining: '',
-      image: ''
+      image:'',
+      dateofbirth:'',
+      gender:'',
+      nic:'',
     },
+    
+    
 
     // Form submission handler
     onSubmit: values => {
       createEmployee(values)
-
-
     },
-    validationSchema: Yup.object({
-      firstname: Yup.string().required('First Name is required'),
-      lastname: Yup.string().required('Last Name is required'),
-      email: Yup.string().email('Invalid email address').required('Email is required'),
-      phone: Yup.string().required('Phone is required'),
-      phone: Yup.string().matches(/^[0-9]+$/, 'Phone must contain only numbers').required('Phone is required'),
-      job: Yup.string().required('Job Position is required'),
-      dateofjoining: Yup.date().required('Date of Joining is required'),
-      image: Yup.string().required('Image is required')
-    })
+    
   })
+  
+
   return (
     <div className="modalContainer">
-<form action="" onSubmit={formik.handleSubmit}>
-      <div className="modalBox">
-        <div className="modalHeader">
-          <h2>New Employee Details</h2>
-        </div>
-        {/* <ImageUpload setImageURL={setImageURL}/> */}
-        
-          <div className="modalInner"
-
-          >
+      <form action="" onSubmit={formik.handleSubmit}>
+        <div className="modalBox">
+          <div className="modalHeader">
+            <h2>New Employee Details</h2>
+          </div>
+          {/* <ImageUpload setImageURL={setImageURL}/> */}
+          <div className="modalInner">
             <div className="input-container">
               <div className="input-box">
                 <label htmlFor="">First Name</label>
-                <input type="text" name="firstname"
-                  required
-                  onChange={formik.handleChange}
-                  values={formik.values.firstname}
-                />
+                <input
+                    type="text"
+                    name="firstname"
+                    required
+                    onChange={formik.handleChange}
+                    value={formik.values.firstname}
+                    onKeyDown={(e) => {
+                      const key = e.key;
+                      // Allow only alphabetic characters (A-Z, a-z) and space (32)
+                      if (
+                        (key < 'A' || key > 'Z') &&
+                        (key < 'a' || key > 'z') &&
+                        key !== ' '
+                      ) {
+                        e.preventDefault(); // Prevent input of numbers and special characters
+                      }
+                    }}
+                  />
               </div>
               <div className="input-box">
                 <label htmlFor="">Last Name</label>
-                <input type="text" name="lastname"
-                  required
-                  onChange={formik.handleChange}
-                  values={formik.values.lastname}
-                />
+                <input
+                    type="text"
+                    name="lastname"
+                    required
+                    onChange={formik.handleChange}
+                    value={formik.values.selectedFile}
+                    onKeyDown={(e) => {
+                      const key = e.key;
+                      // Allow only alphabetic characters (A-Z, a-z) and space (32)
+                      if (
+                        (key < 'A' || key > 'Z') &&
+                        (key < 'a' || key > 'z') &&
+                        key !== ' '
+                      ) {
+                        e.preventDefault(); // Prevent input of numbers and special characters
+                      }
+                    }}
+                  />
               </div>
             </div>
-            <div className="input-box">
-                <label htmlFor="">image</label>
-                <input type="text" name="image"
-                  required
-                  onChange={formik.handleChange}
-                  values={formik.values.image}
-                />
-              </div>
+            {/* <div className="input-box">
+              <label htmlFor="">image</label>
+              <div className="input-container">
+                <div className="input-box">
+                    <input
+                        type="file"
+                        name="image"
+                        accept=".png, .jpg, .jpeg"
+                        onChange={handleImageChange}
+                        values={formik.values.image}
+                      />
+                  </div>
+                  <div className="input-box">
+                {selectedImagePreview && (
+                  <img src={selectedImagePreview} alt="Selected Image" 
+                  style={{ maxWidth: '75px', maxHeight: '75px' }}/>
+                )}
+                </div>
+                </div>
+            </div> */}
+
+                      {/* <div className="input-box">
+                        <label htmlFor="">image</label>
+                        <input type="text" name="image"
+                          required
+                          onChange={formik.handleChange}
+                          values={formik.values.image}
+                        />
+                      </div> */}
+
 
             <div className="input-container">
               <div className="input-box">
                 <label htmlFor="">Email Address</label>
-                <input type="email" name="email"
+                <input
+                  type="email"
+                  name="email"
                   required
                   onChange={formik.handleChange}
                   values={formik.values.email}
                 />
               </div>
               <div className="input-box">
-                <label htmlFor="">Phone</label>
-                <input type="text" name="phone"
+                <label htmlFor="">NIC</label>
+                <input
+                  type="text"
+                  name="nic"
                   required
                   onChange={formik.handleChange}
-                  values={formik.values.phone}
+                  values={formik.values.nic}
                 />
               </div>
               
             </div>
+            <div className="input-container">
+              <div className="input-box">
+                <label htmlFor="">Job-position</label>
+                <input
+                  type="text"
+                  name="job"
+                  required
+                  onChange={formik.handleChange}
+                  values={formik.values.job}
+                />
+              </div>
+              <div className="input-box">
+                <label htmlFor="">Phone</label>
+                <input
+                  type="text"
+                  name="phone"
+                  required
+                  pattern="[0-9]*"
+                  onChange={formik.handleChange}
+                  values={formik.values.phone}
+                  onKeyDown={(e) => {
+                    const key = e.key;
+                    // Allow only numeric characters (0-9)
+                    if((key < '0' || key > '9') && key !== '')
+                    {
+                      e.preventDefault(); // Prevent input of non-numeric characters
+                    }
+                  }}
+                />
+              </div>
+            
+
+            </div>
+            <div className="input-container">
             <div className="input-box">
-              <label htmlFor="">Job-position</label>
-              <input type="text" name="job"
+              <label htmlFor="">Age</label>
+              <input
+                type="text"
+                name="age"
                 required
                 onChange={formik.handleChange}
-                values={formik.values.job}
+                values={formik.values.age}
+                onKeyDown={(e) => {
+                  const key = e.key;
+                  // Allow only numeric characters (0-9)
+                  if((key < '0' || key > '9') && key !== ' ')
+                  {
+                    e.preventDefault(); // Prevent input of non-numeric characters
+                  }
+                }}
               />
             </div>
             <div className="input-box">
+              <label htmlFor="">Date of Birthday</label>
+              <input
+                type="date"
+                name="dateofbirth"
+                required
+                onChange={formik.handleChange}
+                values={formik.values.dateofbirth}
+              />
+            </div>
+
+            </div>
+            <div className="input-container">
+            <div className="gender">
+              <label htmlFor="">Gender</label>
+              <select
+                    name="gender"
+                    values={formik.values.gender}
+                    onChange={formik.handleChange}
+                    required
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+               </select>
+              
+            </div>
+
+            <div className="input-box">
               <label htmlFor="">Date of Joining</label>
-              <input type="date" name="dateofjoining"
+              <input
+                type="date"
+                name="dateofjoining"
                 required
                 onChange={formik.handleChange}
                 values={formik.values.dateofjoining}
               />
             </div>
-            <div className="modalFooter">
-              <button onClick={notify} className="add-btn" type="submit">{loading ? 'Saving...' : 'Save Details'}</button>
-              <ToastContainer 
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"
-                
-                />
+
             </div>
-
+            
+            <div className="modalFooter">
+              <button
+                
+                className="add-btn"
+                type="submit"
+              >
+                {loading ? "Saving..." : "Save Details"}
+                
+              </button>
+            </div>
           </div>
-        
-
-      </div>
+        </div>
       </form>
     </div>
   );

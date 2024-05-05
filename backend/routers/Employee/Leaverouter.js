@@ -1,5 +1,5 @@
-import express from 'express';
-import EmployeeLeave from '../../model/Employee/Leavemodel.js';
+const express = require('express');
+const EmployeeLeave = require ('../../model/Employee/Leavemodel');
 
 const router = express.Router();
 
@@ -64,4 +64,4 @@ router.delete('/:id', async (req, res) => {
      }
 });
 
-export default router;
+module.exports = router;

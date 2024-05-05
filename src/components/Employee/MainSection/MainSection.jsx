@@ -13,6 +13,7 @@ const MainSection = ({ setEmployeeId }) => {
   const [employees, setEmployees] = useState([])
   const [empById, setEmpById] = useState([])
   const [reRender, setReRender] = useState(false)
+  
 
   const getAllEmployee = async () => {
     try {
@@ -36,6 +37,7 @@ const MainSection = ({ setEmployeeId }) => {
     try {
       const res = await axiosGet(`/searchemployee/${e.target.value}`)
       setEmployees(res.data)
+      // const value = e.target.value.toLowerCase();
     }
     catch (err) {
       console.log(err.message)

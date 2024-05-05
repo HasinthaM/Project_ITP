@@ -2,15 +2,12 @@ import React, { useState } from 'react'
 import { useFormik } from 'formik'
 import "./ModelPopup.css";
 import { axiosPut } from "../../../axiosServices";
+import { toast } from "react-hot-toast";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-const notify = () => toast("Employee Update Successfully!");
 
 // Function to handle editing employee details
 const EditDetailsModal = ({ empById, setEditModal }) => {
-    const { firstname, lastname, email, phone, job, dateofjoining, image } = empById
+    const { firstname, lastname, email, phone, job, dateofjoining, image, dateofbirth } = empById
     //const date = new Date(dateofjoining)
     const [loading, setLoading] = useState(false)
     const handleEdit = async (values) => {
@@ -20,10 +17,18 @@ const EditDetailsModal = ({ empById, setEditModal }) => {
             setLoading(false)
             setEditModal(false)
             console.log(res)
+            toast.success("Update Employee details Successfully!", {
+                duration: 4000,
+                position:'top-right'
+              });
 
         }
         catch (err) {
             console.log(err)
+            toast.error("Error : Cann't Update Employee Details.please try again!", {
+                duration: 4000,
+                position:'top-right'
+              });
         }
     }
     // Formik form setup
@@ -36,6 +41,7 @@ const EditDetailsModal = ({ empById, setEditModal }) => {
             job,
             dateofjoining,
             image,
+            dateofbirth,
         },
         onSubmit: values => {
             handleEdit(values)
@@ -58,11 +64,24 @@ const EditDetailsModal = ({ empById, setEditModal }) => {
                         <div className="input-container">
                             <div className="input-box">
                                 <label htmlFor="">First Name</label>
-                                <input type="text" name="firstname"
+                                <input 
+                                    type="text"  
+                                    name="firstname"
                                     required
                                     defaultValue={firstname}
                                     onChange={formik.handleChange}
                                     values={formik.values.firstname}
+                                    onKeyDown={(e) => {
+                                        const key = e.key;
+                                        // Allow only alphabetic characters (A-Z, a-z) and space (32)
+                                        if (
+                                          (key < 'A' || key > 'Z') &&
+                                          (key < 'a' || key > 'z') &&
+                                          key !== ' '
+                                        ) {
+                                          e.preventDefault(); // Prevent input of numbers and special characters
+                                        }
+                                      }}
                                 />
                             </div>
                             <div className="input-box">
@@ -72,6 +91,17 @@ const EditDetailsModal = ({ empById, setEditModal }) => {
                                     defaultValue={lastname}
                                     onChange={formik.handleChange}
                                     values={formik.values.lastname}
+                                    onKeyDown={(e) => {
+                                        const key = e.key;
+                                        // Allow only alphabetic characters (A-Z, a-z) and space (32)
+                                        if (
+                                          (key < 'A' || key > 'Z') &&
+                                          (key < 'a' || key > 'z') &&
+                                          key !== ' '
+                                        ) {
+                                          e.preventDefault(); // Prevent input of numbers and special characters
+                                        }
+                                      }}
                                 />
                             </div>
                         </div>
@@ -125,19 +155,7 @@ const EditDetailsModal = ({ empById, setEditModal }) => {
                         </div>
                     </div>
                     <div className="modalFooter">
-                        <button onClick={notify} className="add-btn" type="submit">{loading ? 'Editing' : 'Edit and Save'}</button>
-                        <ToastContainer 
-                            position="top-right"
-                            autoClose={5000}
-                            hideProgressBar={false}
-                            newestOnTop={false}
-                            closeOnClick
-                            rtl={false}
-                            pauseOnFocusLoss
-                            draggable
-                            pauseOnHover
-                            theme="colored"
-                            />
+                        <button  className="add-btn" type="submit">{loading ? 'Editing' : 'Edit and Save'}</button>
                     </div>
                 </div>
             </form>

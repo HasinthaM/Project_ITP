@@ -15,6 +15,9 @@ const deleteEmployee = require('./routers/Employee/deleteEmployee');
 const getEmployeeById = require('./routers/Employee/getEmployeeById');
 const searchEmployee = require('./routers/Employee/searchEmployee');
 
+//Employee Leave management
+const Leaverouter = require('./routers/Employee/Leaverouter')
+
 app.use(cors());
 app.use(express.json());
 
@@ -48,3 +51,6 @@ app.use('/employee', updateEmployee);
 app.use('/employee', deleteEmployee);
 app.use('/searchemployee', searchEmployee);
 app.use('/employee', getEmployeeById);
+
+//Employee leave management
+app.use('/employeeleave', Leaverouter);
