@@ -49,7 +49,10 @@ const PSidebar = () => {
           <Menu.Item key="2" onClick={() => handleMenuClick('/create')} style={{  fontSize:'18px' }}>
             Create Package
           </Menu.Item>
-          <Menu.Item key="3" onClick={() => handleMenuClick('/preport')} style={{fontSize:'18px' }}>
+          <Menu.Item key="3" onClick={() => handleMenuClick('/pintfc')} style={{  fontSize:'18px' }}>
+            Packages
+          </Menu.Item>
+          <Menu.Item key="4" onClick={() => handleMenuClick('/preport')} style={{fontSize:'18px' }}>
             Report
           </Menu.Item>
         </Menu>
