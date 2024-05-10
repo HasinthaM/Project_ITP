@@ -71,7 +71,18 @@ const Data = [
 const HelpCenter = () => {
   const [text, setText] = useState(false);
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState(''); 
+  const [filteredData, setFilteredData] = useState(Data); // Initialize with all data
+  
 
+  const handleSearch = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    const filtered = Data.filter((item) =>
+      item.question.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredData(filtered);
+  };
   const display = () => {
     setText(!text);
   };
@@ -82,8 +93,22 @@ const HelpCenter = () => {
       <>
       <h1 style={{ color: 'blue' }}>Welcome to the Help Center</h1>
         <h2>We Are Await For You.....</h2>
-        <h2>You can Find Your Common Solutions From Here..</h2>
+        <h2>You can Search Your Common Solutions From Here..</h2>
 
+        <div className="search-bar" style={{ backgroundColor: 'black', padding: '5px', borderRadius: '5px', marginBottom: '10px', marginLeft:'400px', width: '50%' }}>
+            <input type="text" placeholder="Search..." value={searchQuery} onChange={handleSearch} style={{ width: '100%', padding: '10px', borderRadius: '10px', border: 'none', outline: 'none','::placeholder': {color: 'red'} }} />
+          </div>
+
+          <div className="container1">
+            <div className="accordionBlock">
+              {filteredData.map((val) => {
+                return (
+                  <Accordion key={val.id} question={val.question} answer={val.answer} />
+                );
+              })}
+              {filteredData.length === 0 && <p>No results found.</p>}
+            </div>
+          </div>
         <div className="container1">
           <div className="accordionBlock">
             {Data.map((val) => {

@@ -75,12 +75,12 @@ const CreateTicketRecords = () => {
   return (
     <div className='p-4' style={{ backgroundImage: `url(${seaImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
       <BackButton />
-      <h1 className='text-3xl my-4 text-center'>Create Ticket</h1>
+      <h1 className='text-3xl my-4 text-center' style={{ fontWeight: 'bold' }}>Create Ticket</h1> {/* Apply bold font style */}
       {loading ? <Spinner /> : ''}
       {ticketAdded && <div className='text-green-600 text-center'>Ticket added successfully</div>} {/* Display success message */}
       <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
         <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Ticket ID</label>
+          <label className='text-xl mr-4 text-black-500'>Ticket ID</label>
           <input
             type='text'
             value={t_id}
@@ -89,7 +89,7 @@ const CreateTicketRecords = () => {
           />
         </div>
         <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Name</label>
+          <label className='text-xl mr-4 text-black-500'>Name</label>
           <input
             type='text'
             value={name}
@@ -105,7 +105,7 @@ const CreateTicketRecords = () => {
           />
         </div>
         <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Email</label>
+          <label className='text-xl mr-4 text-black-500'>Email</label>
           <input
             type='text'
             value={email}
@@ -114,7 +114,7 @@ const CreateTicketRecords = () => {
           />
         </div>
         <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Issue Type</label>
+          <label className='text-xl mr-4 text-black-500'>Issue Type</label>
           <input
             type='text'
             value={issueType}
@@ -123,7 +123,7 @@ const CreateTicketRecords = () => {
           />
         </div>
         <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Issue</label>
+          <label className='text-xl mr-4 text-black-500'>Issue</label>
           <input
             type='text'
             value={issue}
