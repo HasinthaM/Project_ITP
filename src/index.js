@@ -9,6 +9,8 @@ import ShowSalaryRecoards from './pages/Salary/ShowSalaryRecoards';
 import EditSalaryRecoard from './pages/Salary/EditSalaryRecoard';
 import DeleteSalaryRecoard from './pages/Salary/DeleteSalaryRecoard';
 import ShowSalary from './pages/Salary/ShowSalary';
+import CreateOrderForm from './pages/OrderForm/CreateOrderForm';
+import AddPaymentDetails from './pages/PaymentDetails/AddPaymentDetails';
 import { SnackbarProvider } from 'notistack';
 import App from './App';
 
@@ -27,6 +29,9 @@ root.render(
       <Route path='/salary/edit/:_id' element={<EditSalaryRecoard />} />
       <Route path='/salary/delete/:_id' element={<DeleteSalaryRecoard />} />
       <Route path='/salary/details1/:_id' element={<ShowSalary />} />
+      <Route path='/orderform' element={<CreateOrderForm />} />
+      <Route path='/paymentdetails' element={<AddPaymentDetails/>} />
+ 
 
       </Routes>
       </SnackbarProvider>

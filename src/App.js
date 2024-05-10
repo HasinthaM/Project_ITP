@@ -10,6 +10,8 @@ function App() {
         <h1>Welcome</h1>
        
         <button className='salary-button' onClick={() => navigate('/salarys')}>Salary</button>
+        <button className='salary-button' onClick={() => navigate('/orderform')}>order form</button>
+
       </header>
     </div>
   );

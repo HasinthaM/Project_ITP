@@ -7,6 +7,10 @@ const mongoose = require('mongoose');
 
 
 const salaryRouter = require('./routers/salaryRoute');
+const orderformRouter = require('./routers/orderformRoute');
+const paymentRouter = require('./routers/paymentdetailsRoute');
+
+
 
 app.use(cors());
 app.use(express.json());
@@ -33,3 +37,6 @@ const server = app.listen(port, host, () =>{
 
 
 app.use('/api/salary', salaryRouter);
+app.use('/api/order', orderformRouter);
+app.use('/api/payment', paymentRouter);
+ 

@@ -9,12 +9,14 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import SalaryPdf from '../../components/Salary/SalaryPdf';
 
 
+import backgroundImage from '../../Salaryimages/7.jpg'
+
 
 const Home = () => {
   const [salary, setSalary] = useState([]);
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
-  const keys = ["name", "basicSalary", "attendance"];
+  const keys = ["name", "basicSalary", "attendance"];//search values
 
   useEffect(() => {
     setLoading(true);
@@ -37,7 +39,17 @@ const Home = () => {
   };
   console.log(salary)
   return (
-    <div className='bg-orange-200 min-h-screen'>
+    <div
+      className='p-4'
+      style={{
+        backgroundImage: `url(${backgroundImage})`, // Set background image
+        backgroundSize: 'cover', // Adjust background image size
+        backgroundPosition: 'center', // Adjust background image position
+        minHeight: '100vh', // Ensure the background covers the entire screen
+      }}
+    >
+      
+
     <div className='p-4'>
       <input
         type="text"
@@ -68,55 +80,59 @@ const Home = () => {
         <table className='w-full border-separate border-spacing-2'>
           <thead>
             <tr>
-              <th className='border border-slate-600 rounded-md'>No</th>
-              <th className='border border-slate-600 rounded-md'>ID</th>
-              <th className='border border-slate-600 rounded-md'>Name</th>
-              <th className='border border-slate-600 rounded-md'>Basic Salary</th>
-              <th className='border border-slate-600 rounded-md'>Attendance</th>
-              <th className='border border-slate-600 rounded-md'>Allowance</th>
-              <th className='border border-slate-600 rounded-md'>EPF</th>
-              <th className='border border-slate-600 rounded-md'>ETF</th>
-              <th className='border border-slate-600 rounded-md'>Tax</th>
-              <th className='border border-slate-600 rounded-md'>NetSalary</th>
-              <th className='border border-slate-600 rounded-md'>Operations</th>
+              <th className='border border-slate-600 rounded-md font-bold text-black'>No</th>
+              <th className='border border-slate-600 rounded-md font-bold text-black'>ID</th>
+              <th className='border border-slate-600 rounded-md font-bold text-black'>NIC</th>
+              <th className='border border-slate-600 rounded-md font-bold text-black'>Name</th>
+              <th className='border border-slate-600 rounded-md font-bold text-black'>Basic Salary</th>
+              <th className='border border-slate-600 rounded-md font-bold text-black'>Attendance</th>
+              <th className='border border-slate-600 rounded-md font-bold text-black'>Allowance</th>
+              <th className='border border-slate-600 rounded-md font-bold text-black'>EPF</th>
+              <th className='border border-slate-600 rounded-md font-bold text-black'>ETF</th>
+              <th className='border border-slate-600 rounded-md font-bold text-black'>Tax</th>
+              <th className='border border-slate-600 rounded-md font-bold text-black'>NetSalary</th>
+              <th className='border border-slate-600 rounded-md font-bold text-black'>Operations</th>
             </tr>
           </thead>
           <tbody>
-            {search(salary).map((salary, index) => (
+            {search(salary).map((salary, index) => ( //search bar
               <tr key={salary._id} className='h-8'>
-                <td className='border border-slate-700 rounded-md text-center'>
+                <td className='border border-slate-700 rounded-md text-center font-bold text-black'>
                   {index + 1}
                 </td>
-                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+                <td className='border border-slate-700 rounded-md text-center max-md:hidden font-bold text-black'>
                   {salary.s_id}
                 </td>
-                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+                <td className='border border-slate-700 rounded-md text-center max-md:hidden font-bold text-black'>
+                  {salary.nic}
+                </td>
+                <td className='border border-slate-700 rounded-md text-center max-md:hidden font-bold text-black'>
                   {salary.name}
                 </td>
-                <td className='border border-slate-700 rounded-md text-center'>
+                <td className='border border-slate-700 rounded-md text-center font-bold text-black'>
                   {salary.basicSalary}
                 </td>
-                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+                <td className='border border-slate-700 rounded-md text-center max-md:hidden font-bold text-black'>
                   {salary.attendance}
                 </td>
-                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+                <td className='border border-slate-700 rounded-md text-center max-md:hidden font-bold text-black'>
                   {salary.allowance}
                 </td>
-                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+                <td className='border border-slate-700 rounded-md text-center max-md:hidden font-bold text-black'>
                   {salary.epf}
                 </td>
-                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+                <td className='border border-slate-700 rounded-md text-center max-md:hidden font-bold text-black'>
                   {salary.etf}
                 </td>
-                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+                <td className='border border-slate-700 rounded-md text-center max-md:hidden font-bold text-black'>
                   {salary.tax}
                 </td>
 
-                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+                <td className='border border-slate-700 rounded-md text-center max-md:hidden font-bold text-black'>
                   {salary.netSalary}
                 </td>
 
-                <td className='border border-slate-700 rounded-md text-center'>
+                <td className='border border-slate-700 rounded-md text-center font-bold text-black'>
                   <div className='flex justify-center gap-x-4'>
                     <Link to={`/salary/details/${salary._id}`}>
                       <BsInfoCircle className='text-2xl text-green-800' />

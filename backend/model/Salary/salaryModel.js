@@ -6,6 +6,10 @@ const salarySchema = new mongoose.Schema({
         type: Number,
         unique: true,
     },
+    nic: {
+        type: String,
+        required: true
+    },  
     name: {
         type: String,
         required: true
@@ -40,7 +44,7 @@ const salarySchema = new mongoose.Schema({
     }
 },
 {
-    timestamps: true,
+    timestamps: true,  // Automatically adds createdAt and updatedAt timestamps
 });
 
 // Plugin for unique validation

@@ -37,15 +37,15 @@ const router = express.Router();
 // Route for saving a new Salary
 router.post('/', async (request, response) => {
     try {
-        if ( !request.body.name || !request.body.basicSalary || !request.body.attendance) {
+        if (!request.body.nic || !request.body.name || !request.body.basicSalary || !request.body.attendance) {
             return response.status(400).send({
-                message: 'Send all required fields: name, basicSalary, attendance',
+                message: 'Send all required fields: nic,name, basicSalary, attendance',
             });
         }
 
         const newSalary = {
 
-            
+            nic: request.body.nic,
             name: request.body.name,
             basicSalary: request.body.basicSalary,
             attendance: request.body.attendance,
