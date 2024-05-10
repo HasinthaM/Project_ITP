@@ -4,7 +4,7 @@ import { axiosDelete } from "../../../../axiosServices";
 import { toast } from "react-hot-toast";
 
 const Card = ({ empData, handleEdit, handleReRender}) => {
-  const { firstname, lastname, job, email, image } = empData
+  const { firstname, lastname, job, email, image, nic } = empData
   const [dropDown, setDropdown] = useState(false)
 
   const handleDelete = async(id) =>{
@@ -49,6 +49,7 @@ const Card = ({ empData, handleEdit, handleReRender}) => {
         </div> */}
         <div className="emp-detail">
           <h3>{firstname} {lastname}</h3>
+          <p>{nic}</p>
           <p>{email}</p>
         </div>
       </div>

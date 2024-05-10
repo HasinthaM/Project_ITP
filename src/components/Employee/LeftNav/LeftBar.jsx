@@ -43,6 +43,7 @@ const LeftBar = ({ employeeId }) => {
         
         <p className='job'>Job Role : {empById.job}</p>
         <p className='date'>Join Date - {empById.dateofjoining}</p>
+        <p className='password'>Password - {empById.password}</p>
 
         </div>
         

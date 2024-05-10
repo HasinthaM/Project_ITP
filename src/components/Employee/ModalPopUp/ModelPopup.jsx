@@ -10,6 +10,8 @@ import { toast } from "react-hot-toast";
 const ModelPopup = ({ setShowModal }) => {
   const [loading, setLoading] = useState(false);
   const [gender, setGender] = useState(''); 
+  const [showPassword, setShowPassword] = useState(false);
+  
 
   const handleGenderChange = (e) => {
     setGender(e.target.value); // Update gender state when the radio button changes
@@ -32,6 +34,7 @@ const ModelPopup = ({ setShowModal }) => {
   const createEmployee = async (values) => {
     setLoading(true)
     try{
+      
       const res = await axiosPost('/employee', values);
       console.log(res)
       setLoading(false)
@@ -61,18 +64,32 @@ const ModelPopup = ({ setShowModal }) => {
       dateofjoining: '',
       image:'',
       dateofbirth:'',
+      age:'',
       gender:'',
       nic:'',
+      password:'',
+      confirmPassword:'',
     },
     
     
 
     // Form submission handler
     onSubmit: values => {
+      if (values.password !== values.confirmPassword) {
+        toast.error("Passwords do not match!", {
+          duration: 4000,
+          position:'top-right'
+        });
+        return;
+      }
       createEmployee(values)
     },
     
   })
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(prevState => !prevState);
+  };
   
 
   return (
@@ -198,18 +215,17 @@ const ModelPopup = ({ setShowModal }) => {
                 <input
                   type="text"
                   name="phone"
+                  maxLength={10}
                   required
-                  pattern="[0-9]*"
+                  onKeyDown={(event) => {
+                    const key = event.key;
+                    if (!/[0-9]/.test(key) && key !== 'Backspace') {
+                        event.preventDefault();
+                    }
+                }}
+                
                   onChange={formik.handleChange}
                   values={formik.values.phone}
-                  onKeyDown={(e) => {
-                    const key = e.key;
-                    // Allow only numeric characters (0-9)
-                    if((key < '0' || key > '9') && key !== '')
-                    {
-                      e.preventDefault(); // Prevent input of non-numeric characters
-                    }
-                  }}
                 />
               </div>
             
@@ -221,17 +237,16 @@ const ModelPopup = ({ setShowModal }) => {
               <input
                 type="text"
                 name="age"
+                maxLength={2}
                 required
                 onChange={formik.handleChange}
                 values={formik.values.age}
-                onKeyDown={(e) => {
-                  const key = e.key;
-                  // Allow only numeric characters (0-9)
-                  if((key < '0' || key > '9') && key !== ' ')
-                  {
-                    e.preventDefault(); // Prevent input of non-numeric characters
+                onKeyDown={(event) => {
+                  const key = event.key;
+                  if (!/[0-9]/.test(key) && key !== 'Backspace') {
+                      event.preventDefault();
                   }
-                }}
+              }}
               />
             </div>
             <div className="input-box">
@@ -274,6 +289,35 @@ const ModelPopup = ({ setShowModal }) => {
               />
             </div>
 
+            </div>
+            <div className="input-container">
+            <div className="input-box">
+              <label htmlFor="">Password</label>
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                required
+                onChange={formik.handleChange}
+                value={formik.values.password}
+              />
+              <span
+                  className={`password-toggle ${showPassword ? "visible" : ""}`}
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </span>
+            </div>
+            <div className="input-box">
+              <label htmlFor="">Confirm Password</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                required
+                onChange={formik.handleChange}
+                value={formik.values.confirmPassword}
+              />
+              
+            </div>
             </div>
             
             <div className="modalFooter">

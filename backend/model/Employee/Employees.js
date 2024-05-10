@@ -1,6 +1,6 @@
 const { type } = require('@testing-library/user-event/dist/type');
 const mongoose = require('mongoose');
-const { string } = require('yup');
+
 
 const EmployeeSchema = new mongoose.Schema({
     firstname: {
@@ -46,6 +46,14 @@ const EmployeeSchema = new mongoose.Schema({
     },
     gender:{
 
+        type:String,
+        require:true
+    },
+    password:{
+        type:String,
+        require:true
+    },
+    confirmPassword:{
         type:String,
         require:true
     }

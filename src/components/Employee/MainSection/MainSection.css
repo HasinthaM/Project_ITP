@@ -104,12 +104,14 @@
      text-align: center;
    }
    .emp-detail > h3{
-       color: #373852;
+       color: #0f0f14;
+       font-size: 1.1rem;
+       font-weight: 500;
    }
    .emp-detail > p{
        margin-top: 5px;
        color: #555663c7;
-       font-size: 0.8rem;
+       font-size: 1rem;
    }
    .job-role {
      background-color: hsla(0, 0%, 74%, 0.897);
