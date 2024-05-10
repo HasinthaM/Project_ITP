@@ -4,7 +4,7 @@
   left: 230px; /* Width of your sidebar */
   width: calc(100% - 250px); /* Adjust according to your sidebar width */
   margin-right: 100px; /* Add a margin to separate from the sidebar */
-  background-color: lavender;
+  background-color: white;
 }
 
 .p-title {
@@ -30,7 +30,7 @@ th, td {
 }
 
 th {
-  background-color: lavender;
+  background-color: white;
   font-weight: bold;
 }
 

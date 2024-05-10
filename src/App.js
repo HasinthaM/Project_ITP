@@ -11,8 +11,7 @@ function App() {
       <header className="App-header1">
         <h1>Package Managemnt</h1>
         <button className='manager-dash' onClick={() => navigate('/pdashboard')}>Package Manager</button>
-        <button className='p-homeI' onClick={() => navigate('/phome')}>User</button>
-        <button className='o-home' onClick={() => navigate('/o-manager')}>Operation Manager</button>
+        <button className='p-homeI' onClick={() => navigate('/pintfc')}>User</button>
 
       </header>
     </div>

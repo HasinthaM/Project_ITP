@@ -51,6 +51,7 @@ const P_dashboard = () => {
         return (
             packageItem.pID.toLowerCase().includes(query) ||
             packageItem.province.toLowerCase().includes(query) ||
+            packageItem.district.toLowerCase().includes(query) || // Include district in the search
             packageItem.packageName.toLowerCase().includes(query) ||
             packageItem.vehicle.toLowerCase().includes(query) ||
             packageItem.noOfPerson.toString().toLowerCase().includes(query) ||
@@ -67,19 +68,20 @@ const P_dashboard = () => {
             <Psidebar />
             <h4 className='p-title'>Tour Packages</h4>
             <div className="search-barp">
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                </div>
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+            </div>
             <div className='table-container1'>
                 <table>
                     <thead>
                         <tr>
                             <th>PID</th>
                             <th>Province</th>
+                            <th>District</th> {/* Add District column */}
                             <th>PName</th>
                             <th>Vehicle</th>
                             <th>NPersons</th>
@@ -96,6 +98,7 @@ const P_dashboard = () => {
                             <tr key={packageItem._id}>
                                 <td>{packageItem.pID}</td>
                                 <td>{packageItem.province}</td>
+                                <td>{packageItem.district}</td> {/* Display district */}
                                 <td>{packageItem.packageName}</td>
                                 <td>{packageItem.vehicle}</td>
                                 <td>{packageItem.noOfPerson}</td>

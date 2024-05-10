@@ -12,6 +12,9 @@ const P_edit = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState(null);
+  const [districtsForProvince, setDistrictsForProvince] = useState([]);
+  const [selectedProvince, setSelectedProvince] = useState(null);
+
 
   const provinces = [
     'Western Province',
@@ -24,6 +27,24 @@ const P_edit = () => {
     'Uva Province',
     'Sabaragamuwa Province',
   ];
+
+  const districts = {
+    "Western Province": ["Colombo", "Gampaha", "Kalutara"],
+    "Central Province": ["Kandy", "Matale", "Nuwara Eliya"],
+    "Southern Province": ["Galle", "Matara", "Hambantota"],
+    "Northern Province": [
+      "Jaffna",
+      "Kilinochchi",
+      "Mannar",
+      "Mullaitivu",
+      "Vavuniya",
+    ],
+    "Eastern Province": ["Trincomalee", "Batticaloa", "Ampara"],
+    "North Western Province": ["Puttalam", "Kurunegala"],
+    "North Central Province": ["Polonnaruwa", "Anuradhapura"],
+    "Uva Province": ["Badulla", "Monaragala"],
+    "Sabaragamuwa Province": ["Ratnapura", "Kegalle"],
+  };
 
   const vehicles = [
     { type: 'Car', seats: 4 },
@@ -43,6 +64,7 @@ const P_edit = () => {
         setValues({
           pID: packageData.pID,
           province: packageData.province,
+          district: packageData.district,
           packageName: packageData.packageName,
           vehicle: packageData.vehicle,
           noOfPerson: packageData.noOfPerson,
@@ -62,6 +84,13 @@ const P_edit = () => {
       form.setFieldsValue({ noOfPerson: selectedVehicle.seats });
     }
   };
+
+  const handleProvinceChange = (value) => {
+    setSelectedProvince(value); // Set the selected province
+    setDistrictsForProvince(districts[value]);
+    form.setFieldsValue({ district: undefined }); // Reset district field when province changes
+  };
+
 
 
   const onFinish = async (values) => {
@@ -140,18 +169,38 @@ const P_edit = () => {
                   <Input readOnly />
                 </Form.Item>
                 <Form.Item
-                  label="Select Province"
-                  name="province"
-                  rules={[{ required: true, message: 'Please select Province' }]}
+                label="Select Province"
+                name="province"
+                rules={[{ required: true, message: "Please select Province" }]}
+              >
+                <Select
+                  placeholder="Select Province"
+                  onChange={handleProvinceChange}
                 >
-                  <Select placeholder="Select Province">
-                    {provinces.map((provinceName, index) => (
-                      <Option key={index} value={provinceName}>
-                        {provinceName}
-                      </Option>
-                    ))}
-                  </Select>
-                </Form.Item>
+                  {provinces.map((province) => (
+                    <Option key={province} value={province}>
+                      {province}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+
+              <Form.Item
+                label="Select District"
+                name="district"
+                rules={[
+                  { required: true, message: "Please select District" },
+                ]}
+              >
+                <Select placeholder="Select District">
+                  {districtsForProvince.map((district) => (
+                    <Option key={district} value={district}>
+                      {district}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+
                 <Form.Item
                   label="Package Name"
                   name="packageName"

@@ -33,6 +33,7 @@ const P_report = () => {
             @page {
                 size: A3;
                 margin: 0;
+                border: 2px solid black;
             }
         `
     });
@@ -94,7 +95,7 @@ const P_report = () => {
                         </table>
                     </div>
                 </div>
-                <button className='create-button2' onClick={generatePDF}>PDF</button>
+                <button className='pdf-button2' onClick={generatePDF}>PDF</button>
             </div>
         </div>
     );

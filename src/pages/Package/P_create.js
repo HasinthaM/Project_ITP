@@ -9,6 +9,8 @@ const { Option } = Select;
 const P_create = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
+  const [districtsForProvince, setDistrictsForProvince] = useState([]);
+  const [selectedProvince, setSelectedProvince] = useState(null); // Add state to store selected province
 
   const handleSubmit = async (values) => {
     try {
@@ -45,6 +47,24 @@ const P_create = () => {
     "Sabaragamuwa Province",
   ];
 
+  const districts = {
+    "Western Province": ["Colombo", "Gampaha", "Kalutara"],
+    "Central Province": ["Kandy", "Matale", "Nuwara Eliya"],
+    "Southern Province": ["Galle", "Matara", "Hambantota"],
+    "Northern Province": [
+      "Jaffna",
+      "Kilinochchi",
+      "Mannar",
+      "Mullaitivu",
+      "Vavuniya",
+    ],
+    "Eastern Province": ["Trincomalee", "Batticaloa", "Ampara"],
+    "North Western Province": ["Puttalam", "Kurunegala"],
+    "North Central Province": ["Polonnaruwa", "Anuradhapura"],
+    "Uva Province": ["Badulla", "Monaragala"],
+    "Sabaragamuwa Province": ["Ratnapura", "Kegalle"],
+  };
+
   const vehicles = [
     { type: "Car", seats: 4 },
     { type: "Van", seats: 10 },
@@ -62,214 +82,245 @@ const P_create = () => {
     }
   };
 
-  const handleKeyPress = (event, fieldName) => {
-    const charCode = event.which ? event.which : event.keyCode;
-    const value = event.key;
-    if (
-      (charCode >= 65 && charCode <= 90) || // A-Z
-      (charCode >= 97 && charCode <= 122) || // a-z
-      (charCode >= 48 && charCode <= 57) || // 0-9
-      charCode === 8 || // Backspace
-      charCode === 32 || // Space
-      charCode === 9 || // Tab
-      (charCode >= 37 && charCode <= 40) || // Arrow keys
-      charCode === 46 || // Delete
-      (value === value.toUpperCase() && value !== value.toLowerCase())
-    ) {
-      return true;
-    } else {
-      event.preventDefault();
-      alert(`Please enter only alphanumeric characters for ${fieldName}`);
-      return false;
-    }
+  const handleProvinceChange = (value) => {
+    setSelectedProvince(value); // Set the selected province
+    setDistrictsForProvince(districts[value]);
+    form.setFieldsValue({ district: undefined }); // Reset district field when province changes
   };
 
-  const handleAlphaKeyPress = (event, fieldName) => {
-    const charCode = event.which ? event.which : event.keyCode;
-    if (
-      (charCode >= 65 && charCode <= 90) || // A-Z
-      (charCode >= 97 && charCode <= 122) || // a-z
-      charCode === 8 || // Backspace
-      charCode === 32 || // Space
-      charCode === 9 || // Tab
-      (charCode >= 37 && charCode <= 40) || // Arrow keys
-      charCode === 46
-    ) {
-      return true;
+  const handleKeyDown = (event, fieldType) => {
+    // Get the key code of the pressed key
+    const keyCode = event.keyCode || event.which;
+    
+    if (fieldType === 'pID') {
+        // Allow numbers (48-57), uppercase and lowercase letters (65-90, 97-122), space (32), and backspace (8)
+        if (!((keyCode >= 48 && keyCode <= 57) || 
+              (keyCode >= 65 && keyCode <= 90) || // Uppercase letters
+              (keyCode >= 97 && keyCode <= 122) || // Lowercase letters
+              keyCode === 32 || // space key
+              keyCode === 8   // backspace key
+            )) {
+            // Prevent the default action (typing)
+            event.preventDefault();
+            // Show an alert message for special characters
+            alert("Only numbers, letters, spaces, and backspace are allowed in this field.");
+        }
+        
+        // Check if the shift key is pressed along with numbers
+        if (event.shiftKey && keyCode >= 48 && keyCode <= 57) {
+            // Show an alert message for shift key + numbers
+            alert("Special charactersis not allowed in this field.");
+        }
     } else {
-      event.preventDefault();
-      alert(`Please enter only letters for ${fieldName}`);
-      return false;
+        // For the 'Places' and 'Activities' fields, block both numbers and special characters
+        if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 186 && keyCode <= 192) || (keyCode >= 219 && keyCode <= 222)) {
+            // Prevent the default action (typing)
+            event.preventDefault();
+            // Show an alert message
+            alert("Numbers and special characters are not allowed in this field.");
+        }
     }
-  };
+};
 
   return (
     <div>
-       <PSidebar />
-    <div className="package-form1">
-      <h2 className="c-tittle">Create Package</h2>
-      <Form
-        form={form}
-        onFinish={handleSubmit}
-        layout="vertical"
-        initialValues={{
-          pID: "",
-          province: "",
-          packageName: "",
-          vehicle: "",
-          meals: [],
-          accommodation: "",
-          noOfPerson: "",
-          places: "",
-          activities: "",
-          price: "",
-        }}
-      >
-        <Row gutter={[26, 26]}>
-          <Col span={8}>
-            <Form.Item
-              label="Package ID"
-              name="pID"
-              rules={[{ required: true, message: "Please enter Package ID" }]}
-            >
-              <Input
-                placeholder="Package ID"
-                onKeyPress={(e) => handleKeyPress(e, "Package ID")}
-              />
-            </Form.Item>
-            <Form.Item
-              label="Select Province"
-              name="province"
-              rules={[{ required: true, message: "Please select Province" }]}
-            >
-              <Select placeholder="Select Province">
-                {provinces.map((province) => (
-                  <Option key={province} value={province}>
-                    {province}
-                  </Option>
-                ))}
-              </Select>
-            </Form.Item>
-            <Form.Item
-              label="Package Name"
-              name="packageName"
-              rules={[
-                { required: true, message: "Please enter Package Name" },
-              ]}
-            >
-              <Input
-                placeholder="Package Name"
-                onKeyPress={(e) => handleKeyPress(e, "Package Name")}
-              />
-            </Form.Item>
-          </Col>
-          <Col span={8}>
-            <Form.Item
-              label="Select Vehicle"
-              name="vehicle"
-              rules={[{ required: true, message: "Please select Vehicle" }]}
-            >
-              <Select
-                placeholder="Select Vehicle"
-                onChange={handleVehicleChange}
-              >
-                {vehicles.map((vehicle) => (
-                  <Option key={vehicle.type} value={vehicle.type}>
-                    {vehicle.type}
-                  </Option>
-                ))}
-              </Select>
-            </Form.Item>
-            <Form.Item
-              label="Number of Persons"
-              name="noOfPerson"
-              rules={[
-                { required: true, message: "Please enter Number of Persons" },
-              ]}
-            >
-              <Input type="number" min={1} />
-            </Form.Item>
-            <Form.Item
-              label="Places"
-              name="places"
-              rules={[
-                {
-                  required: true,
-                  message: "Please enter Places",
-                },
-              ]}
-            >
-              <Input
-                placeholder="Places"
-                onKeyPress={(e) => handleAlphaKeyPress(e, "Places")}
-              />
-            </Form.Item>
-            <Form.Item
-              label="Meals"
-              name="meals"
-              rules={[
-                {
-                  required: true,
-                  message: "Please select Meals",
-                  type: "array",
-                },
-              ]}
-            >
-              <Checkbox.Group options={mealOptions} />
-            </Form.Item>
-          </Col>
-          <Col span={8}>
-            <Form.Item
-              label="Activities"
-              name="activities"
-              rules={[
-                {
-                  required: true,
-                  message: "Please enter Activities",
-                },
-              ]}
-            >
-              <Input
-                placeholder="Activities"
-                onKeyPress={(e) => handleAlphaKeyPress(e, "Activities")}
-              />
-            </Form.Item>
-            <Form.Item
-              label="Select Accommodation"
-              name="accommodation"
-              rules={[
-                { required: true, message: "Please select Accommodation" },
-              ]}
-            >
-              <Select placeholder="Select Accommodation">
-                <Option value="3 Star Hotel">3 Star Hotel</Option>
-                <Option value="5 Star Hotel">5 Star Hotel</Option>
-                <Option value="Annexe">Annexe</Option>
-              </Select>
-            </Form.Item>
-            <Form.Item
-              label="Price"
-              name="price"
-              rules={[{ required: true, message: "Please enter Price" }]}
-            >
-              <Input
-                placeholder="Price"
-                onKeyPress={(e) => handleKeyPress(e, "Price")}
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-        <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <Button type="primary" htmlType="submit" loading={loading}>
-            Create Package
-          </Button>
-        </div>
-        <div
-          style={{ textAlign: "left", marginTop: "5px", marginLeft: "308px" }}
+      <PSidebar />
+      <div className="package-form1">
+        <h2 className="c-tittle">Create Package</h2>
+        <Form
+          form={form}
+          onFinish={handleSubmit}
+          layout="vertical"
+          initialValues={{
+            pID: "",
+            province: "",
+            district: "",
+            packageName: "",
+            vehicle: "",
+            meals: [],
+            accommodation: "",
+            noOfPerson: "",
+            places: "",
+            activities: "",
+            price: "",
+          }}
         >
-        </div>
-      </Form>
-    </div>
+          <Row gutter={[26, 26]}>
+            <Col span={8}>
+              <Form.Item
+                label="Package ID"
+                name="pID"
+                rules={[
+                  { required: true, message: "Please enter Package ID" },
+                ]}
+              >
+                <Input placeholder="Package ID" />
+              </Form.Item>
+              <Form.Item
+                label="Select Province"
+                name="province"
+                rules={[{ required: true, message: "Please select Province" }]}
+              >
+                <Select
+                  placeholder="Select Province"
+                  onChange={handleProvinceChange}
+                >
+                  {provinces.map((province) => (
+                    <Option key={province} value={province}>
+                      {province}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+
+              <Form.Item
+                label="Select District"
+                name="district"
+                rules={[
+                  { required: true, message: "Please select District" },
+                ]}
+              >
+                <Select placeholder="Select District">
+                  {districtsForProvince.map((district) => (
+                    <Option key={district} value={district}>
+                      {district}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+              <Form.Item
+                label="Package Name"
+                name="packageName"
+                rules={[
+                  { required: true, message: "Please add package name" },
+                ]}
+              >
+                <Select placeholder="Package Name">
+                  <Option value="2 Days">2 Days Package</Option>
+                  <Option value="4 Days">4 Days Package</Option>
+                  <Option value="6 Days">6 Days Package</Option>
+                  <Option value="8 Days">8 Days Package</Option>
+                  <Option value="10 Days">10 Days Package</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                label="Select Vehicle"
+                name="vehicle"
+                rules={[
+                  { required: true, message: "Please select Vehicle" },
+                ]}
+              >
+                <Select
+                  placeholder="Select Vehicle"
+                  onChange={handleVehicleChange}
+                >
+                  {vehicles.map((vehicle) => (
+                    <Option key={vehicle.type} value={vehicle.type}>
+                      {vehicle.type}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+              <Form.Item
+                label="Number of Persons"
+                name="noOfPerson"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter Number of Persons",
+                  },
+                ]}
+              >
+                <Input type="number" min={1}
+                readOnly />
+              </Form.Item>
+              <Form.Item
+                label="Places"
+                name="places"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter Places",
+                  },
+                  {
+                    pattern: /^[a-zA-Z\s]*$/,
+                    message: "Only letters and spaces are allowed",
+                  },
+                ]}
+              >
+                <Input placeholder="Places" onKeyDown={handleKeyDown}/>
+              </Form.Item>
+              <Form.Item
+                label="Meals"
+                name="meals"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please select Meals",
+                    type: "array",
+                  },
+                ]}
+              >
+                <Checkbox.Group options={mealOptions} />
+              </Form.Item>
+            </Col>
+            <Col span={8}>
+              <Form.Item
+                label="Activities"
+                name="activities"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter Activities",
+                  },
+                  {
+                    pattern: /^[a-zA-Z\s]*$/,
+                    message: "Only letters and spaces are allowed",
+                  },
+                ]}
+              >
+                <Input placeholder="Activities" onKeyDown={handleKeyDown}/>
+              </Form.Item>
+              <Form.Item
+                label="Select Accommodation"
+                name="accommodation"
+                rules={[
+                  { required: true, message: "Please select Accommodation" },
+                ]}
+              >
+                <Select placeholder="Select Accommodation">
+                  <Option value="3 Star Hotel">3 Star Hotel</Option>
+                  <Option value="5 Star Hotel">5 Star Hotel</Option>
+                  <Option value="Annexe">Annexe</Option>
+                </Select>
+              </Form.Item>
+              <Form.Item
+                label="Price"
+                name="price"
+                rules={[
+                  { required: true, message: "Please enter Price" },
+                ]}
+              >
+                <Input placeholder="Price"/>
+              </Form.Item>
+            </Col>
+          </Row>
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+            <Button type="primary" htmlType="submit" loading={loading}>
+              Create Package
+            </Button>
+          </div>
+          <div
+            style={{
+              textAlign: "left",
+              marginTop: "5px",
+              marginLeft: "308px",
+            }}
+          ></div>
+        </Form>
+      </div>
     </div>
   );
 };

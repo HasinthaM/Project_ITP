@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../../styles/Package/P_userdashboard.css';
+import PUSidebar from '../../../components/Package/PUSidebar';
 
 const P_userdashboard = () => {
     const [users, setUsers] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -42,85 +42,41 @@ const P_userdashboard = () => {
         }
     };
 
-    const handleView = (packageUItem) => {
-        navigate(`/udetails/${packageUItem._id}`); 
+    // Function to handle buy button click
+    const handleBuyButtonClick = () => {
+        navigate('/'); // Navigate to 'payment' path
     };
-    const handleSearchChange = (e) => {
-        const value = e.target.value.toLowerCase();
-        setSearchQuery(value);
-    };
-    
-    const filteredUsers = users.filter((user) =>
-    Object.values(user).some((value) => {
-        if (typeof value === "number") {
-            return String(value).toLowerCase().includes(searchQuery.toLowerCase());
-        } else if (typeof value === "string") {
-            return value.toLowerCase().includes(searchQuery.toLowerCase());
-        }
-        return false;
-    })
-);
-
-    
 
     return (
-        <div>
-            <div className='search-bar2'>
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                />
+        <div className="container">
+            <PUSidebar />
+            <h2 className='cus-topic'>Customize Packages</h2>
+            <div className="flex-container8">
+                {users.map((packageUItem) => (
+                    <div className="flex-item8" key={packageUItem._id}>
+                        <div>Province: {packageUItem.province}</div>
+                        <div>District: {packageUItem.district}</div>
+                        <div>Duration: {`${packageUItem.duration.start} - ${packageUItem.duration.end}`}</div>
+                        <div>No. of Persons: {packageUItem.noOfPerson}</div>
+                        <div>Vehicle: {packageUItem.vehicle}</div>
+                        <div>Places: {packageUItem.places}</div>
+                        <div>Meals: {packageUItem.meals}</div>
+                        <div>Activities: {packageUItem.activities}</div>
+                        <div>Accommodation: {packageUItem.accommodation}</div>
+                        <div>Price: {packageUItem.price}</div>
+                        <div className="action-buttons2">
+                            
+                            <button className="edit2" onClick={() => handleEdit(packageUItem)}>
+                                <i className="fas fa-edit"></i>&nbsp; 
+                            </button>
+                            <button className="delete2" onClick={() => handleDelete(packageUItem)}>
+                                <i className="fas fa-trash-alt"></i>&nbsp; 
+                            </button>
+                        </div>
+                        <button className="buy-button2" onClick={handleBuyButtonClick}>Buy</button>
+                    </div>
+                ))}
             </div>
-            <div className='cus-topic'>
-                <h2>Customize Packages</h2>
-            </div>
-            <div className="table-container2">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Province</th>
-                            <th>Duration</th>
-                            <th>NPerson</th>
-                            <th>Vehicle</th>
-                            <th>Places</th>
-                            <th>Meals</th>
-                            <th>Activities</th>
-                            <th>Accommodation</th>
-                            <th>Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {filteredUsers.map((packageUItem) => (
-                            <tr key={packageUItem._id}>
-                                <td>{packageUItem.province}</td>
-                                <td>{packageUItem.duration}</td>
-                                <td>{packageUItem.noOfperson}</td>
-                                <td>{packageUItem.vehicle}</td>
-                                <td>{packageUItem.places}</td>
-                                <td>{packageUItem.meals}</td>
-                                <td>{packageUItem.activities}</td>
-                                <td>{packageUItem.accommodation}</td>
-                                <td>{packageUItem.price}</td>
-                                <td className="action-buttons">
-                                    <button className="view" onClick={() => handleView(packageUItem)}>
-                                        <i className="fas fa-eye"></i>&nbsp; Read
-                                    </button>
-                                    <button className="edit" onClick={() => handleEdit(packageUItem)}>
-                                        <i className="fas fa-edit"></i>&nbsp; Update
-                                    </button>
-                                    <button className="delete" onClick={() => handleDelete(packageUItem)}>
-                                        <i className="fas fa-trash-alt"></i>&nbsp; Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-            <button className='create-button3' onClick={() => navigate('/ucus')}>Customize Package</button>
         </div>
     );
 }

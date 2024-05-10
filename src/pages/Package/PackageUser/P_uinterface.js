@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Assuming you're using React Router v6
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import axios from 'axios';
 import '../../../styles/Package/P_uinterface.css';
+import PUSidebar  from '../../../components/Package/PUSidebar';
 
 const P_uinterface = () => {
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // Initialize navigate
     const [packages, setPackages] = useState([]);
 
     useEffect(() => {
@@ -22,8 +23,14 @@ const P_uinterface = () => {
         retrievePackages();
     }, []);
 
+    // Function to handle buy button click
+    const handleBuyButtonClick = () => {
+        navigate('/'); // Navigate to 'payment' path
+    };
+
     return (
         <div>
+            <PUSidebar />
             <h6 className='topic6'>Tour Packages</h6>
             <div className="flex-container6">
                 {packages.map(packageItem => (
@@ -36,12 +43,10 @@ const P_uinterface = () => {
                         <div>Meals: {packageItem.meals}</div>
                         <div>Activities: {packageItem.activities}</div>
                         <div>Accommodation: {packageItem.accommodation}</div>
-                        <div>Price: {packageItem.price}</div>    
+                        <div>Price: {packageItem.price}</div>
+                        <button className="buy-button" onClick={handleBuyButtonClick}>Buy</button>
                     </div>
                 ))}
-            </div>
-            <div className="button-customize6">
-                <button className='p-customize6' onClick={() => navigate('/ucus')} style={{ backgroundColor: '#000000', fontSize: '18px', color:'white' }}> Customize Packages</button>
             </div>
         </div>
     );

@@ -4,7 +4,7 @@
   left: 220px; /* Width of your sidebar */
   width: calc(100% - 350px); /* Adjust according to your sidebar width */
   margin-right: 100px; /* Add a margin to separate from the sidebar */
-  background-color: lavender;
+  background-color: white;
   }
   
   .r-title {
@@ -27,11 +27,11 @@
   }
   
   th {
-    background-color: lavender;
+    background-color: white;
     font-weight: bold;
   }
   
-  .create-button2 {
+  .pdf-button2 {
     position: absolute;
     bottom: 558px;
     background-color: #000000;
@@ -39,6 +39,7 @@
     cursor: pointer;
     border: none;
     border-radius: 10px;
+    left: 1200px;
   }
   
   

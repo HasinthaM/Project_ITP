@@ -6,20 +6,30 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    duration: {
-        type: String, 
-        required: true
-    },
-    noOfperson: {
-        type: Number,
-        required: true
-    },
-    vehicle: {
+    district: {
         type: String,
         required: true
     },
     places: {
         type: String,
+        required: true
+    },
+    duration: {
+        start: {
+            type:String,
+            required: true
+        },
+        end: {
+            type: String,
+            required: true
+        }
+    },
+    vehicle: {
+        type: String,
+        required: true
+    },
+    noOfPerson: {
+        type: Number,
         required: true
     },
     meals: {
