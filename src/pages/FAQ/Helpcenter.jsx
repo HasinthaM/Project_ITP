@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Accordion from './Accordion';
 import ticketImage from '../../images/Ticket/ticket.jpg';
+import { useNavigate } from 'react-router-dom'; // import the useNavigate hook
 
 const Data = [
   {
@@ -69,6 +70,7 @@ const Data = [
 
 const HelpCenter = () => {
   const [text, setText] = useState(false);
+  const navigate = useNavigate();
 
   const display = () => {
     setText(!text);
@@ -90,9 +92,13 @@ const HelpCenter = () => {
               );
             })}
             <h3>Still need help?</h3>
-           <h3>Please send  us to email regarding your issue on our Contact Us page</h3>
+           <h3>Please send  us to email regarding your issue </h3>
           </div>
         </div>
+       
+        <div style={{ textAlign: 'center', margin: '20px 0' }}>
+            <button style={{ color: 'red', fontSize: '20px' }} onClick={() => navigate('/email')}>Click Here</button> {/* Add this button to navigate to the Contact page */}
+          </div>
        
         <div style={{ textAlign: 'center', margin: '20px 0' }}>
 
