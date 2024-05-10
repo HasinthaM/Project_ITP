@@ -1,5 +1,5 @@
 const express = require('express');
-const Ticket = require('../model/Ticket/ticketModel');
+const Ticket = require('../../model/Ticket/ticketModel');
 
 //Create an express router instance
 const router = express.Router();

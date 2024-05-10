@@ -6,7 +6,7 @@ import { AiOutlineEdit } from 'react-icons/ai';
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import TicketPdf from '../../components/Ticket/TicketPdf';
-import ticketImage from '../../images/ticket.jpg';
+import ticketImage from '../../images/Ticket/ticket.jpg';
 
 const Home = () => {
   const [tickets, setTickets] = useState([]);

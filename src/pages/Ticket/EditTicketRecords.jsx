@@ -4,7 +4,7 @@ import Spinner from '../../components/Ticket/Spinner';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import seaImage from '../../images/sea.jpg';
+import seaImage from '../../images/Ticket/sea.jpg';
 
 //define function
 const EditTicketRecords = () => {

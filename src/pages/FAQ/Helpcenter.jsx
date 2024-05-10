@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Accordion from './Accordion';
-import ticketImage from '../../images/ticket.jpg';
+import ticketImage from '../../images/Ticket/ticket.jpg';
 
 const Data = [
   {
@@ -78,8 +78,9 @@ const HelpCenter = () => {
     <div className='p-4' style={{ backgroundImage: `url(${ticketImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
     <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', padding: '2rem', borderRadius: '1rem' }}>
       <>
-        <h1>Welcome to the Help Center</h1>
+      <h1 style={{ color: 'blue' }}>Welcome to the Help Center</h1>
         <h2>We Are Await For You.....</h2>
+        <h2>You can Find Your Common Solutions From Here..</h2>
 
         <div className="container1">
           <div className="accordionBlock">
@@ -89,9 +90,10 @@ const HelpCenter = () => {
               );
             })}
             <h3>Still need help?</h3>
-           <h3>Please send  Us to Email Regarding your Issue</h3>
+           <h3>Please send  us to email regarding your issue on our Contact Us page</h3>
           </div>
         </div>
+       
         <div style={{ textAlign: 'center', margin: '20px 0' }}>
 
         </div>

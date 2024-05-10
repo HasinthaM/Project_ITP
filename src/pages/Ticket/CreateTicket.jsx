@@ -4,7 +4,7 @@ import Spinner from '../../components/Ticket/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import seaImage from '../../images/sea.jpg';
+import seaImage from '../../images/Ticket/sea.jpg';
 
 const CreateTicketRecords = () => {
   const [t_id, setT_id] = useState('');

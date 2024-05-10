@@ -4,9 +4,9 @@ const cors = require('cors');
 const port = 3001;
 const host = 'localhost';  // can use http://localhost also
 const mongoose = require('mongoose');
-const router = require('./routers/router');
 
-const ticketRouter = require('./routers/ticketRoute');
+
+const ticketRouter = require('./routers/Ticket/ticketRoute');
 
 app.use(cors());
 app.use(express.json());
@@ -31,5 +31,5 @@ const server = app.listen(port, host, () =>{
      console.log(`Node server is listening to ${server.address().port}`)
 }); 
 
-app.use('/api', router);
+
 app.use('/api/ticket', ticketRouter);

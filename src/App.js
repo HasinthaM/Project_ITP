@@ -11,7 +11,7 @@ function App() {
        
         <button className='ticket-button' onClick={() => navigate('/ticket')}>Ticket</button>
         <button className='faq-button' onClick={() => navigate('/faq')}>FAQ</button>
-        <button className='email-button' onClick={() => navigate('/email')}>Email</button>
+        <button className='email-button' onClick={() => navigate('/email')}>Contact Us</button>
       </header>
     </div>
   );
