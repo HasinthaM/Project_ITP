@@ -5,8 +5,10 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
+//define the function
 const DeleteTicketRecords = () => {
 
+  // Define state variable using useState hook to manage loading state
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { _id } = useParams();
@@ -19,7 +21,7 @@ const DeleteTicketRecords = () => {
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Ticket Deleted successfully', { variant: 'success' });
-        navigate('/ticket');
+        navigate('/ticket');// Navigate to ticket page after successful deletion
       })
       .catch((error) => {
         setLoading(false);
@@ -39,7 +41,7 @@ const DeleteTicketRecords = () => {
 
         <button
           className='p-4 bg-red-600 text-white m-8 w-full'
-          onClick={handleDeleteTicket}
+          onClick={handleDeleteTicket} // Call handleDeleteTicket function when button is clicked
         >
           Yes, Delete it
         </button>

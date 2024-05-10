@@ -19,6 +19,23 @@
   color: white;
 }
 
+.App {
+  text-align: center;
+}
+
+
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
 .users-button{
   font-size: 18px;
   padding: 20px 40px;
@@ -26,4 +43,84 @@
   border-radius: 20px;
   background-color: white;
   cursor: pointer;
+}
+*{
+  padding:0;
+  margin:0;
+  box-sizing:border-box;
+
+}
+h1{
+  text-align:center;
+  font-size: 3rem;
+  margin: 1em 0;
+  font-style: inherit;
+
+}
+h2{
+  text-align:center;
+  font-size: 2rem;
+  margin: 1em 0;
+
+
+}
+h3{
+  text-align:center;
+  font-size: 2rem;
+  margin: 1em 0;
+
+
+}
+
+.container{
+ /* background-color:aqua;*/
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  height: 100vh;
+}
+.accordionBlock{
+  width:90%;
+  margin-left: 10ch;
+ /* background-color: beige;*/
+
+}
+.question{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:.5em 1em;
+  width:80%;
+  background-color:rgb(57, 58, 57);
+  margin:0 auto;
+  margin-bottom:.2em;
+  border-radius: .5em;
+}
+.question h2{
+  color:#f2eded;
+  font-size: 1.8rem;
+}
+.question p{
+  color:#fff;
+  font-size: 3.5rem;
+}
+.answers p{
+  font-size:1.6rem;
+  background-color: #fff;
+  width:70%;
+  margin:0 auto;
+  padding:.2em;
+  text-align: center;
+}
+.custom-button{
+  background-color: #767779; /* Blue background */
+  color: #fff; /* White text color */
+  padding: 15px 10px; /* Padding */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 20px; /* Font size */
+  cursor: pointer; 
+}
+.custom-button:hover {
+  background-color: #222422; /* Darker blue on hover */
 }

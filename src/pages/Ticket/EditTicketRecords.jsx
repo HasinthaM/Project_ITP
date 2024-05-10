@@ -4,9 +4,12 @@ import Spinner from '../../components/Ticket/Spinner';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import seaImage from '../../images/sea.jpg';
 
-
+//define function
 const EditTicketRecords = () => {
+
+  // Define state variables using useState hook to manage form inputs and loading state
   const [t_id, sett_id] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -19,6 +22,8 @@ const EditTicketRecords = () => {
 
   useEffect(() => {
     setLoading(true);
+
+    // Fetch ticket details from server when component mounts
     axios.get(`http://localhost:3001/api/ticket/${_id}`)
       .then((response) => {
         sett_id(response.data.t_id);
@@ -39,7 +44,7 @@ const EditTicketRecords = () => {
 
     // Name validation
     if (!/^[A-Za-z\s]+$/.test(name)) {
-      enqueueSnackbar('Please enter words only for Name', { variant: 'error' });
+      enqueueSnackbar('Please enter letters only for Name', { variant: 'error' });
       return;
     }
     
@@ -52,15 +57,17 @@ if (!/\S+@\S+\.\S+/.test(email)) {
   
     // IssueType validation
     if (!/^[A-Za-z\s]+$/.test(issueType)) {
-        enqueueSnackbar('Please enter words only for Issue Type', { variant: 'error' });
+        enqueueSnackbar('Please enter letters only for Issue Type', { variant: 'error' });
         return;
       }
 
       // Issue validation
       if (!/^[A-Za-z\s]+$/.test(issue)) {
-        enqueueSnackbar('Please enter words only for Issue', { variant: 'error' });
+        enqueueSnackbar('Please enter letters only for Issue', { variant: 'error' });
         return;
       }
+
+      // Create data object with form input values
     const data = {
       t_id,
       name,
@@ -87,7 +94,7 @@ if (!/\S+@\S+\.\S+/.test(email)) {
 
 
   return (
-    <div className='p-4'>
+    <div className='p-4' style={{ backgroundImage: `url(${seaImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
       <BackButton />
       <h1 className='text-3xl my-4 text-center'>Edit Ticket</h1>
       {loading ? <Spinner /> : ''}
@@ -139,7 +146,7 @@ if (!/\S+@\S+\.\S+/.test(email)) {
           />
         </div>
 
-        <button className='p-2 bg-sky-300 m-8' onClick={handleEditTicket}>
+        <button className='p-2 bg-black text-white m-8' onClick={handleEditTicket}>
           Save
         </button>
       </div>

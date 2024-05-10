@@ -8,8 +8,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Welcome</h1>
-        <button className='users-button' onClick={() => navigate('/users')}>Users</button>
+       
         <button className='ticket-button' onClick={() => navigate('/ticket')}>Ticket</button>
+        <button className='faq-button' onClick={() => navigate('/faq')}>FAQ</button>
+        <button className='email-button' onClick={() => navigate('/email')}>Email</button>
       </header>
     </div>
   );

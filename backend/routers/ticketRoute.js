@@ -1,19 +1,21 @@
 const express = require('express');
 const Ticket = require('../model/Ticket/ticketModel');
 
-
+//Create an express router instance
 const router = express.Router();
 
 // Route for saving a new Ticket
 router.post('/', async (request, response) => {
     try {
         
+        //Validate request body for required feilds
         if (!request.body.t_id || !request.body.name || !request.body.email || !request.body.issueType || !request.body.issue) {
             return response.status(400).send({
                 message: 'Send all required fields: t_id ,name, email, issueType, issue',
             });
         }
 
+        //Create a new ticket object with data from the request body
         const newTicket = {
 
             t_id: request.body.t_id,
@@ -29,8 +31,11 @@ router.post('/', async (request, response) => {
         // Create a new Ticket entry in the database
         const ticket = await Ticket.create(newTicket);
 
+        //send a success response with the created ticket
         return response.status(201).send(ticket);
     } catch (error) {
+
+        //handle errors and send an error response
         console.log(error.message);
         return response.status(500).send({ message: error.message });
     }
@@ -41,13 +46,17 @@ router.post('/', async (request, response) => {
 // Route for Get All Ticket from database
 router.get('/', async (request, response) => {
     try {
+        //find all tickets in the database and sort them by createAt timestamp in descending order
         const ticket = await Ticket.find({}).sort({ createdAt: -1 });
 
+        //send a success response with the count of tickets and the ticket data
         return response.status(200).json({
             count: ticket.length,
             data: ticket,
         });
     } catch (error) {
+
+        //handle errors and send an error response
         console.log(error.message);
         response.status(500).send({ message: error.message });
     }
@@ -55,8 +64,11 @@ router.get('/', async (request, response) => {
 // router for get one ticket
 router.get('/:_id', async (request, response) => {
     try {
+
+        //Extract the ticket ID from the request parameters
         const { _id } = request.params;
 
+        //Find the ticket by its ID in the database
         const ticket = await Ticket.findById({ _id });
         return response.status(200).json(t)
     }
@@ -70,14 +82,17 @@ router.get('/:_id', async (request, response) => {
 
 router.put('/:_id', async (request, response) => {
     try { 
+        //Validate request body for required fields
         if (!request.body.name || !request.body.email || !request.body.issueType || !request.body.issue) {
             return response.status(400).send({
                 message: 'Send all required fields: name, email, issueType, issue',
             });
         }
 
+        //Extract the ticket id from the request parameters
         const { _id } = request.params;
 
+        //create a new ticket object with updated data from the request body
         const newTicket = {
             name: request.body.name,
             email: request.body.email,
@@ -87,7 +102,7 @@ router.put('/:_id', async (request, response) => {
         };
 
         
-
+       //find the ticket by its ID and update it with the new data
         const result = await Ticket.findByIdAndUpdate(_id, newTicket, { new: true });
 
         if (!result) {
@@ -102,6 +117,7 @@ router.put('/:_id', async (request, response) => {
 });
 
 
+//route for deleting a ticket by its id
 router.delete('/:_id', async (request, response) => {
     try {
 
