@@ -114,7 +114,14 @@ if (!/\S+@\S+\.\S+/.test(email)) {
           <input
             type='text'
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              const input = e.target.value;
+              if (!/^[A-Za-z\s]+$/.test(input)) {
+                enqueueSnackbar('Please enter letters only for Name', { variant: 'error' });
+              } else {
+                setName(input);
+              }
+            }}
             className='border-2 border-gray-500 px-4 py-2 w-full'
           />
         </div>
