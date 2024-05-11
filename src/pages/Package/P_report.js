@@ -26,7 +26,28 @@ const P_report = () => {
     }, []);
 
     const generatePDF = useReactToPrint({
-        content: () => componentPDF.current,
+        content: () => {
+            const clonedContent = componentPDF.current.cloneNode(true);
+
+            // Create a new div for the title
+            const titleDiv = document.createElement("div");
+            titleDiv.style.textAlign = "center";
+            titleDiv.style.marginBottom = "20px";
+            titleDiv.style.fontSize = "40px";
+            titleDiv.innerHTML = "<h1>JourneyX</h1>";
+            clonedContent.insertBefore(titleDiv, clonedContent.firstChild); // Insert the title at the beginning
+
+            // Create a new div for the sign text
+            const signDiv = document.createElement("div");
+            signDiv.style.position = "absolute";
+            signDiv.style.bottom = "40px";
+            signDiv.style.left = "750px";
+            signDiv.innerText = "Signature: _______________";
+            signDiv.style.fontSize = "30px";
+            clonedContent.appendChild(signDiv); // Append the sign text at the end
+
+            return clonedContent;
+        },
         documentTitle: "Packagedata",
         onAfterPrint: () => alert("Data saved in PDF"),
         pageStyle: `
@@ -59,7 +80,6 @@ const P_report = () => {
             <Psidebar />
             <div className='create-p2'>
                 <div ref={componentPDF}>
-                   
                     <h2 className='r-title'> Packages Report</h2>
                     <div className="table-container4">
                         <table>
