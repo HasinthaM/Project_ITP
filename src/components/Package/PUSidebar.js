@@ -20,7 +20,7 @@ const PUSidebar = () => {
         style={{
           height: '100vh',        
           left: 0,
-          background: 'lavender'
+          background: '#D9D9D9'
         }}
       >
         <div className="demo-logo-vertical" />
@@ -40,7 +40,7 @@ const PUSidebar = () => {
         <Menu
           mode="inline"
           defaultSelectedKeys={[]}
-          style={{ marginTop: 60, background:'lavender', fontWeight:'bold'}}
+          style={{ marginTop: 60, background:'#D9D9D9', fontWeight:'bold'}}
           inlineIndent={20}
         >
           <Menu.Item key="1" onClick={() => handleMenuClick('/pintfc')} style={{  fontSize:'18px' }}>

@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form, Input, Select, Checkbox, Button, Row, Col, DatePicker } from "antd";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import moment from 'moment';
 import '../../../styles/Package/P_uedit.css';
 import PUSidebar from '../../../components/Package/PUSidebar';
 
 const { Option } = Select;
 
-export default function P_uedit({ id }) {
+export default function P_uedit() {
+    const { id } = useParams();
     const navigate = useNavigate();
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
@@ -420,7 +421,7 @@ export default function P_uedit({ id }) {
         <div>
             <PUSidebar />
             <div className="cus-form2">
-                <h2 className="pc-tittle">Customization</h2>
+                <h2 className="pc-tittle"> Update</h2>
                 <Form
                     form={form}
                     onFinish={onFinish}
@@ -587,7 +588,7 @@ export default function P_uedit({ id }) {
             </Col>
           </Row>
                     <div style={{ textAlign: "center", marginTop: "20px" }}>
-                        <Button type="primary" htmlType="submit" loading={loading}>
+                        <Button type="primary" htmlType="submit" loading={loading} style={{backgroundColor:"gray",color:"white"}}>
                             Customize Package
                         </Button>
                     </div>

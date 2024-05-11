@@ -482,7 +482,8 @@ const P_customize = () => {
                   },
                 ]}
               >
-                <Input placeholder="Places" onKeyDown={handleKeyDown} />
+                <Input placeholder="Places" onKeyDown={handleKeyDown} 
+                readOnly/>
               </Form.Item>
               <Form.Item
                 label="Duration"
@@ -566,7 +567,8 @@ const P_customize = () => {
                   },
                 ]}
               >
-                <Input placeholder="Activities" onKeyDown={handleKeyDown} />
+                <Input placeholder="Activities" onKeyDown={handleKeyDown} 
+                readOnly/>
               </Form.Item>
               <Form.Item
                 label="Select Accommodation"
@@ -595,7 +597,7 @@ const P_customize = () => {
             </Col>
           </Row>
           <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <Button type="primary" htmlType="submit" loading={loading}>
+            <Button type="primary" htmlType="submit" loading={loading} style={{backgroundColor:"gray",color:"white"}}>
               Customize Package
             </Button>
           </div>
