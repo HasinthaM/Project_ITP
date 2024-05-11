@@ -33,6 +33,17 @@ const Contact = () => {
     // Handle the action when the contact button is clicked
   };
 
+  const handleNameChange = (e) => {
+    const input = e.target.value;
+    // Replace any non-alphabetic characters with an empty string
+    const formattedInput = input.replace(/[^A-Za-z]/ig, '');
+    // Update the state with the formatted input
+    e.target.value = formattedInput;
+  };
+
+  
+  
+
   return (
     <StyledContactContainer>
       <StyledContactForm>
@@ -40,9 +51,9 @@ const Contact = () => {
           <label className="title">Send Your Email For Us...</label>
 
           <label>Name</label>
-          <input type="text" name="user_name" />
+          <input type="text" name="user_name" onChange={handleNameChange} />
           <label>Email</label>
-          <input type="email" name="user_email" />
+          <input type="email" name="user_email"  />
           <label>Message</label>
           <textarea name="message" />
           <label className="or">or</label>
