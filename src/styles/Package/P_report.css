@@ -15,7 +15,16 @@
     color: black;
     font-size: 45px; /* Adjust the font size as needed */
   }
-  
+  .rep-title {
+    position: absolute;
+    top: 80px; /* Adjust the top position as needed */
+    margin-left:80%;
+    transform: translateX(-50%);
+    color: black;
+    font-size: 50px; /* Adjust the font size as needed */
+  }
+
+
   table {
     width: 100%;
     border-collapse: collapse;
@@ -40,6 +49,16 @@
     border: none;
     border-radius: 10px;
     left: 1200px;
+  }
+
+  .pdf-only {
+    position: absolute;
+    bottom: 100px;
+    left: 80%;
+    transform: translateX(-50%);
+    color: black;
+    font-size: 20px;
+    display: none;
   }
   
   

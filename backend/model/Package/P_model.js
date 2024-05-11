@@ -9,6 +9,10 @@ const packageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    district: {
+        type: String,
+        required: true
+    },
     packageName: {
         type: String,
         required: true

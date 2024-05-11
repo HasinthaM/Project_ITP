@@ -59,6 +59,7 @@ const P_report = () => {
             <Psidebar />
             <div className='create-p2'>
                 <div ref={componentPDF}>
+                   
                     <h2 className='r-title'> Packages Report</h2>
                     <div className="table-container4">
                         <table>
@@ -66,6 +67,7 @@ const P_report = () => {
                                 <tr>
                                     <th>PID</th>
                                     <th>Province</th>
+                                    <th>District</th>
                                     <th>PName</th>
                                     <th>Vehicle</th>
                                     <th>NPersons</th>
@@ -81,6 +83,7 @@ const P_report = () => {
                                     <tr key={packageItem._id}>
                                         <td>{packageItem.pID}</td>
                                         <td>{packageItem.province}</td>
+                                        <td>{packageItem.district}</td>
                                         <td>{packageItem.packageName}</td>
                                         <td>{packageItem.vehicle}</td>
                                         <td>{packageItem.noOfPerson}</td>
