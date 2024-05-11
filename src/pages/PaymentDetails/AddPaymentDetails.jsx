@@ -3,7 +3,7 @@ import Spinner from '../../components/Salary/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import Pets from "../../Salaryimages/3.jpg";
+import Pets from "../../Salaryimages/2.png";
 
 const AddPaymentDetails = () => {
   const [cardholdername, setCardHolderName] = useState('');
@@ -14,8 +14,16 @@ const AddPaymentDetails = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    let month = currentDate.getMonth() + 1;
+    month = month < 10 ? `0${month}` : month;
+    return `${year}-${month}`;
+  };
+
   const handleSaveAddPaymentDetails = (e) => {
-    e.preventDefault(); // Prevents the default form submission behavior
+    e.preventDefault();
 
     const data = {
       cardholdername,
@@ -28,8 +36,8 @@ const AddPaymentDetails = () => {
       .post('http://localhost:3001/api/payment', data)
       .then(() => {
         setLoading(false);
-        enqueueSnackbar('OrderForm Created successfully', { variant: 'success' });
-        navigate('/home'); // Redirect to '/salary' page
+        enqueueSnackbar('Payment successful', { variant: 'success' });
+        navigate('/invoice');
       })
       .catch((error) => {
         setLoading(false);
@@ -37,11 +45,51 @@ const AddPaymentDetails = () => {
       });
   };
 
+  const handleNameChange = (e) => {
+    const { value } = e.target;
+    const nameRegex = /^[a-zA-Z\s]*$/;
+    if (nameRegex.test(value) || value === '') {
+      setCardHolderName(value);
+    }
+  };
+
+  const handleCardNumberChange = (e) => {
+    let value = e.target.value;
+    value = value.replace(/\D/g, '');
+    value = value.replace(/(\d{4})/g, '$1 ');
+    value = value.trim();
+    value = value.slice(0, 19);
+    setCardNumber(value);
+  };
+
+  const handleCVVChange = (e) => {
+    const { value } = e.target;
+    const cvvRegex = /^\d{0,3}$/;
+    if (cvvRegex.test(value)) {
+      setCVV(value);
+    }
+  };
+
+  const handleExpiryDateChange = (e) => {
+    const selectedDate = new Date(e.target.value);
+    const currentDate = new Date();
+
+    if (selectedDate > currentDate && !isNaN(selectedDate)) {
+      const year = selectedDate.getFullYear();
+      let month = selectedDate.getMonth() + 1;
+      month = month < 10 ? `0${month}` : month;
+      const formattedExpiryDate = `${year}-${month}`;
+      setExpiryDate(formattedExpiryDate);
+    } else {
+      setExpiryDate('');
+    }
+  };
+
   return (
     <div className="min-h-screen mt-36 mb-10">
       <div className="flex justify-center items-center gap-2">
         <div className="hidden lg:block">
-          <img className="w-[600px] h-[500px] ml-10 mt-6" src={Pets} alt="" />
+          <img className="w-[400px] h-[450px] ml-60 mt-6" src={Pets} alt="" />
         </div>
 
         <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5">
@@ -56,7 +104,7 @@ const AddPaymentDetails = () => {
                   type="text"
                   placeholder="Name"
                   value={cardholdername}
-                  onChange={(e) => setCardHolderName(e.target.value)}
+                  onChange={handleNameChange}
                 />
               </div>
               <div>
@@ -64,35 +112,35 @@ const AddPaymentDetails = () => {
                 <input
                   className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
                   type="text"
-                  placeholder="cardnumber"
+                  placeholder="Card number"
                   value={cardnumber}
-                  onChange={(e) => setCardNumber(e.target.value)}
+                  onChange={handleCardNumberChange}
                 />
               </div>
               <div>
                 <h3 className="font-semibold text-slate-400 ml-1">Expiry date</h3>
                 <input
                   className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
-                  type="text"
+                  type="month"
                   placeholder="expirydate"
                   value={expirydate}
-                  onChange={(e) => setExpiryDate(e.target.value)}
+                  onChange={handleExpiryDateChange}
+                  min={getCurrentDate()}
                 />
               </div>
-             
               <div>
                 <h3 className="font-semibold text-slate-400 ml-1">CVV</h3>
                 <input
                   className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
                   type="text"
-                  placeholder="cvv"
+                  placeholder="CVV"
                   value={cvv}
-                  onChange={(e) => setCVV(e.target.value)}
+                  onChange={handleCVVChange}
                 />
               </div>
               <button
                 className="bg-red-700 text-white p-3 rounded-lg w-[460px] h-11 hover:opacity-90"
-                type="submit" // Ensure button acts as a submit button
+                type="submit"
               >
                 Submit
               </button>

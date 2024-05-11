@@ -8,6 +8,11 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         unique: true,
     },
+
+    packagename: {
+        type: String,
+        required: true
+    },
     customername: {
         type: String,
         required: true
@@ -21,6 +26,22 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
     billingaddress: {
+        type: String,
+        required: true
+    },
+    cardholdername: {
+        type: String,
+        required: true
+    },
+    cardnumber: {
+        type: String,
+        required: true
+    },
+    expirydate: {
+        type: String,
+        required: true
+    },
+    cvv: {
         type: String,
         required: true
     },

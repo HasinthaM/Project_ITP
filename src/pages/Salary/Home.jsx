@@ -9,7 +9,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import SalaryPdf from '../../components/Salary/SalaryPdf';
 
 
-import backgroundImage from '../../Salaryimages/7.jpg'
+import backgroundImage from '../../Salaryimages/17.jpg'
 
 
 const Home = () => {
@@ -69,7 +69,7 @@ const Home = () => {
       <div className='flex justify-center items-center gap-x-4'>
       </div>
       <div className='flex-grow text-center'>
-        <h1 className='text-3xl my-8 text-center'>Salary List</h1>
+        <h1 className='text-3xl my-8 text-center font-bold text-black'>Salary List</h1>
         <Link to='/salary/create'>
           <MdOutlineAddBox className='text-sky-800 text-4xl' />
         </Link>

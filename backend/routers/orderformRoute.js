@@ -1,48 +1,67 @@
 const express = require('express');
-// In orderformRoute.js
 const Order = require('../model/OrderForm/orderformModel');
 
-
-// Create a new router object to handle routes
 const router = express.Router();
 
-// POST route for creating a new order
-router.post("/", async (request, response, next) => {
+// Route for creating a new order
+router.post("/", async (req, res) => {
     try {
-      // Check if all required fields are present in the request body
-      if (
-        !request.body.customername ||
-        !request.body.phone ||
-        !request.body.email ||
-        !request.body. billingaddress 
+        const { packagename, customername, phone, email, billingaddress, cardholdername, cardnumber, expirydate, cvv   } = req.body;
         
-        
+        if (!packagename || !customername || !phone || !email || !billingaddress || !cardholdername || !cardnumber || !expirydate || !cvv) {
+            return res.status(400).json({ message: "Please provide all required fields: packagename, customername, phone, email, billingaddress" });
+        }
 
-      ) {
-        return response.status(400).send({
-          message: "send all required fields: customername, phone, email, billingaddress",
-        });
-      }
+        const newOrder = {
+            packagename,
+            customername,
+            phone,
+            email,
+            billingaddress,
+            cardholdername,
+            cardnumber,
+            expirydate,
+            cvv,
+            
+        };
 
-      const newOrder = {
-        customername: request.body.customername,
-        phone: request.body.phone,
-        email: request.body.email,
-        billingaddress: request.body.billingaddress,
-        
-        
-      };
+        const order = await Order.create(newOrder);
   
-      const order = await Order.create(newOrder);
-  
-      return response.status(201).send(order);
+        return res.status(201).json(order);
     } catch (error) {
-      console.log(error.message);
-      return response.status(500).send({ message: error.message });
+        console.error(error.message);
+        return res.status(500).json({ message: "Internal Server Error" });
     }
-    
-  });
+});
 
+// Route for retrieving all orders
+router.get('/', async (req, res) => {
+    try {
+        const orders = await Order.find({}).sort({ createdAt: -1 });
 
-  // Export the router to be used in other parts of the application
+        return res.status(200).json({
+            count: orders.length,
+            data: orders,
+        });
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+
+// Route for retrieving a single order by ID
+router.get('/:_id', async (req, res) => {
+    try {
+        const { _id } = req.params;
+        const order = await Order.findById(_id);
+        if (!order) {
+            return res.status(404).json({ message: "Order not found" });
+        }
+        return res.status(200).json(order);
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+});
+
 module.exports = router;
