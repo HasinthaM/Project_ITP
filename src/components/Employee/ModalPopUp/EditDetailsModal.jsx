@@ -34,6 +34,7 @@ const EditDetailsModal = ({ empById, setEditModal }) => {
               });
         }
     }
+
     // Formik form setup
     const formik = useFormik({
         initialValues: {
@@ -50,6 +51,7 @@ const EditDetailsModal = ({ empById, setEditModal }) => {
             nic,
             password,
             confirmPassword,
+            
         },
         onSubmit: values => {if (values.password !== values.confirmPassword) {
             toast.error("Passwords do not match!", {
@@ -255,7 +257,7 @@ const EditDetailsModal = ({ empById, setEditModal }) => {
                                         <input
                                             type={showPassword ? "text" : "password"}
                                             name="password"
-                                            defaultValue={password}
+                                            
                                             required
                                             onChange={formik.handleChange}
                                             value={formik.values.password}
@@ -272,7 +274,7 @@ const EditDetailsModal = ({ empById, setEditModal }) => {
                                         <input
                                             type="password"
                                             name="confirmPassword"
-                                            defaultValue={confirmPassword}
+                                            
                                             required
                                             onChange={formik.handleChange}
                                             value={formik.values.confirmPassword}
