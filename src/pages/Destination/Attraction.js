@@ -1,6 +1,6 @@
 import React from 'react'
 import '../../styles/Destination/attraction.css'
-import NavigationBar from '../../components/NavigationBar'
+import NavigationBar3 from '../../components/NavigationBar3'
 import sigiriyaImage from '../../images/Destination/sigiriya.jpg'
 import kandyImage from '../../images/Destination/kandy.jpg'
 import ellaImage from '../../images/Destination/ella.jpg'
@@ -12,7 +12,7 @@ export default function Attraction() {
     <div className="dContainer">
         <div className='dNavBar'>
 
-            <NavigationBar/>
+            <NavigationBar3/>
 
         </div>
         <div className='dContent'>

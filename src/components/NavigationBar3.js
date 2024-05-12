@@ -1,10 +1,10 @@
 import React from 'react'
-import './navbar.css'
+import './navbar2.css'
 import { Link } from 'react-router-dom'
 
 export default function NavigationBar() {
   return (
-    <div className='nav-bar'>
+    <div className='nav-bar2'>
 
         <div className="left-section">
             <h1 className='logo'>journyX</h1>
@@ -25,13 +25,7 @@ export default function NavigationBar() {
             <button className='btn'>Contact</button>
         </div>
 
-        <div className="right-section">
-          <Link to='login'>
-            <button className='btn'>LogIn</button>
-          </Link>
-          <Link to='userRegistration'>
-            <button className='btn'>SignUp</button>
-          </Link>  
+        <div>
             
         </div>
 

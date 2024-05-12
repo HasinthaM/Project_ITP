@@ -17,7 +17,8 @@ const addDestination = (req, res, next) => {
     const destination = new Destination({
         id: req.body.id,
         title: req.body.title,
-        description: req.body.description
+        description: req.body.description,
+        url: req.body.url
     });
     destination.save()
         .then(response => {
@@ -30,8 +31,8 @@ const addDestination = (req, res, next) => {
 
 //update destination
 const updateDestination = (req, res, next) => {
-    const {id, title, description} = req.body;
-    Destination.updateOne({id: id}, {$set: {title: title}}, {$set: {description: description}})
+    const {id, title, description, url} = req.body;
+    Destination.updateOne({id: id}, {$set: {title: title, description: description, url: url}})
         .then(response => {
             res.json({response})
         })
@@ -52,8 +53,21 @@ const deleteDestination = (req, res, next) => {
         });
 }
 
+// controller.js
 
+const getDestinationById = (req, res, next) => {
+    const id = 1; // Assuming the id is always 1
+    Destination.findOne({ id })
+        .then(response => {
+            res.json({ response });
+        })
+        .catch(error => {
+            res.json({ error });
+        });
+};
+
+exports.getDestinationById = getDestinationById;
 exports.getDestination = getDestination;
 exports.addDestination = addDestination;
-exports. updateDestination = updateDestination;
+exports.updateDestination = updateDestination;
 exports.deleteDestination = deleteDestination;

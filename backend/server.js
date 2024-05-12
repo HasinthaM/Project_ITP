@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const port = 3000;
+const port = 3001;
 const host = 'localhost';
 const mongoose = require('mongoose');
-const router = require('./routers/router');
+const router = require('./routers/Destination/router');
+const userRouter = require('./routers/User/router');
 
 app.use(cors());
 app.use(express.json());
@@ -29,3 +30,4 @@ const server = app.listen(port, host, () => {
 });
 
 app.use('/api', router);
+app.use('/api/users', userRouter);

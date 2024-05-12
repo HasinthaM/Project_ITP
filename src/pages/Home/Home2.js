@@ -1,5 +1,5 @@
 import React from 'react'
-import NavigationBar from '../../components/NavigationBar'
+import NavigationBar2 from '../../components/NavigationBar2'
 import Footer from '../../components/Footer'
 import '../../styles/Home/home.css'
 import elephantImage from '../../images/Destination/elephant.png'
@@ -19,7 +19,7 @@ export default function Home() {
     <div className='all'>
         <div className='cover'>
           <div className='navBar'>
-            <NavigationBar />
+            <NavigationBar2 />
           </div>
 
           <div className='content1'>
