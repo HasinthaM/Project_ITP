@@ -1,58 +1,50 @@
 .Bookingu {
-  margin-top: 50px;
-   margin-left: 10%;
-   margin-right: 10%;
+  text-align: center;
+  margin-left: 100px;
 }
 
 .formu {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-   margin-left: 28%;
-   border-radius: 10px;
+   width: 75%;
+   margin-left: 150px;
 }
 
-.formu > div {
+.form-column {
   display: flex;
   flex-direction: column;
-  margin-right: 1%;
-  margin-left: 7%;
-  margin-top: 20px;
-   border-radius: 10px;
-
+  width: 50%; 
+  margin-right: 2rem;
 }
 
-label {
-  margin-bottom: 1rem; /* Adjusted margin for better spacing */
+.form-column label {
+  margin-bottom: 0.5rem;
 }
 
-input,
-select,
-button {
-  padding: 0.5rem; /* Adjusted padding for better spacing */
-  margin-bottom: 1rem;
-  width: 100%; /* Full width for better alignment */
+.form-column input,
+.form-column select {
+  width: 100%; 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
 }
 
-.resbutt {
-  background-color: #303132;
-  color: white;
+
+.form-column button {
+  width: 75%;
+  padding: 10px;
+  background-color: #4d4e50;
+  color: #dad4d4;
   border: none;
+  border-radius: 3px;
   cursor: pointer;
+  margin-left: 55px;
 }
-
-button.R_vehicle {
-  margin-top: 1.5rem;
-  background-color: #333533;
+.Bookingu h2 {
+  text-align: center;
+   margin-left: 500px;
 }
-
-.resbutt:hover,
-.resbutt:focus {
-  background-color: #606061;
-}
-
-button:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
+.form-column button:hover {
+  background-color: #56585a;
 }

@@ -91,72 +91,70 @@ const CarRentalForm = () => {
         onSubmit={handleFormSubmit}
         style={{ display: "flex", justifyContent: "center" }}
       >
-        <div
-          className="formu"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            marginRight: "2rem",
-          }}
-        >
-          <label>
-            Vehicle Type:
-            <select
-              value={vehicleType}
-              onChange={(e) => setVehicleType(e.target.value)}
+        <div className="form-column">
+          <div className="Vtype">
+            <label>
+              Vehicle Type:
+              <select
+                value={vehicleType}
+                onChange={(e) => setVehicleType(e.target.value)}
+              >
+                <option value="">Select Vehicle Type</option>
+                <option value="car">Car</option>
+                <option value="van">Van</option>
+                <option value="cab">Cab</option>
+                <option value="tuktuk">Tuk Tuk</option>
+                <option value="Bike">Bike</option>
+              </select>
+            </label>
+            <br />
+            <label>
+              Vehicle No(press vehicle details to check available vehicles):
+              <input
+                type="text"
+                value={vehicle}
+                onChange={(e) => setVehicle(e.target.value.slice(0, 8))}
+                maxLength={8}
+              />
+            </label>
+            <button
+              className="R_vehicle"
+              onClick={() => navigate("/R_vehicle")}
             >
-              <option value="">Select Vehicle Type</option>
-              <option value="car">car</option>
-              <option value="van">Van</option>
-              <option value="cab">Cab</option>
-              <option value="tuktuk">Tuk Tuk</option>
-              <option value="Bike">Bike</option>
-            </select>
-          </label>
-          <br />
-          <label>
-            Vehicle No(press vehicle details to check available vehicles):
-            <input
-              type="text"
-              value={vehicle}
-              onChange={(e) => setVehicle(e.target.value.slice(0, 8))}
-              maxLength={8}
-            />
-          </label>
-          <button className="R_vehicle" onClick={() => navigate("/R_vehicle")}>
-            Vehicle details
-          </button>
-          <br />
-          <label>
-            With Driver:
-            <input
-              type="checkbox"
-              checked={withDriver}
-              onChange={() => setWithDriver(!withDriver)}
-            />
-          </label>
-          <br />
-          <label>
-            Duration:
-            <div>
-              <label>Start Date:</label>
+              Vehicle details
+            </button>
+            <br />
+            <label>
+              With Driver:
               <input
-                type="date"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
+                type="checkbox"
+                checked={withDriver}
+                onChange={() => setWithDriver(!withDriver)}
               />
-            </div>
-            <div>
-              <label>End Date:</label>
-              <input
-                type="date"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-              />
-            </div>
-          </label>
+            </label>
+            <br />
+            <label>
+              Duration:
+              <div>
+                <label>Start Date:</label>
+                <input
+                  type="date"
+                  value={startDate}
+                  onChange={(e) => setStartDate(e.target.value)}
+                />
+              </div>
+              <div>
+                <label>End Date:</label>
+                <input
+                  type="date"
+                  value={endDate}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
+              </div>
+            </label>
+          </div>
         </div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className="form-column">
           <label>
             Pickup Location:
             <select
@@ -215,7 +213,9 @@ const CarRentalForm = () => {
             />
           </label>
           <br />
-          <button className="resbutt" type="submit">Reserve</button>
+          <button className="resbutt" type="submit">
+            Reserve
+          </button>
         </div>
       </form>
     </div>
