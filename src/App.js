@@ -2,17 +2,15 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 function App() {
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate(); 
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="">
+      <header className="">
         <h1>Welcome</h1>
-        <button className="users-button" onClick={() => navigate("/Users")}>
-          Users
-        </button>
+       
         <button className="users-button" onClick={() => navigate("/R_Booking")}>
-          R_Booking
+         User
         </button>
         <button className="Admin" onClick={() => navigate("/Adminhome")}>
          Admin

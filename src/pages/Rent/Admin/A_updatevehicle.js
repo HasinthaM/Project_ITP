@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import "../../../stylesadmin/A_updatevehicle.css";
 
 const A_updatevehicle = () => {
   const { id } = useParams();
@@ -46,12 +47,36 @@ const A_updatevehicle = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+  
+    if (
+      !vehicle.vehicleType ||
+      !vehicle.vehicleno ||
+      !vehicle.Owner ||
+      !vehicle.Ownerid ||
+      !vehicle.address ||
+      !vehicle.phone
+    ) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    if (!/^\d{10}$/.test(vehicle.phone)) {
+      alert("Phone Number should be a 10-digit number");
+      return;
+    }
+
+    if (vehicle.vehicleno.length !== 8) {
+      alert("Vehicle Number should be 8 characters long");
+      return;
+    }
+
     axios
       .put(`http://localhost:3001/vehicle/update/${id}`, vehicle)
       .then((res) => {
         if (res.data.success) {
           alert("Vehicle updated successfully");
-          navigate("/A_checkvehicle"); // Redirect to the vehicle list page
+          navigate("/A_checkvehicle");
         } else {
           console.error("Update unsuccessful");
         }
@@ -61,7 +86,7 @@ const A_updatevehicle = () => {
   return (
     <div>
       <h2>Update Vehicle</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="container">
         <label>
           Vehicle Type:
           <input

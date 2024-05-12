@@ -1,43 +1,58 @@
-.R_Booking {
-  background-color: lavender;
-  padding: 20px;
-  border-radius: 10px;
-  width: 50%;
-  margin: auto;
+.Bookingu {
   margin-top: 50px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+   margin-left: 10%;
+   margin-right: 10%;
 }
 
-.R_Booking h2 {
-  color: #333;
-}
-
-.R_Booking form {
+.formu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 20px;
+   margin-left: 28%;
+   border-radius: 10px;
+}
+
+.formu > div {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-.R_Booking label {
-  margin-top: 10px;
-}
-
-.R_Booking button {
-  background-color: #78a55a;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  margin-right: 1%;
+  margin-left: 7%;
   margin-top: 20px;
+   border-radius: 10px;
+
 }
 
-.R_Booking button:hover {
-  background-color: #5c7f3f;
+label {
+  margin-bottom: 1rem; /* Adjusted margin for better spacing */
 }
 
-/* Additional styles for checkbox alignment */
-.R_Booking input[type="checkbox"] {
-  margin-right: 5px;
+input,
+select,
+button {
+  padding: 0.5rem; /* Adjusted padding for better spacing */
+  margin-bottom: 1rem;
+  width: 100%; /* Full width for better alignment */
+}
+
+.resbutt {
+  background-color: #303132;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button.R_vehicle {
+  margin-top: 1.5rem;
+  background-color: #333533;
+}
+
+.resbutt:hover,
+.resbutt:focus {
+  background-color: #606061;
+}
+
+button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
 }

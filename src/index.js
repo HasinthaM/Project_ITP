@@ -25,7 +25,7 @@ root.render(
       <Route path="/users" element={<Users />} />
       <Route path="/R_Booking" element={<R_Booking />} />
       <Route path="/R_vehicle" element={<R_vehicle />} />
-      <Route path="/R_Bdetails" element={<R_Bdetails />} />
+      <Route path="/R_Bdetails/:id" element={<R_Bdetails />} />
       <Route path="/R_Bookdet" element={<R_Bookdet />} />
       <Route path="/R_Details" element={<R_Details />} />
       <Route path="/R_Bupdate/:id" element={<R_Bupdate />} />

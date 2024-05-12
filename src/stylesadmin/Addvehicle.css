@@ -1,0 +1,78 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #a0a29f;
+  color: rgb(35, 35, 35);
+}
+
+
+.addv {
+  display: flex;
+  margin-left: 55px;
+  margin-right: 375px;
+}
+
+.container {
+  background-color: #a0a29f;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 1500px; /* Adjust the width as needed */
+  margin-left: 150px;
+  margin-right: 50px;
+}
+
+h2 {
+  margin: auto;
+  width: 25%;
+  margin-left: 45%;
+  
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 253, 253, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  left: 250%;
+  width: 100%; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 233px;
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #daf5c9;
+  color: rgb(32, 19, 19);
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #e2f3d5;
+}
+.adbtn{
+   padding: 10px 20px;
+  background-color: #646563;
+  color: rgb(32, 19, 19);
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 120px;
+}

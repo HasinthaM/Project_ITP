@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import '../../../stylesadmin/A_checkvehicle.css';
+import R_Sidebar from "../../../components/Rent/R_Sidebar";
 
 const VehicleList = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -43,44 +45,47 @@ const VehicleList = () => {
   };
 
   return (
-    <div>
-      <h2>All Vehicles</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Vehicle Type</th>
-            <th>Vehicle Number</th>
-            <th>Owner Name</th>
-            <th>Owner ID</th>
-            <th>Address</th>
-            <th>Phone Number</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {vehicles.map((vehicle) => (
-            <tr key={vehicle._id}>
-              <td>{vehicle.vehicleType}</td>
-              <td>{vehicle.vehicleno}</td>
-              <td>{vehicle.Owner}</td>
-              <td>{vehicle.Ownerid}</td>
-              <td>{vehicle.address}</td>
-              <td>{vehicle.phone}</td>
-              <td>
-                <button
-                  className="R_Bupdate"
-                  onClick={() => navigate(`/A_updatevehicle/${vehicle._id}`)}
-                >
-                  Edit
-                </button>
-                <button onClick={() => handleDelete(vehicle._id)}>
-                  Delete
-                </button>
-              </td>
+    <div className="cvh">
+      <R_Sidebar />
+      <div className="vhl">
+        <h2>All Vehicles</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Vehicle Type</th>
+              <th>Vehicle Number</th>
+              <th>Owner Name</th>
+              <th>Owner ID</th>
+              <th>Address</th>
+              <th>Phone Number</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {vehicles.map((vehicle) => (
+              <tr key={vehicle._id}>
+                <td>{vehicle.vehicleType}</td>
+                <td>{vehicle.vehicleno}</td>
+                <td>{vehicle.Owner}</td>
+                <td>{vehicle.Ownerid}</td>
+                <td>{vehicle.address}</td>
+                <td>{vehicle.phone}</td>
+                <td>
+                  <button
+                    className="R_Bupdate"
+                    onClick={() => navigate(`/A_updatevehicle/${vehicle._id}`)}
+                  >
+                    Edit
+                  </button>
+                  <button onClick={() => handleDelete(vehicle._id)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

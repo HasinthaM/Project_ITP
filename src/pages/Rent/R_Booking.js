@@ -14,11 +14,26 @@ const CarRentalForm = () => {
   const [passportOrId, setPassportOrId] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [totalFee, setTotalFee] = useState(0);
+  const rentalRates = {
+    car: 7000,
+    van: 9000,
+    cab: 9000,
+    tuktuk: 5000,
+    bike: 3000,
+  };
   const navigate = useNavigate();
-
+  const calculateTotalFee = () => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const numberOfDays = (end - start) / (1000 * 60 * 60 * 24);
+    const ratePerDay = rentalRates[vehicleType] || 0; // Use 0 as default rate if vehicle type is not found
+    const total = ratePerDay * numberOfDays;
+    setTotalFee(total);
+  };
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-
+    calculateTotalFee();
     // Validation
     if (
       !vehicleType ||
@@ -29,7 +44,8 @@ const CarRentalForm = () => {
       !customerName ||
       !passportOrId ||
       !address ||
-      !phoneNumber
+      !phoneNumber ||
+      !totalFee
     ) {
       alert("Please fill in all fields");
       return;
@@ -51,12 +67,14 @@ const CarRentalForm = () => {
         passportOrId,
         address,
         phone: phoneNumber,
+        totalFee,
       });
 
       if (response.data.success) {
         console.log("Data saved successfully");
 
-        navigate("/R_Bdetails");
+        // navigate("/R_Bdetails");
+        navigate(`/R_Bdetails/${passportOrId}`);
       } else {
         console.error("Failed to save data:", response.data.error);
       }
@@ -66,120 +84,139 @@ const CarRentalForm = () => {
   };
 
   return (
-    <div className="R_Booking" style={{ textAlign: "center" }}>
+    <div className="Bookingu" style={{ textAlign: "center" }}>
       <h2>Rent a Vehicle Here!</h2>
-      <form onSubmit={handleFormSubmit}>
-        {" "}
-        <label>
-          Vehicle Type:
-          <select
-            value={vehicleType}
-            onChange={(e) => setVehicleType(e.target.value)}
-          >
-            <option value="">Select Vehicle Type</option>
-            <option value="car">Sedan</option>
-            <option value="van">SUV</option>
-            <option value="cab">SUV</option>
-            <option value="tuktuk">SUV</option>
-            <option value="Bike">SUV</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Vehicle:
-          <input
-            type="text"
-            value={vehicle}
-            onChange={(e) => setVehicle(e.target.value)}
-          />
-        </label>
-        <button className="R_vehicle" onClick={() => navigate("/R_vehicle")}>
-          Vehicle details
-        </button>
-        <br />
-        <label>
-          With Driver:
-          <input
-            type="checkbox"
-            checked={withDriver}
-            onChange={() => setWithDriver(!withDriver)}
-          />
-        </label>
-        <br />
-        <label>
-          Duration:
-          <div>
-            <label>Start Date:</label>
+      <form
+        className="formu"
+        onSubmit={handleFormSubmit}
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <div
+          className="formu"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginRight: "2rem",
+          }}
+        >
+          <label>
+            Vehicle Type:
+            <select
+              value={vehicleType}
+              onChange={(e) => setVehicleType(e.target.value)}
+            >
+              <option value="">Select Vehicle Type</option>
+              <option value="car">car</option>
+              <option value="van">Van</option>
+              <option value="cab">Cab</option>
+              <option value="tuktuk">Tuk Tuk</option>
+              <option value="Bike">Bike</option>
+            </select>
+          </label>
+          <br />
+          <label>
+            Vehicle No(press vehicle details to check available vehicles):
             <input
-              type="date"
-              value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
+              type="text"
+              value={vehicle}
+              onChange={(e) => setVehicle(e.target.value.slice(0, 8))}
+              maxLength={8}
             />
-          </div>
-          <div>
-            <label>End Date:</label>
+          </label>
+          <button className="R_vehicle" onClick={() => navigate("/R_vehicle")}>
+            Vehicle details
+          </button>
+          <br />
+          <label>
+            With Driver:
             <input
-              type="date"
-              value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
+              type="checkbox"
+              checked={withDriver}
+              onChange={() => setWithDriver(!withDriver)}
             />
-          </div>
-        </label>
-        <br />
-        <label>
-          Pickup Location:
-          <select
-            value={pickupLocation}
-            onChange={(e) => setPickupLocation(e.target.value)}
-          >
-            <option value="">Select Pickup Location</option>
-            <option value="airport">Airport</option>
-            <option value="colombo">Colombo</option>
-            <option value="galle">Galle</option>
-            <option value="Kandy">Kandy</option>
-            <option value="Ella">Ella</option>
-            <option value="Anuradhapura">Anuradhapura</option>
-            <option value="Nuwaraeliya">Nuwaraeliya</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Customer Name:
-          <input
-            type="text"
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Passport or ID Number:
-          <input
-            type="text"
-            value={passportOrId}
-            onChange={(e) => setPassportOrId(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Address:
-          <input
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Phone Number:
-          <input
-            type="tel"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-          />
-        </label>
-        <br />
-        <button type="submit">Reserve</button>
+          </label>
+          <br />
+          <label>
+            Duration:
+            <div>
+              <label>Start Date:</label>
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>End Date:</label>
+              <input
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
+            </div>
+          </label>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <label>
+            Pickup Location:
+            <select
+              value={pickupLocation}
+              onChange={(e) => setPickupLocation(e.target.value)}
+            >
+              <option value="">Select Pickup Location</option>
+              <option value="airport">Airport</option>
+              <option value="colombo">Colombo</option>
+              <option value="galle">Galle</option>
+              <option value="Kandy">Kandy</option>
+              <option value="Ella">Ella</option>
+              <option value="Anuradhapura">Anuradhapura</option>
+              <option value="Nuwaraeliya">Nuwaraeliya</option>
+            </select>
+          </label>
+          <br />
+          <label>
+            Customer Name:
+            <input
+              type="text"
+              value={customerName}
+              onChange={(e) => setCustomerName(e.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Passport or ID Number:
+            <input
+              type="text"
+              value={passportOrId}
+              onChange={(e) => setPassportOrId(e.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Address:
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Phone Number:
+            <input
+              type="tel"
+              value={phoneNumber}
+              onChange={(e) => {
+                const input = e.target.value;
+                if (/^\d{0,15}$/.test(input)) {
+                  setPhoneNumber(input);
+                }
+              }}
+            />
+          </label>
+          <br />
+          <button className="resbutt" type="submit">Reserve</button>
+        </div>
       </form>
     </div>
   );

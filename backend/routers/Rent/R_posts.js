@@ -43,6 +43,10 @@ const postSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  totalFee: {
+    type: Number,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Posts", postSchema);

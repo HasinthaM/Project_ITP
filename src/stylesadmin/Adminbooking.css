@@ -1,0 +1,25 @@
+.searchb{
+width: 20%;
+  
+}
+.pdfbutt{
+    margin-left: 5%;
+     background-color: #333632;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100px;
+}
+.bdth{
+     display: flex;
+      margin-left: 25px;
+  margin-right: 275px;
+  width: 100%;
+}
+.bdt{
+     width: 1500px; /* Adjust the width as needed */
+  margin-left: 150px;
+  margin-right: 50px;
+}

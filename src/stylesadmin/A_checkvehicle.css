@@ -1,0 +1,78 @@
+/* A_checkvehicle.css */
+
+/* Styles for the entire page */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.cvh{
+   display: flex;
+      margin-left: 25px;
+  margin-right: 275px;
+  width: 100%;
+}
+.vhl{
+   width: 1500px; /* Adjust the width as needed */
+  margin-left: 150px;
+  margin-right: 50px;
+}
+
+/* Styles for the main content */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+/* Styles for the table */
+table {
+  width: 80%;
+  height: 40%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  margin-left: 150px;
+}
+
+table th, table td {
+  border: 2px solid #7c7979;
+  padding: 1px;
+  text-align: left;
+  height: 1px;
+}
+
+/* Styles for table header */
+table th {
+  background-color: #f2f2f2;
+}
+
+/* Styles for table actions buttons */
+button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.R_Bupdate {
+  background-color: #6e726e;
+  color: white;
+  border: none;
+}
+
+.R_Bupdate:hover {
+  background-color: #9aa09a;
+}
+
+.R_Bdelete {
+  background-color: #e42618;
+  color: white;
+  border: none;
+}
+
+.R_Bdelete:hover {
+  background-color: #da190b;
+}

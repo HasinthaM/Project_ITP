@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
+import "./styles/R_Bupdate.css";
 
 
 const R_Update = () => {
@@ -62,7 +62,7 @@ const R_Update = () => {
         editedPost
       );
       console.log("Post updated successfully:", response.data);
-      window.location.href = "/R_Bdetails";
+      window.location.href = "/R_Bdetails/passportOrId";
     } catch (err) {
       console.error(err);
     }
@@ -74,8 +74,8 @@ const R_Update = () => {
 
   return (
     <div>
-      <h2>Edit Post</h2>
-      <form onSubmit={handleEdit}>
+      <h2>Edit Your Reservation</h2>
+      <form onSubmit={handleEdit} className="update">
         <label>
           Vehicle Type:
           <select

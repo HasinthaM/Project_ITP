@@ -1,5 +1,6 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Import for navigation
+import { useNavigate } from "react-router-dom"; 
+import "../../../stylesadmin/Adminhome.css";
 
 const ThreeButtonNav = () => {
   const navigate = useNavigate();
@@ -22,6 +23,8 @@ const ThreeButtonNav = () => {
 
   return (
     <div className="button-container">
+      <h1>Admin home</h1>
+
       <button onClick={() => handleButtonClick("Check bookings")}>
         Check bookings
       </button>
