@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../../../styles/Package/P_userdashboard.css";
 import PUSidebar from "../../../components/Package/PUSidebar";
+import NavigationBar from "../../../components/NavigationBar3";
 
 const P_userdashboard = () => {
   const [users, setUsers] = useState([]);
@@ -53,6 +55,9 @@ const P_userdashboard = () => {
 
   return (
     <div className="container">
+      <div className="navBar">
+        <NavigationBar />
+      </div>
       <PUSidebar />
       <h2 className="cus-topic">Customize Packages</h2>
       <div className="flex-container8">
@@ -85,9 +90,11 @@ const P_userdashboard = () => {
                 <i className="fas fa-trash-alt"></i>&nbsp;
               </button>
             </div>
-            <button className="buy-button2" onClick={handleBuyButtonClick}>
-              Buy
-            </button>
+            <Link to="/orderform">
+              <button className="buy-button2" onClick={handleBuyButtonClick}>
+                Buy
+              </button>
+            </Link>
           </div>
         ))}
       </div>

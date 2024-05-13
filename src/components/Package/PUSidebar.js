@@ -18,9 +18,9 @@ const PUSidebar = () => {
         collapsible
         collapsed={collapsed}
         style={{
-          height: "90vh",
+          height: "100vh",
           left: 0,
-          background: "#D9D9D9",
+          background: "#b2b2b2",
         }}
       >
         <div className="demo-logo-vertical" />
@@ -28,7 +28,7 @@ const PUSidebar = () => {
         <Menu
           mode="inline"
           defaultSelectedKeys={[]}
-          style={{ marginTop: 60, background: "#D9D9D9", fontWeight: "bold" }}
+          style={{ marginTop: 60, background: "#b2b2b2", fontWeight: "bold" }}
           inlineIndent={20}
         >
           <Menu.Item

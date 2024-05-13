@@ -20,12 +20,13 @@ body {
 
 .rent-vhl h2 {
   margin-bottom: 20px;
+  width: 100%;
 }
 
 /* Styles for the table */
 .rent-vhl table {
   width: 80%;
-  height: 40%;
+  height: 10%;
   border-collapse: collapse;
   margin-top: 10px;
   margin-left: 10px;

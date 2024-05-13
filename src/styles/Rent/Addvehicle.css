@@ -23,7 +23,7 @@
 
 .rent-cont h2 {
   margin: auto;
-  width: 55px;
+  width: 100%;
   margin-left: 300px;
   margin-top: 50px;
 }
@@ -55,8 +55,8 @@
 
 .rent-cont button {
   padding: 10px 20px;
-  background-color: #b8b8b5;
-  color: rgb(32, 19, 19);
+  background-color: #484847;
+  color: rgb(248, 246, 246);
   border: none;
   cursor: pointer;
   margin-top: 20px;

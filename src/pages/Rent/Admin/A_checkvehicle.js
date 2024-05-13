@@ -77,7 +77,10 @@ const VehicleList = () => {
                   >
                     Edit
                   </button>
-                  <button onClick={() => handleDelete(vehicle._id)}>
+                  <button
+                    className="rent-R_Bdelete"
+                    onClick={() => handleDelete(vehicle._id)}
+                  >
                     Delete
                   </button>
                 </td>

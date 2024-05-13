@@ -13,7 +13,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import "../../../styles/Package/P_customize.css";
 import moment from "moment";
-import PUSidebar  from "../../../components/Package/PUSidebar";
+import PUSidebar from "../../../components/Package/PUSidebar";
+import NavigationBar from "../../../components/NavigationBar3";
 
 const { Option } = Select;
 
@@ -27,12 +28,10 @@ const P_customize = () => {
 
   // Function to calculate the total price based on the selected options
   const calculateFullPrice = (changedValues, allValues) => {
-    const { district, duration, vehicle, meals, accommodation } =
-      allValues;
+    const { district, duration, vehicle, meals, accommodation } = allValues;
 
     // Define prices for each parameter
 
-   
     const districtPrice = {
       Colombo: 2500,
       Gampaha: 2400,
@@ -414,199 +413,223 @@ const P_customize = () => {
 
   return (
     <div>
-    <PUSidebar />
-    <div>
-      <div className="cus-form2">
-        <h2 className="pc-tittle">Customization</h2>
-        <Form
-          form={form}
-          onFinish={handleSubmit}
-          layout="vertical"
-          onValuesChange={calculateFullPrice} // Calculate full price when form values change
-          initialValues={{
-            province: "",
-            district: "",
-            places: "",
-            duration: { start: null, end: null },
-            vehicle: "",
-            noOfPerson: "",
-            meals: [],
-            activities: "",
-            accommodation: "",
-            price: "",
-          }}
-        >
-          <Row gutter={[26, 26]}>
-            <Col span={8}>
-              <Form.Item
-                label="Select Province"
-                name="province"
-                rules={[{ required: true, message: "Please select Province" }]}
-              >
-                <Select
-                  placeholder="Select Province"
-                  onChange={handleProvinceChange}
-                >
-                  {provinces.map((province) => (
-                    <Option key={province} value={province}>
-                      {province}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-              <Form.Item
-                label="Select District"
-                name="district"
-                rules={[{ required: true, message: "Please select District" }]}
-              >
-                <Select
-                  placeholder="Select District"
-                  onChange={handleDistrictChange}
-                >
-                  {districtsForProvince.map((district) => (
-                    <Option key={district} value={district}>
-                      {district}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-
-              <Form.Item
-                label="Places"
-                name="places"
-                rules={[
-                  { required: true, message: "Please enter Places" },
-                  {
-                    pattern: /^[a-zA-Z\s,]*$/,
-                    message: "Only letters, spaces, and commas are allowed",
-                  },
-                ]}
-              >
-                <Input placeholder="Places" onKeyDown={handleKeyDown} 
-                readOnly/>
-              </Form.Item>
-              <Form.Item
-                label="Duration"
-                name="duration"
-                rules={[
-                  { required: true, message: "Please select Duration" },
-                  { validator: validateDuration },
-                ]}
-              >
-                <Row gutter={[8, 0]}>
-                  <Col span={12}>
-                    <Form.Item name={["duration", "start"]} noStyle>
-                      <DatePicker
-                        placeholder="Start Date"
-                        disabledDate={disabledDate}
-                        style={{ width: "100%" }}
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item name={["duration", "end"]} noStyle>
-                      <DatePicker
-                        placeholder="End Date"
-                        disabledDate={disabledDate}
-                        style={{ width: "100%" }}
-                      />
-                    </Form.Item>
-                  </Col>
-                </Row>
-              </Form.Item>
-            </Col>
-            <Col span={8}>
-              <Form.Item
-                label="Select Vehicle"
-                name="vehicle"
-                rules={[{ required: true, message: "Please select Vehicle" }]}
-              >
-                <Select
-                  placeholder="Select Vehicle"
-                  onChange={handleVehicleChange}
-                >
-                  {vehicles.map((vehicle) => (
-                    <Option key={vehicle.type} value={vehicle.type}>
-                      {vehicle.type}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-              <Form.Item
-                label="Number of Persons"
-                name="noOfPerson"
-                rules={[
-                  { required: true, message: "Please enter Number of Persons" },
-                ]}
-              >
-                <Input type="number" min={1} readOnly />
-              </Form.Item>
-              <Form.Item
-                label="Meals"
-                name="meals"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please select Meals",
-                    type: "array",
-                  },
-                ]}
-              >
-                <Checkbox.Group options={mealOptions} />
-              </Form.Item>
-            </Col>
-            <Col span={8}>
-              <Form.Item
-                label="Activities"
-                name="activities"
-                rules={[
-                  { required: true, message: "Please enter Activities" },
-                  {
-                    pattern: /^[a-zA-Z\s,]*$/,
-                    message: "Only letters, spaces, and commas are allowed",
-                  },
-                ]}
-              >
-                <Input placeholder="Activities" onKeyDown={handleKeyDown} 
-                readOnly/>
-              </Form.Item>
-              <Form.Item
-                label="Select Accommodation"
-                name="accommodation"
-                rules={[
-                  { required: true, message: "Please select Accommodation" },
-                ]}
-              >
-                <Select placeholder="Select Accommodation">
-                  <Option value="3 Star Hotel">3 Star Hotel</Option>
-                  <Option value="5 Star Hotel">5 Star Hotel</Option>
-                  <Option value="Annexe">Annexe</Option>
-                </Select>
-              </Form.Item>
-              <Form.Item
-                label="Price"
-                name="price"
-                rules={[{ required: true, message: "Please enter Price" }]}
-              >
-                <Input
-                  placeholder="Price"
-                  value={`${totalPrice} Rs`}
-                  readOnly
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-          <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <Button type="primary" htmlType="submit" loading={loading} style={{backgroundColor:"gray",color:"white"}}>
-              Customize Package
-            </Button>
-          </div>
-          <div
-            style={{ textAlign: "left", marginTop: "5px", marginLeft: "308px" }}
-          ></div>
-        </Form>
+      <div className="navBar">
+        <NavigationBar />
       </div>
-    </div>
+      <PUSidebar />
+      <div>
+        <div className="cus-form2">
+          <Form
+            form={form}
+            onFinish={handleSubmit}
+            layout="vertical"
+            onValuesChange={calculateFullPrice} // Calculate full price when form values change
+            initialValues={{
+              province: "",
+              district: "",
+              places: "",
+              duration: { start: null, end: null },
+              vehicle: "",
+              noOfPerson: "",
+              meals: [],
+              activities: "",
+              accommodation: "",
+              price: "",
+            }}
+          >
+            <Row gutter={[26, 26]}>
+              <Col span={8}>
+                <Form.Item
+                  label="Select Province"
+                  name="province"
+                  rules={[
+                    { required: true, message: "Please select Province" },
+                  ]}
+                >
+                  <Select
+                    placeholder="Select Province"
+                    onChange={handleProvinceChange}
+                  >
+                    {provinces.map((province) => (
+                      <Option key={province} value={province}>
+                        {province}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  label="Select District"
+                  name="district"
+                  rules={[
+                    { required: true, message: "Please select District" },
+                  ]}
+                >
+                  <Select
+                    placeholder="Select District"
+                    onChange={handleDistrictChange}
+                  >
+                    {districtsForProvince.map((district) => (
+                      <Option key={district} value={district}>
+                        {district}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+
+                <Form.Item
+                  label="Places"
+                  name="places"
+                  rules={[
+                    { required: true, message: "Please enter Places" },
+                    {
+                      pattern: /^[a-zA-Z\s,]*$/,
+                      message: "Only letters, spaces, and commas are allowed",
+                    },
+                  ]}
+                >
+                  <Input
+                    placeholder="Places"
+                    onKeyDown={handleKeyDown}
+                    readOnly
+                  />
+                </Form.Item>
+                <Form.Item
+                  label="Duration"
+                  name="duration"
+                  rules={[
+                    { required: true, message: "Please select Duration" },
+                    { validator: validateDuration },
+                  ]}
+                >
+                  <Row gutter={[8, 0]}>
+                    <Col span={12}>
+                      <Form.Item name={["duration", "start"]} noStyle>
+                        <DatePicker
+                          placeholder="Start Date"
+                          disabledDate={disabledDate}
+                          style={{ width: "100%" }}
+                        />
+                      </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                      <Form.Item name={["duration", "end"]} noStyle>
+                        <DatePicker
+                          placeholder="End Date"
+                          disabledDate={disabledDate}
+                          style={{ width: "100%" }}
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item
+                  label="Select Vehicle"
+                  name="vehicle"
+                  rules={[{ required: true, message: "Please select Vehicle" }]}
+                >
+                  <Select
+                    placeholder="Select Vehicle"
+                    onChange={handleVehicleChange}
+                  >
+                    {vehicles.map((vehicle) => (
+                      <Option key={vehicle.type} value={vehicle.type}>
+                        {vehicle.type}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  label="Number of Persons"
+                  name="noOfPerson"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter Number of Persons",
+                    },
+                  ]}
+                >
+                  <Input type="number" min={1} readOnly />
+                </Form.Item>
+                <Form.Item
+                  label="Meals"
+                  name="meals"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please select Meals",
+                      type: "array",
+                    },
+                  ]}
+                >
+                  <Checkbox.Group options={mealOptions} />
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item
+                  label="Activities"
+                  name="activities"
+                  rules={[
+                    { required: true, message: "Please enter Activities" },
+                    {
+                      pattern: /^[a-zA-Z\s,]*$/,
+                      message: "Only letters, spaces, and commas are allowed",
+                    },
+                  ]}
+                >
+                  <Input
+                    placeholder="Activities"
+                    onKeyDown={handleKeyDown}
+                    readOnly
+                  />
+                </Form.Item>
+                <Form.Item
+                  label="Select Accommodation"
+                  name="accommodation"
+                  rules={[
+                    { required: true, message: "Please select Accommodation" },
+                  ]}
+                >
+                  <Select placeholder="Select Accommodation">
+                    <Option value="3 Star Hotel">3 Star Hotel</Option>
+                    <Option value="5 Star Hotel">5 Star Hotel</Option>
+                    <Option value="Annexe">Annexe</Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  label="Price"
+                  name="price"
+                  rules={[{ required: true, message: "Please enter Price" }]}
+                >
+                  <Input
+                    placeholder="Price"
+                    value={`${totalPrice} Rs`}
+                    readOnly
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={loading}
+                style={{ backgroundColor: "gray", color: "white" }}
+              >
+                Customize Package
+              </Button>
+            </div>
+            <div
+              style={{
+                textAlign: "left",
+                marginTop: "5px",
+                marginLeft: "308px",
+              }}
+            ></div>
+          </Form>
+        </div>
+      </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Rent/R_Booking.css";
+import NavigationBar from "../../components/NavigationBar3";
 
 const CarRentalForm = () => {
   const [vehicleType, setVehicleType] = useState("");
@@ -84,8 +85,11 @@ const CarRentalForm = () => {
   };
 
   return (
-    <div className="rent-Bookingu" style={{ textAlign: "center" }}>
-      <h2>Rent a Vehicle Here!</h2>
+    <div className="rent_bookingu">
+      <div className="navBar">
+        <NavigationBar />
+      </div>
+      <h2 className="rent_heading">Rent a Vehicle Here!</h2>
       <form
         className="rent-formu"
         onSubmit={handleFormSubmit}

@@ -1,31 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Form, Input, Select, Checkbox, Button, Row, Col, DatePicker } from "antd";
-import { useNavigate,useParams } from 'react-router-dom';
-import moment from 'moment';
-import '../../../styles/Package/P_uedit.css';
-import PUSidebar from '../../../components/Package/PUSidebar';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  Form,
+  Input,
+  Select,
+  Checkbox,
+  Button,
+  Row,
+  Col,
+  DatePicker,
+} from "antd";
+import { useNavigate, useParams } from "react-router-dom";
+import moment from "moment";
+import "../../../styles/Package/P_uedit.css";
+import PUSidebar from "../../../components/Package/PUSidebar";
+import NavigationBar from "../../../components/NavigationBar3";
 
 const { Option } = Select;
 
 export default function P_uedit() {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const [form] = Form.useForm();
-    const [loading, setLoading] = useState(false);
-    const [values, setValues]= useState(null);
-    const [districtsForProvince, setDistrictsForProvince] = useState([]);
-    const [placesAndActivities, setPlacesAndActivities] = useState({});
-    const [totalPrice, setTotalPrice] = useState(0);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
+  const [values, setValues] = useState(null);
+  const [districtsForProvince, setDistrictsForProvince] = useState([]);
+  const [placesAndActivities, setPlacesAndActivities] = useState({});
+  const [totalPrice, setTotalPrice] = useState(0);
 
-    // Function to calculate the total price based on the selected options
+  // Function to calculate the total price based on the selected options
   const calculateFullPrice = (changedValues, allValues) => {
-    const { district, duration, vehicle, meals, accommodation } =
-      allValues;
+    const { district, duration, vehicle, meals, accommodation } = allValues;
 
     // Define prices for each parameter
 
-   
     const districtPrice = {
       Colombo: 2500,
       Gampaha: 2400,
@@ -177,64 +185,69 @@ export default function P_uedit() {
     return durationInDays * 500; // Assuming price per day is 50
   };
 
-    useEffect(() => {
-        axios.get(`http://localhost:3001/api/user/${id}`)
-          .then(res => {
-            const packageData = res.data.package;
-            setValues({
-              province: packageData.province,
-              district: packageData.district,
-              duration: [moment(packageData.duration.start), moment(packageData.duration.end)],
-              noOfPerson: packageData.noOfPerson,
-              vehicle: packageData.vehicle,
-              places: packageData.places,
-              meals: packageData.meals,
-              activities: packageData.activities,
-              accommodation: packageData.accommodation,
-              price: packageData.price,
-            });
-          })
-          .catch(err => console.log(err));
-      }, [id]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/api/user/${id}`)
+      .then((res) => {
+        const packageData = res.data.package;
+        setValues({
+          province: packageData.province,
+          district: packageData.district,
+          duration: [
+            moment(packageData.duration.start),
+            moment(packageData.duration.end),
+          ],
+          noOfPerson: packageData.noOfPerson,
+          vehicle: packageData.vehicle,
+          places: packageData.places,
+          meals: packageData.meals,
+          activities: packageData.activities,
+          accommodation: packageData.accommodation,
+          price: packageData.price,
+        });
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
 
-    
+  const onFinish = async (values) => {
+    try {
+      setLoading(true);
+      await axios.put(`http://localhost:3001/api/package/update/${id}`, values);
+      alert("Package updated successfully!");
+      navigate("/udashboard");
+    } catch (error) {
+      console.error("Update failed:", error);
+      alert("Failed to update package. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const onFinish = async (values) => {
-        try {
-            setLoading(true);
-            await axios.put(`http://localhost:3001/api/package/update/${id}`, values);
-            alert('Package updated successfully!');
-            navigate('/udashboard');
-        } catch (error) {
-            console.error('Update failed:', error);
-            alert('Failed to update package. Please try again later.');
-        } finally {
-            setLoading(false);
-        }
-    };
+  const handleKeyDown = (event) => {
+    const keyCode = event.keyCode || event.which;
+    if (
+      (keyCode >= 48 && keyCode <= 57) ||
+      (keyCode >= 186 && keyCode <= 222)
+    ) {
+      event.preventDefault();
+      alert("Numbers and special characters are not allowed in this field.");
+    }
+  };
 
-    const handleKeyDown = (event) => {
-        const keyCode = event.keyCode || event.which;
-        if ((keyCode >= 48 && keyCode <= 57) || (keyCode >= 186 && keyCode <= 222)) {
-            event.preventDefault();
-            alert("Numbers and special characters are not allowed in this field.");
-        }
-    };
+  const provinces = [
+    "Western Province",
+    "Central Province",
+    "Southern Province",
+    "Northern Province",
+    "Eastern Province",
+    "North Western Province",
+    "North Central Province",
+    "Uva Province",
+    "Sabaragamuwa Province",
+  ];
 
-    const provinces = [
-        "Western Province",
-        "Central Province",
-        "Southern Province",
-        "Northern Province",
-        "Eastern Province",
-        "North Western Province",
-        "North Central Province",
-        "Uva Province",
-        "Sabaragamuwa Province",
-    ];
-
-    const districts = {
-        "Western Province": ["Colombo", "Gampaha", "Kalutara"],
+  const districts = {
+    "Western Province": ["Colombo", "Gampaha", "Kalutara"],
     "Central Province": ["Kandy", "Matale", "Nuwara Eliya"],
     "Southern Province": ["Galle", "Matara", "Hambantota"],
     "Northern Province": [
@@ -249,32 +262,31 @@ export default function P_uedit() {
     "North Central Province": ["Polonnaruwa", "Anuradhapura"],
     "Uva Province": ["Badulla", "Monaragala"],
     "Sabaragamuwa Province": ["Ratnapura", "Kegalle"],
-    };
+  };
 
-    const vehicles = [
-        { type: "Car", seats: 4 },
-        { type: "Van", seats: 10 },
-        { type: "Bike", seats: 2 },
-        { type: "Bicycle", seats: 1 },
-        { type: "Luxury Bus", seats: 25 },
-      ];
+  const vehicles = [
+    { type: "Car", seats: 4 },
+    { type: "Van", seats: 10 },
+    { type: "Bike", seats: 2 },
+    { type: "Bicycle", seats: 1 },
+    { type: "Luxury Bus", seats: 25 },
+  ];
 
-    const mealOptions = ["Breakfast", "Lunch", "Tea", "Dinner"];
+  const mealOptions = ["Breakfast", "Lunch", "Tea", "Dinner"];
 
-    const handleProvinceChange = (value) => {
-        setDistrictsForProvince(districts[value]);
-        form.setFieldsValue({ district: undefined });
-    };
+  const handleProvinceChange = (value) => {
+    setDistrictsForProvince(districts[value]);
+    form.setFieldsValue({ district: undefined });
+  };
 
-    const handleVehicleChange = (value) => {
-        const selectedVehicle = vehicles.find((vehicle) => vehicle.type === value);
-        if (selectedVehicle) {
-          form.setFieldsValue({ noOfPerson: selectedVehicle.seats });
-        }
-      };
+  const handleVehicleChange = (value) => {
+    const selectedVehicle = vehicles.find((vehicle) => vehicle.type === value);
+    if (selectedVehicle) {
+      form.setFieldsValue({ noOfPerson: selectedVehicle.seats });
+    }
+  };
 
-
-    const disabledDate = (current) => {
+  const disabledDate = (current) => {
     const today = moment().startOf("day");
     if (current < today) return true;
 
@@ -296,8 +308,6 @@ export default function P_uedit() {
     }
     return Promise.resolve();
   };
-
- 
 
   const handleDistrictChange = (value) => {
     const placesAndActivitiesForDistrict = {
@@ -417,19 +427,22 @@ export default function P_uedit() {
     }
   };
 
-    return (
-        <div>
-            <PUSidebar />
-            <div className="cus-form2">
-                <h2 className="pc-tittle"> Update</h2>
-                <Form
-                    form={form}
-                    onFinish={onFinish}
-                    layout="vertical"
-                    onValuesChange={calculateFullPrice}
-                    initialValues={values}
-                >
-                   <Row gutter={[26, 26]}>
+  return (
+    <div>
+      <div className="navBar">
+        <NavigationBar />
+      </div>
+      <PUSidebar />
+      <div className="cus-form2">
+        <h2 className="pc-tittle"> Update</h2>
+        <Form
+          form={form}
+          onFinish={onFinish}
+          layout="vertical"
+          onValuesChange={calculateFullPrice}
+          initialValues={values}
+        >
+          <Row gutter={[26, 26]}>
             <Col span={8}>
               <Form.Item
                 label="Select Province"
@@ -528,7 +541,10 @@ export default function P_uedit() {
                 label="Number of Persons"
                 name="noOfPerson"
                 rules={[
-                  { required: true, message: "Please enter Number of Persons" },
+                  {
+                    required: true,
+                    message: "Please enter Number of Persons",
+                  },
                 ]}
               >
                 <Input type="number" min={1} readOnly />
@@ -587,13 +603,18 @@ export default function P_uedit() {
               </Form.Item>
             </Col>
           </Row>
-                    <div style={{ textAlign: "center", marginTop: "20px" }}>
-                        <Button type="primary" htmlType="submit" loading={loading} style={{backgroundColor:"gray",color:"white"}}>
-                            Customize Package
-                        </Button>
-                    </div>
-                </Form>
-            </div>
-        </div>
-    );
-};
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={loading}
+              style={{ backgroundColor: "gray", color: "white" }}
+            >
+              Customize Package
+            </Button>
+          </div>
+        </Form>
+      </div>
+    </div>
+  );
+}
