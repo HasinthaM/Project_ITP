@@ -273,7 +273,7 @@ const Feedback1 = () => {
           onClick={handleOpen}
           className="feedback-button"
         >
-          Add Feedback
+          Add Feedbacks
         </Button>
       </div>
       <Dialog open={open} onClose={handleClose}>
