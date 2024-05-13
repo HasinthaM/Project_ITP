@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   Document,
   Page,
@@ -12,7 +13,7 @@ import {
 const styles = StyleSheet.create({
   page: {
     flexDirection: "row",
-    backgroundColor: "#E4E4E4",
+    backgroundColor: "#9bdceb", // Background color for the entire page
     padding: 20, // Added padding for better spacing
     justifyContent: "center", // Center align horizontally
     alignItems: "center", // Center align vertically

@@ -9,7 +9,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import SalaryPdf from '../../components/Salary/SalaryPdf';
 
 
-import backgroundImage from '../../Salaryimages/17.jpg'
+import backgroundImage from '../../images/Salary/17.jpg'
 
 
 const Home = () => {

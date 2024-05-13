@@ -10,7 +10,6 @@ import EditSalaryRecoard from './pages/Salary/EditSalaryRecoard';
 import DeleteSalaryRecoard from './pages/Salary/DeleteSalaryRecoard';
 import ShowSalary from './pages/Salary/ShowSalary';
 import CreateOrderForm from './pages/OrderForm/CreateOrderForm';
-import AddPaymentDetails from './pages/PaymentDetails/AddPaymentDetails';
 import Invoice from './pages/OrderForm/Invoice';  
 import { SnackbarProvider } from 'notistack';
 import App from './App';
@@ -31,7 +30,6 @@ root.render(
       <Route path='/salary/delete/:_id' element={<DeleteSalaryRecoard />} />
       <Route path='/salary/details1/:_id' element={<ShowSalary />} />
       <Route path='/orderform' element={<CreateOrderForm />} />
-      <Route path='/paymentdetails' element={<AddPaymentDetails/>} />
       <Route path='/invoice/:_id' element={<Invoice />} />
  
 

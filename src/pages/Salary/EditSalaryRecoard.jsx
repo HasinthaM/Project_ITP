@@ -4,6 +4,7 @@ import Spinner from '../../components/Salary/Spinner';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import backgroundImage from '../../images/Salary/17.jpg'
 
 
 const EditSalaryRecoard = () => {
@@ -76,12 +77,24 @@ const EditSalaryRecoard = () => {
 
 
   return (
-    <div className=' min-h-screen'>
+
+
+    
+    <div
+    className='p-4'
+    style={{
+      backgroundImage: `url(${backgroundImage})`, // Set background image
+      backgroundSize: 'cover', // Adjust background image size
+      backgroundPosition: 'center', // Adjust background image position
+      minHeight: '100vh', // Ensure the background covers the entire screen
+    }}
+  >
+    <div className=' 200 min-h-screen'>
     <div className='p-4'>
       <BackButton />
-      <h1 className='text-3xl my-4 text-center'>Edit Salary</h1>
+      <h1 className='text-3xl my-4 text-center font-bold text-black'>Edit Salary</h1>
       {loading ? <Spinner /> : ''}
-      <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto '>
+      <div className='flex flex-col border-2 border-black rounded-xl w-[600px] p-4 mx-auto '>
       <div className='my-4'>
           <label className='text-xl mr-4 text-gray-500'>Salary ID</label>
           <input
@@ -120,10 +133,11 @@ const EditSalaryRecoard = () => {
           />
         </div>
 
-        <button className='p-2 bg-sky-300 m-8' onClick={handleEditSalary}>
+        <button className='p-2 bg-sky-300 m-8 font-bold text-black' onClick={handleEditSalary}>
           Save
         </button>
       </div>
+    </div>
     </div>
     </div>
   )

@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import BackButton from '../../components/Salary/BackButton';
 import Spinner from '../../components/Salary/Spinner';
 import { Link } from 'react-router-dom'
-import backgroundImage from '../../Salaryimages/10.jpg'
+import backgroundImage from '../../images/Salary/10.jpg'
 
 const ShowSalaryRecoards = () => {
 

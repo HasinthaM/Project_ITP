@@ -4,7 +4,7 @@ import Spinner from '../../components/Salary/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import backgroundImage from '../../Salaryimages/17.jpg'
+import backgroundImage from '../../images/Salary/17.jpg'
 
 const CreateSalaryRecoard = () => {
   const [nic, setNic] = useState('');

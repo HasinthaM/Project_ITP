@@ -3,7 +3,7 @@ import Spinner from '../../components/Salary/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import backgroundImage from '../../Salaryimages/14.jpg'
+import backgroundImage from '../../images/Salary/7.jpg'
 
 const CreateOrderForm = () => {
   const [customername, setCustomerName] = useState('');
@@ -132,7 +132,7 @@ const CreateOrderForm = () => {
     const cvvRegex = /^\d{0,3}$/;
     if (cvvRegex.test(value)) {
       setCVV(value);
-    }
+    } 
   };
 
   const handleExpiryDateChange = (e) => {
@@ -152,6 +152,8 @@ const CreateOrderForm = () => {
 
   return (
 
+    
+
     <div
     className='p-4'
     style={{
@@ -167,13 +169,13 @@ const CreateOrderForm = () => {
          
         </div>
 
-        <div className="flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-start gap-10">
+        <div className="flex p-3 max-w-6xl mx-auto flex-col md:flex-row md:items-start gap-10">
           <div className="flex-1">
             <h1 className="text-3xl text-gray-800 font-serif ">Fill the Order Form</h1>
             {loading ? <Spinner /> : ''}
             <form className="flex flex-col gap-6" onSubmit={handleSaveOrderForm}>
               <div>
-                <h3 className="font-semibold text-slate-400 ml-1">Select Package</h3>
+                <h3 className="font-semibold text-black-400 ml-1">Select Package</h3>
                 <select
                   className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
                   value={selectedPackage}
@@ -187,7 +189,7 @@ const CreateOrderForm = () => {
                 </select>
               </div>
               <div>
-                <h3 className="font-semibold text-slate-400 ml-1">Customer name</h3>
+                <h3 className="font-semibold text-black-400 ml-1">Customer name</h3>
                 <input
                   className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
                   type="text"
@@ -197,7 +199,7 @@ const CreateOrderForm = () => {
                 />
               </div>
               <div>
-                <h3 className="font-semibold text-slate-400 ml-1">Phone</h3>
+                <h3 className="font-semibold text-black-400 ml-1">Phone</h3>
                 <div className="flex items-center">
                   <select
                     className="bg-slate-100 p-3 rounded-lg w-[160px] h-11 mr-2"
@@ -225,7 +227,7 @@ const CreateOrderForm = () => {
                 </div>
               </div>
               <div>
-                <h3 className="font-semibold text-slate-400 ml-1">Email</h3>
+                <h3 className="font-semibold text-black-400 ml-1">Email</h3>
                 <input
                   className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
                   type="email"
@@ -235,7 +237,7 @@ const CreateOrderForm = () => {
                 />
               </div>
               <div>
-                <h3 className="font-semibold text-slate-400 ml-1">Billing Address</h3>
+                <h3 className="font-semibold text-black-400 ml-1">Billing Address</h3>
                 <input
                   className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
                   type="text"
@@ -244,65 +246,75 @@ const CreateOrderForm = () => {
                   onChange={(e) => setBillingAddress(e.target.value)}
                 />
               </div>
+              <div className="center-button">
               <button
                 className="bg-red-700 text-white p-3 rounded-lg w-[460px] h-11 hover:opacity-90"
                 type="submit" // Ensure button acts as a submit button
               >
                 Submit
               </button>
+              </div>
             </form>
           </div>
+          <div className="flex p-3 max-w-8xl mx-auto flex-col md:flex-row md:items-start gap-10">
           <div className="flex-1">
-          <h1 className="text-3xl text-gray-800 font-serif ">Add Payment Details </h1>
-          <br></br>
-          <br></br>
+  <h1 className="text-3xl text-gray-800 font-serif">Add Payment Details</h1>
+  
+  
+  <div style={{ marginBottom: '20px' }}>
+    <h3 className="font-semibold text-black-400 ml-1">Cardholder name</h3>
+    <input
+      className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
+      type="text"
+      placeholder="Name"
+      value={cardholdername}
+      onChange={handleCardNameChange}
+    />
+  </div>
+  <div style={{ marginBottom: '20px' }}>
+    <h3 className="font-semibold text-black-400 ml-1">Card number</h3>
+    <input
+      className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
+      type="text"
+      placeholder="Card number"
+      value={cardnumber}
+      onChange={handleCardNumberChange}
+    />
+  </div>
+  <div style={{ marginBottom: '20px' }}>
+    <h3 className="font-semibold text-black-400 ml-1">Expiry date</h3>
+    <input
+      className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
+      type="month"
+      placeholder="expirydate"
+      value={expirydate}
+      onChange={handleExpiryDateChange}
+      min={getCurrentDate()}
+    />
+  </div>
+  <div style={{ marginBottom: '20px' }}>
+    <h3 className="font-semibold text-black-400 ml-1">CVV</h3>
+    <input
+      className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
+      type="text"
+      placeholder="CVV"
+      value={cvv}
+      onChange={handleCVVChange}
+    />
+  </div>
 
-            <div>
-              <h3 className="font-semibold text-slate-400 ml-1">Cardholder name</h3>
-              <input
-                className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
-                type="text"
-                placeholder="Name"
-                value={cardholdername}
-                onChange={handleCardNameChange}
-              />
-            </div>
-            <div>
-              <h3 className="font-semibold text-slate-400 ml-1">Card number</h3>
-              <input
-                className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
-                type="text"
-                placeholder="Card number"
-                value={cardnumber}
-                onChange={handleCardNumberChange}
-              />
-            </div>
-            <div>
-              <h3 className="font-semibold text-slate-400 ml-1">Expiry date</h3>
-              <input
-                className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
-                type="month"
-                placeholder="expirydate"
-                value={expirydate}
-                onChange={handleExpiryDateChange}
-                min={getCurrentDate()}
-              />
-            </div>
-            <div>
-              <h3 className="font-semibold text-slate-400 ml-1">CVV</h3>
-              <input
-                className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
-                type="text"
-                placeholder="CVV"
-                value={cvv}
-                onChange={handleCVVChange}
-              />
-            </div>
-          </div>
+   
+
+
+   
+</div>
+
+        </div>
         </div>
       </div>
     </div>
     </div>
+   
   );
 };
 

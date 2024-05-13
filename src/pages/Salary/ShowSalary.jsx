@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import BackButton from '../../components/Salary/BackButton';
 import Spinner from '../../components/Salary/Spinner';
-import backgroundImage from '../../Salaryimages/10.jpg'
+import backgroundImage from '../../images/Salary/10.jpg'
 
 const ShowSalary = () => {
 
