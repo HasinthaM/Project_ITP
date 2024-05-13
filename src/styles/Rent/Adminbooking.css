@@ -1,5 +1,7 @@
 .rent-searchb {
   width: 20%;
+  color: black;
+  border-color: black;
 }
 .rent-pdfbutt {
   margin-left: 5%;
@@ -18,6 +20,10 @@
   margin-right: 275px;
   margin-top: 10px;
   width: 100%;
+}
+.adb {
+  font-weight: bold;
+  font-size: 24px;
 }
 .rent-bdt {
   width: 1500px; /* Adjust the width as needed */

@@ -13,14 +13,17 @@
   width: 75%;
 }
 
-.rent_heading {
-  text-align: center; /* Center the text */
+.rent_heading2 {
+  text-align: center;
   width: 100%;
   margin-left: 50px;
   margin-right: 75px;
   margin-top: 55px;
+  text-size-adjust: 45px;
+  color: #070707;
+  font-weight: bold;
+  font-size: 24px;
 }
-
 .rent-formu {
   display: flex;
   padding: 5;

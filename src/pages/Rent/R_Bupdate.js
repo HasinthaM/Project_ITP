@@ -86,10 +86,10 @@ const R_Update = () => {
               onChange={(e) => setVehicleType(e.target.value)}
             >
               <option value="car">Sedan</option>
-              <option value="van">SUV</option>
-              <option value="cab">SUV</option>
-              <option value="tuktuk">SUV</option>
-              <option value="Bike">SUV</option>
+              <option value="van">Van</option>
+              <option value="cab">Cab</option>
+              <option value="tuktuk">tuktuk</option>
+              <option value="Bike">bike</option>
             </select>
           </label>
           <label>
