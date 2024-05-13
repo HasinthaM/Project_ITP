@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import "../../styles/Rent/R_Bdetails.css";
+import NavigationBar from "../../components/NavigationBar3";
 
 const RentalDetails = () => {
   const [posts, setPosts] = useState([]);
@@ -61,55 +62,65 @@ const RentalDetails = () => {
 
   return (
     <div className="RentalDetails">
+      <div className="navBar">
+        <NavigationBar />
+      </div>
       <h2>Booking details</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Vehicle Type</th>
-            <th>Vehicle</th>
-            <th>Driver</th>
-            <th>Rental Duration</th>
-            <th>Location</th>
-            <th>Customer Name</th>
-            <th>Passport/ID</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Total Fee</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {posts.map((post) => (
-            <tr key={post._id}>
-              <td>{post.vehicleType}</td>
-              <td>{post.vehicle}</td>
-              <td>{post.driver ? "Yes" : "No"}</td>
-              <td>{`${new Date(
-                post.rentalDate.startDate
-              ).toLocaleDateString()} to ${new Date(
-                post.rentalDate.endDate
-              ).toLocaleDateString()}`}</td>
-              <td>{post.location}</td>
-              <td>{post.customerName}</td>
-              <td>{post.passportOrId}</td>
-              <td>{post.address}</td>
-              <td>{post.phone}</td>
-              <td>{post.totalFee}</td>
-              <td>
-                <button
-                  className="R_Bupdate"
-                  onClick={() => navigate(`/R_Bupdate/${post._id}`)}
-                >
-                  Edit
-                </button>
-
-                <button onClick={() => handleDelete(post._id)}>Delete</button>
-                <button>Pay now</button>
-              </td>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Vehicle Type</th>
+              <th>Vehicle</th>
+              <th>Driver</th>
+              <th>Rental Duration</th>
+              <th>Location</th>
+              <th>Customer Name</th>
+              <th>Passport/ID</th>
+              <th>Address</th>
+              <th>Phone</th>
+              <th>Total Fee</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {posts.map((post) => (
+              <tr key={post._id}>
+                <td>{post.vehicleType}</td>
+                <td>{post.vehicle}</td>
+                <td>{post.driver ? "Yes" : "No"}</td>
+                <td>{`${new Date(
+                  post.rentalDate.startDate
+                ).toLocaleDateString()} to ${new Date(
+                  post.rentalDate.endDate
+                ).toLocaleDateString()}`}</td>
+                <td>{post.location}</td>
+                <td>{post.customerName}</td>
+                <td>{post.passportOrId}</td>
+                <td>{post.address}</td>
+                <td>{post.phone}</td>
+                <td>{post.totalFee}</td>
+                <td>
+                  <button
+                    className="bupdt"
+                    onClick={() => navigate(`/R_Bupdate/${post._id}`)}
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    className="dlt"
+                    onClick={() => handleDelete(post._id)}
+                  >
+                    Delete
+                  </button>
+                  <button className="paybtn">Pay now</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

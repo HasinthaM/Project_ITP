@@ -16,11 +16,14 @@ body {
   width: 1500px; /* Adjust the width as needed */
   margin-left: 150px;
   margin-right: 50px;
+  margin-top: 45px;
 }
 
 .rent-vhl h2 {
   margin-bottom: 20px;
+  margin-left: 355px;
   width: 100%;
+  color: black;
 }
 
 /* Styles for the table */

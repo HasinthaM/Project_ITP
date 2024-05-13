@@ -9,16 +9,19 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 100px;
+  width: 150px;
+  margin-bottom: 5px;
 }
 .rent-bdth {
   display: flex;
-  margin-left: 25px;
+  margin-left: 5px;
   margin-right: 275px;
+  margin-top: 10px;
   width: 100%;
 }
 .rent-bdt {
   width: 1500px; /* Adjust the width as needed */
   margin-left: 150px;
   margin-right: 50px;
+  margin-top: 35px;
 }

@@ -1,26 +1,37 @@
-.update {
+.R_updt2 {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-family: Arial, sans-serif;
+  margin-top: 5px;
+  margin: 10px;
+  padding: 0;
+  background-color: #938e8e;
+  color: rgb(18, 18, 18);
+  margin-left: 100px;
+  margin-right: 450px;
+  height: 600px;
+  width: 650px;
+  margin-top: 25px;
   justify-content: center;
-  height: 100vh; 
-  margin-left: 30%;
 }
-
-.update label {
+.updatefrm label {
   margin-bottom: 10px;
 }
-
-.update input,
-.update select {
+.R_updt h2 {
+  color: rgb(18, 18, 18);
+  margin-left: 350px;
+}
+.updatefrm input,
+.updatefrm select {
+  width: 98%;
   padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
   margin-bottom: 10px;
-  width: 300px; 
 }
 
-.update button {
+.updatefrm button {
   padding: 8px 16px;
-  background-color: #666864;
+  background-color: #3f403f;
   color: white;
   border: none;
   border-radius: 5px;
