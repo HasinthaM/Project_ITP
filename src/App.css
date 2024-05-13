@@ -1,0 +1,53 @@
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.app-header {
+  text-align: center;
+}
+
+.app-title {
+  margin-bottom: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.app-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.app-button:hover {
+  background-color: #4caf50; /* Change to desired hover color */
+}
+
+.users-button {
+  background-color: #AF8260; /* Blue color for Users button */
+  color: #fff; /* White text color */
+}
+
+.feedback-button {
+  background-color: #803D3B; /* Red color for Feedback button */
+  color: #fff; /* White text color */
+}
+
+.option-button {
+  background-color: #ff9800; /* Orange color for Option button */
+  color: #fff; /* White text color */
+}
+.admin-button {
+  background-color: #481E14; /* Red color for Feedback button */
+  color: #fff; /* White text color */
+}
