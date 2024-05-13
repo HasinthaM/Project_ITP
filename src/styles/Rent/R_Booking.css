@@ -1,0 +1,62 @@
+.rent-Bookingu {
+ display: flex;
+  font-family: Arial, sans-serif;
+  margin-top: 10px;
+  margin: 100;
+  padding: 0;
+  background-color: #817d7d;
+  color: rgb(63, 62, 62);
+  margin-left: 100px;
+  
+  width: 55%;/* Consider removing this margin for better alignment */
+}
+
+.rent-formu {
+  display: flex;
+
+  justify-content: center;
+  width: 85%;
+  margin-right: 50%;
+  margin-top: 100px;
+   /* Consider using margin-left: auto; margin-right: auto; to center the form */
+}
+
+.rent-form-column {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin-right: 2rem;
+}
+
+.rent-form-column label {
+  margin-bottom: 0.5rem;
+}
+
+.rent-form-column input,
+.rent-form-column select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+.rent-form-column button {
+  width: 75%;
+  padding: 10px;
+  background-color: #4d4e50;
+  color: #dad4d4;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-left: 55px; /* Consider centering this button */
+}
+
+.rent-Bookingu h2 {
+  text-align: center;
+  margin-left: 500px; /* Consider removing this margin for better alignment */
+}
+
+.rent-form-column button:hover {
+  background-color: #56585a;
+}

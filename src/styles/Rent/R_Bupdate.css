@@ -1,0 +1,32 @@
+.update {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; 
+  margin-left: 30%;
+}
+
+.update label {
+  margin-bottom: 10px;
+}
+
+.update input,
+.update select {
+  padding: 5px;
+  margin-bottom: 10px;
+  width: 300px; 
+}
+
+.update button {
+  padding: 8px 16px;
+  background-color: #666864;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.update button:hover {
+  background-color: #92968f;
+}
