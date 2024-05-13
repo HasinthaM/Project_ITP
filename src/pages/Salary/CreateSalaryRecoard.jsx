@@ -60,12 +60,22 @@ const CreateSalaryRecoard = () => {
     if (/^[0-9]{9}[vVxX]?$/i.test(inputNic) || /^[0-9]{0,12}$/.test(inputNic)) {
       setNic(inputNic);
     }
+    axios
+    .get('http://localhost:3001/api/memployee/filter?nic=' + inputNic)
+    .then((res) => {
+      if(res.data){
+        console.log(res.data);
+        setName(res.data.firstname);
+      }
+   
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    
   };
 
-  const handleNameChange = (e) => {
-    const inputName = e.target.value.replace(/[^A-Za-z\s]/g, ''); // Remove non-letter characters
-    setName(inputName);
-  };
+
 
   return (
     <div
@@ -99,7 +109,6 @@ const CreateSalaryRecoard = () => {
             <input
               type='text'
               value={name}
-              onChange={handleNameChange}
               className='border-2 border-gray-500 px-4 py-2 w-full'
             />
           </div>
