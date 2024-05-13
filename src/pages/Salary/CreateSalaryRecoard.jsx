@@ -15,8 +15,6 @@ const CreateSalaryRecoard = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
-
-
   const handleSaveSalary = () => {
     // Name validation
     if (!/^[A-Za-z\s]+$/.test(name)) {
@@ -110,7 +108,7 @@ const CreateSalaryRecoard = () => {
             <input
               type='text'
               value={basicSalary}
-              onChange={(e) => setBasicSalary(e.target.value)}
+              onChange={(e) => setBasicSalary(e.target.value.replace(/[^0-9]/g, ''))}
               className='border-2 border-gray-500 px-4 py-2 w-full'
             />
           </div>
@@ -119,7 +117,7 @@ const CreateSalaryRecoard = () => {
             <input
               type='text'
               value={attendance}
-              onChange={(e) => setAttendance(e.target.value)}
+              onChange={(e) => setAttendance(e.target.value.replace(/[^0-9]/g, ''))}
               className='border-2 border-gray-500 px-4 py-2 w-full'
             />
           </div>

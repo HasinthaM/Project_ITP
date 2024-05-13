@@ -20,6 +20,9 @@ const CreateOrderForm = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
+    // Regular expression for email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const getCurrentDate = () => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -54,17 +57,22 @@ const CreateOrderForm = () => {
 
   const packages = [
     { name: 'Select Package', id: '' },
-    { name: 'Package-a: Rs.30,000', id: 'package_a' },
-    { name: 'Package-b: Rs.40,000', id: 'package_b' },
-    { name: 'Package-c: Rs.45,000', id: 'package_c' },
-    { name: 'Package-d: Rs.50,000', id: 'package_c' },
-    { name: 'Package-e: Rs.20,000', id: 'package_c' },
+    { name: 'Package Rs.30,000', id: 'package_a' },
+    { name: 'Package Rs.40,000', id: 'package_b' },
+    { name: 'Package Rs.45,000', id: 'package_c' },
+    { name: 'Package Rs.50,000', id: 'package_c' },
+    { name: 'Package Rs.20,000', id: 'package_c' },
 
     // Add more packages as needed
   ];
 
   const handleSaveOrderForm = (e) => {
     e.preventDefault(); // Prevents the default form submission behavior
+
+    // Email validation
+    if (!emailRegex.test(email)) {
+      return;
+    }
 
     const data = {
       customername,
@@ -132,7 +140,7 @@ const CreateOrderForm = () => {
     const cvvRegex = /^\d{0,3}$/;
     if (cvvRegex.test(value)) {
       setCVV(value);
-    } 
+    }
   };
 
   const handleExpiryDateChange = (e) => {
@@ -152,8 +160,6 @@ const CreateOrderForm = () => {
 
   return (
 
-    
-
     <div
     className='p-4'
     style={{
@@ -163,6 +169,8 @@ const CreateOrderForm = () => {
       minHeight: '100vh', // Ensure the background covers the entire screen
     }}
   >
+
+
     <div className="min-h-screen mt-36 mb-10">
       <div className="flex justify-center items-center gap-2">
         <div className="hidden lg:block">
@@ -246,75 +254,70 @@ const CreateOrderForm = () => {
                   onChange={(e) => setBillingAddress(e.target.value)}
                 />
               </div>
-              <div className="center-button">
-              <button
-                className="bg-red-700 text-white p-3 rounded-lg w-[460px] h-11 hover:opacity-90"
-                type="submit" // Ensure button acts as a submit button
-              >
-                Submit
-              </button>
-              </div>
-            </form>
+              
+            </form >
           </div>
           <div className="flex p-3 max-w-8xl mx-auto flex-col md:flex-row md:items-start gap-10">
           <div className="flex-1">
-  <h1 className="text-3xl text-gray-800 font-serif">Add Payment Details</h1>
-  
-  
-  <div style={{ marginBottom: '20px' }}>
-    <h3 className="font-semibold text-black-400 ml-1">Cardholder name</h3>
-    <input
-      className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
-      type="text"
-      placeholder="Name"
-      value={cardholdername}
-      onChange={handleCardNameChange}
-    />
-  </div>
-  <div style={{ marginBottom: '20px' }}>
-    <h3 className="font-semibold text-black-400 ml-1">Card number</h3>
-    <input
-      className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
-      type="text"
-      placeholder="Card number"
-      value={cardnumber}
-      onChange={handleCardNumberChange}
-    />
-  </div>
-  <div style={{ marginBottom: '20px' }}>
-    <h3 className="font-semibold text-black-400 ml-1">Expiry date</h3>
-    <input
-      className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
-      type="month"
-      placeholder="expirydate"
-      value={expirydate}
-      onChange={handleExpiryDateChange}
-      min={getCurrentDate()}
-    />
-  </div>
-  <div style={{ marginBottom: '20px' }}>
-    <h3 className="font-semibold text-black-400 ml-1">CVV</h3>
-    <input
-      className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
-      type="text"
-      placeholder="CVV"
-      value={cvv}
-      onChange={handleCVVChange}
-    />
-  </div>
+          <h1 className="text-3xl text-gray-800 font-serif ">Add Payment Details </h1>
+         
 
-   
-
-
-   
-</div>
-
+            
+            <div style={{ marginBottom: '20px' }}>
+              <h3 className="font-semibold text-black-400 ml-1">Cardholder name</h3>
+              <input
+                className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
+                type="text"
+                placeholder="Name"
+                value={cardholdername}
+                onChange={handleCardNameChange}
+              />
+            </div>
+            <div style={{ marginBottom: '20px' }}>
+              <h3 className="font-semibold text-black-400 ml-1">Card number</h3>
+              <input
+                className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
+                type="text"
+                placeholder="Card number"
+                value={cardnumber}
+                onChange={handleCardNumberChange}
+              />
+            </div>
+            <div style={{ marginBottom: '20px' }}>
+              <h3 className="font-semibold text-black-400 ml-1">Expiry date</h3>
+              <input
+                className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
+                type="month"
+                placeholder="expirydate"
+                value={expirydate}
+                onChange={handleExpiryDateChange}
+                min={getCurrentDate()}
+              />
+            </div>
+            <div style={{ marginBottom: '20px' }}>
+              <h3 className="font-semibold text-black-400 ml-1">CVV</h3>
+              <input
+                className="bg-slate-100 p-3 rounded-lg w-[460px] h-11"
+                type="text"
+                placeholder="CVV"
+                value={cvv}
+                onChange={handleCVVChange}
+              />
+            </div>
+            <br></br>
+            <button
+              className="bg-red-700 text-white p-3 rounded-lg w-[460px] h-11 hover:opacity-90"
+              type="submit"
+              onClick={handleSaveOrderForm}
+            >
+              Pay
+            </button>
+            </div>
+          </div>
         </div>
         </div>
       </div>
     </div>
-    </div>
-   
   );
 };
 
