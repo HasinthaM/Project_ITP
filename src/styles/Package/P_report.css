@@ -1,6 +1,6 @@
 .table-container4 {
   position: absolute;
-  top: 200px; /* Adjust as needed */
+  top: 220px; /* Adjust as needed */
   left: 220px; /* Width of your sidebar */
   width: calc(100% - 350px); /* Adjust according to your sidebar width */
   margin-right: 100px; /* Add a margin to separate from the sidebar */
@@ -9,7 +9,7 @@
   
   .r-title {
     position: absolute;
-    top: 60px; /* Adjust the top position as needed */
+    top: 150px; /* Adjust the top position as needed */
     left: 52%;
     transform: translateX(-50%);
     color: black;
