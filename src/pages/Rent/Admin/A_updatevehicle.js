@@ -83,9 +83,9 @@ const A_updatevehicle = () => {
   };
 
   return (
-    <div className="rent_update">
+    <div className="rent_update22">
       <h2>Update Vehicle</h2>
-      <form onSubmit={handleSubmit} className="rent-container">
+      <form onSubmit={handleSubmit} className="rent-container23">
         <label>
           Vehicle Type:
           <input

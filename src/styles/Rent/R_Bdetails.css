@@ -1,10 +1,10 @@
 .RentalDetails {
-  width: 80%;
+  width: 100%;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   justify-content: center;
-  margin-left: 105px;
-  margin-top: 75px;
+
+  margin-top: 5px;
 }
 
 .RentalDetails th,
@@ -14,9 +14,13 @@
   text-align: left;
   height: 10px;
 }
-.RentalDetails h2{
-justify-content: center;
-margin-left: 500px;
+.RentalDetails h2 {
+  justify-content: center;
+  margin-left: 500px;
+  margin-top: 35px;
+  color: black;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 .RentalDetails th {
@@ -40,7 +44,15 @@ margin-left: 500px;
   background-color: #e6e6e6;
 }
 
-.RentalDetails .butt {
-  margin-left: 160px;
-  background-color: #373737;
+.bupdt {
+  margin-left: 50px;
+  background-color: #4b35c8;
+}
+.dlt {
+  margin-left: 50px;
+  background-color: #b64141;
+}
+.paybtn {
+  margin-left: 50px;
+  background-color: #5beb86;
 }

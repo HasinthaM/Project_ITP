@@ -4,22 +4,26 @@
   margin-top: 5px;
   margin: 100;
   padding: 0;
-  background-color: #938e8e;
+  background-color: #949191;
   color: rgb(18, 18, 18);
+  border-color: #070707;
   margin-left: 350px;
   margin-right: 150px;
 
   width: 75%;
 }
 
-.rent_heading {
-  text-align: center; /* Center the text */
+.rent_heading2 {
+  text-align: center;
   width: 100%;
   margin-left: 50px;
   margin-right: 75px;
   margin-top: 55px;
+  text-size-adjust: 45px;
+  color: #070707;
+  font-weight: bold;
+  font-size: 24px;
 }
-
 .rent-formu {
   display: flex;
   padding: 5;
@@ -53,7 +57,7 @@
 .rent-form-column button {
   width: 75%;
   padding: 10px;
-  background-color: #545556;
+  background-color: #424344;
   color: #f2eded;
   border: none;
   border-radius: 3px;
@@ -63,10 +67,11 @@
   /* Consider centering this button */
 }
 
-.rent-Bookingu h2 {
-  width: 105%;
+.rent_heading {
+  width: 100%;
   color: #070707;
-  margin-left: 200px; /* Consider removing this margin for better alignment */
+
+  margin-right: 220px; /* Consider removing this margin for better alignment */
 }
 
 .rent-form-column button:hover {

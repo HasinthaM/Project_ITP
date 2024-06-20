@@ -11,8 +11,10 @@
 
 .rent-button-container button {
   margin-top: 20px;
+  height: 45px;
+  width: 180px;
   padding: 10px 20px;
-  background-color: blue;
+  background-color: rgb(76, 76, 78);
   color: white;
   border: none;
   cursor: pointer;
@@ -23,5 +25,5 @@
 }
 
 .rent-button-container button:hover {
-  background-color: darkblue;
+  background-color: rgb(124, 124, 128);
 }

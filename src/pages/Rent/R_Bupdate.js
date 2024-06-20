@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "../../styles/Rent/R_Bupdate.css";
-
+import NavigationBar from "../../components/NavigationBar3";
 const R_Update = () => {
   const [post, setPost] = useState(null);
   const [vehicleType, setVehicleType] = useState("");
@@ -72,96 +72,101 @@ const R_Update = () => {
   }
 
   return (
-    <div>
+    <div className="R_updt">
+      <div className="navBar">
+        <NavigationBar />
+      </div>
       <h2>Edit Your Reservation</h2>
-      <form onSubmit={handleEdit} className="update">
-        <label>
-          Vehicle Type:
-          <select
-            value={vehicleType}
-            onChange={(e) => setVehicleType(e.target.value)}
-          >
-            <option value="car">Sedan</option>
-            <option value="van">SUV</option>
-            <option value="cab">SUV</option>
-            <option value="tuktuk">SUV</option>
-            <option value="Bike">SUV</option>
-          </select>
-        </label>
-        <label>
-          Vehicle:
-          <input
-            type="text"
-            value={vehicle}
-            onChange={(e) => setVehicle(e.target.value)}
-          />
-        </label>
-        <label>
-          Driver:
-          <input
-            type="checkbox"
-            checked={withDriver}
-            onChange={() => setWithDriver(!withDriver)}
-          />
-        </label>
-        <label>
-          Rental Start Date:
-          <input
-            type="date"
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
-        </label>
-        <label>
-          Rental End Date:
-          <input
-            type="date"
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
-        </label>
-        <label>
-          Pickup Location:
-          <input
-            type="text"
-            value={pickupLocation}
-            onChange={(e) => setPickupLocation(e.target.value)}
-          />
-        </label>
-        <label>
-          Customer Name:
-          <input
-            type="text"
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
-          />
-        </label>
-        <label>
-          Passport/ID:
-          <input
-            type="text"
-            value={passportOrId}
-            onChange={(e) => setPassportOrId(e.target.value)}
-          />
-        </label>
-        <label>
-          Address:
-          <input
-            type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        </label>
-        <label>
-          Phone:
-          <input
-            type="tel"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-        </label>
-        <button type="submit">Update</button>
-      </form>
+      <div className="R_updt2">
+        <form onSubmit={handleEdit} className="updatefrm">
+          <label>
+            Vehicle Type:
+            <select
+              value={vehicleType}
+              onChange={(e) => setVehicleType(e.target.value)}
+            >
+              <option value="car">Sedan</option>
+              <option value="van">Van</option>
+              <option value="cab">Cab</option>
+              <option value="tuktuk">tuktuk</option>
+              <option value="Bike">bike</option>
+            </select>
+          </label>
+          <label>
+            Vehicle:
+            <input
+              type="text"
+              value={vehicle}
+              onChange={(e) => setVehicle(e.target.value)}
+            />
+          </label>
+          <label>
+            Driver:
+            <input
+              type="checkbox"
+              checked={withDriver}
+              onChange={() => setWithDriver(!withDriver)}
+            />
+          </label>
+          <label>
+            Rental Start Date:
+            <input
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+          </label>
+          <label>
+            Rental End Date:
+            <input
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+            />
+          </label>
+          <label>
+            Pickup Location:
+            <input
+              type="text"
+              value={pickupLocation}
+              onChange={(e) => setPickupLocation(e.target.value)}
+            />
+          </label>
+          <label>
+            Customer Name:
+            <input
+              type="text"
+              value={customerName}
+              onChange={(e) => setCustomerName(e.target.value)}
+            />
+          </label>
+          <label>
+            Passport/ID:
+            <input
+              type="text"
+              value={passportOrId}
+              onChange={(e) => setPassportOrId(e.target.value)}
+            />
+          </label>
+          <label>
+            Address:
+            <input
+              type="text"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </label>
+          <label>
+            Phone:
+            <input
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </label>
+          <button type="submit">Update</button>
+        </form>
+      </div>
     </div>
   );
 };

@@ -89,7 +89,7 @@ const CarRentalForm = () => {
       <div className="navBar">
         <NavigationBar />
       </div>
-      <h2 className="rent_heading">Rent a Vehicle Here!</h2>
+      <h2 className="rent_heading2">Rent a Vehicle Here!</h2>
       <form
         className="rent-formu"
         onSubmit={handleFormSubmit}

@@ -83,7 +83,7 @@ const RentalDetails = () => {
     <div className="rent-bdth" style={{ width: "100%", textAlign: "center" }}>
       <R_Sidebar />
       <div className="rent-bdt">
-        <h1>Booking Details</h1>
+        <h1 className="adb">Booking Details</h1>
         <input
           className="rent-searchb"
           type="text"
