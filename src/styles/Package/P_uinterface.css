@@ -13,7 +13,7 @@
 .flex-container6 {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; /* Adjust spacing between elements */
+  justify-content: 15px; /* Adjust spacing between elements */
   align-items: flex-start; /* Align items to the top */
   margin-top: -700px;
   margin-left: 260px; /* Adjust margin to create space for the sidebar */

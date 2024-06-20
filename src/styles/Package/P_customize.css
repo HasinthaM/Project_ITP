@@ -21,7 +21,7 @@
 .pc-tittle {
   position: absolute;
   top: -53px; /* Adjust the top position as needed */
-  left: 40%;
+  left: 50%;
   transform: translateX(-50%);
   color: black;
   font-size: 44px; /* Adjust the font size as needed */

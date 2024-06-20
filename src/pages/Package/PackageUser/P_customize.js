@@ -419,6 +419,7 @@ const P_customize = () => {
       <PUSidebar />
       <div>
         <div className="cus-form2">
+          <h1 className="pc-tittle">Customization</h1>
           <Form
             form={form}
             onFinish={handleSubmit}
